@@ -1,3 +1,5 @@
+
+import Register from "../enroll/register";
 import Chats from '../chats/chats';
 import './login.css';
 
@@ -22,6 +24,7 @@ function Login() {
 <button onClick={checkValid} type="button" class="btn btn-outline-primary">Login</button>
 <div>Not register?<a href="https://www.youtube.com/watch?v=oj3x3WSt1J4" class="link-primary">Click here </a>to register</div> 
 </div>
+
   );
 }
 
