@@ -1,4 +1,9 @@
+
 function Chats() {
-    return (<div>shir</div>);
+    return (
+        <div>
+        
+        </div>
+    );
 }
 export default Chats;
