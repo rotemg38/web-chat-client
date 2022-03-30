@@ -13,7 +13,7 @@ function Login() {
 <div>
   <div class="input-group mb-3">
   <span class="input-group-text" id="basic-addon1">Username</span>
-  <input type="text" class="form-control" id="username" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"></input>
+  <input type="text" class="form-control" id="username" placeholder="Text" aria-label="Username" aria-describedby="basic-addon1"></input>
 </div>
 <div class="input-group mb-3">
   <span class="input-group-text" id="basic-addon1">Password</span>
