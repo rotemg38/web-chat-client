@@ -1,17 +1,19 @@
 import Chats from '../chats/chats';
 import './login.css';
 import {useNavigate } from 'react-router-dom';
-
+import {userIsExists} from '../dbHandle/dbHardcoded'
 
 function Login() {
   function checkValid() {
     const name = document.getElementById("username").value;
     const password = document.getElementById("password").value;
-    if (name == ' ' || name == '' || password == ' ' || password == ''){
+    if (name === ' ' || name === '' || password === ' ' || password === '') {
       console.log('not valid');
       alert("Username or password is not valid")
     } // not valid-right msg?
-    else{
+    else if (!userIsExists(name)) {
+      alert("User is not exists")
+    }else{
       navigate("/chats");
     }
   }
@@ -35,7 +37,6 @@ function Login() {
       <button className='btn btn-link' onClick={()=>{navigate("/enroll");}}>Click here </button>to register</div> 
 
 </div>
-
   ); 
 }
 
