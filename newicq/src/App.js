@@ -7,20 +7,18 @@ import MainScreenChats from './mainScreenChats/mainScreenChats';
 function App() {
   return (
     <div className="App">
-      <MainScreenChats/>
-      {/* 
-    <BrowserRouter>
+       {/*<MainScreenChats/>
+       */}
+   <BrowserRouter>
     <Routes>
       <Route path='/' element={<Login/>}></Route>
       <Route path='/enroll' element={<Register/>}></Route>
+      <Route path='/chats' element={<MainScreenChats/>}></Route>
     </Routes>
-    <div>Not register?
-      <Link to="/enroll" className="link-primary">Click here </Link>
-    
-      to register</div> 
-   
     </BrowserRouter>
-   */}
+   
+   
+  
     </div>
   );
 }
