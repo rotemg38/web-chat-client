@@ -5,10 +5,10 @@ function MainScreenChats() {
     return (
         <div>
             <div className="row">
-                <div className="col-3 bg-primary">
+                <div className="col-4 ">
                     <Chats/>
                 </div>
-                <div className="col-9 bg-secondary">
+                <div className="col-8 bg-secondary">
                     <ScreenChat/>
                 </div>
             </div>

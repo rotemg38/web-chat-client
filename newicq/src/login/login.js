@@ -1,7 +1,7 @@
-import {Link} from 'react-router-dom'
+
 import './login.css';
-import {userIsExists} from '../dbHandle/dbHardcoded'
-import Register from '../enroll/register';
+import { userIsExists } from '../dbHandle/dbHardcoded'
+
 
 function Login() {
   function checkValid() {
@@ -16,20 +16,38 @@ function Login() {
     }
   }
   return (
-    <div>
-      <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">Username</span>
-        <input type="text" class="form-control" id="username" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"></input>
-      </div>
-      <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">Password</span>
-        <input type="text" class="form-control" id="password" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1"></input>
-      </div>
-      <button onClick={checkValid} type="button" class="btn btn-outline-primary">Login</button>
-      <div>Not register?<button onClick={Register} type="button" class="link-primary">Click here </button>to register</div>
-    </div>
+    <div className="row align-items-center justify-content-center">
+      <div className="form col-lg-10">
+        <div className="headline">
+          <h1>Login</h1>
+        </div>
+        <form onSubmit={checkValid}>
+          <div className="form-content">
+            <div className="row">
+              <div className="col-lg-12 center-block">
+                <div className="form-group centered">
+                  <div className="col-sm-6">
+                    <input type="text" name="userName" id="username" className="form-control" placeholder="User Name *" />
+                  </div>
+                </div>
+                <br />
 
+                <div className="form-group centered">
+                  <div className="col-sm-6">
+                    <input type="text" name="password" id="password" className="form-control" placeholder="Password *" />
+                  </div>
+                </div>
+
+                <br />
+              </div>
+            </div>
+            <br />
+            <button  type="submit" className="btn btn-primary">Login</button>
+          </div>
+        </form>
+      </div>
+      <div id="try"></div>
+    </div>
   );
 }
-
 export default Login;
