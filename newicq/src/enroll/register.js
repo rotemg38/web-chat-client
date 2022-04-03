@@ -1,4 +1,9 @@
 import './register.css'
+
+import { addUser } from "../dbHandle/dbHardcoded";
+
+function Register() {
+
 import { useState } from "react";
 import {addUser} from "../dbHandle/dbHardcoded";
 import {useNavigate } from 'react-router-dom';
@@ -7,6 +12,7 @@ import { formValidationByElement } from './registerValidations';
 function Register() {
 
     const navigate = useNavigate(); 
+
     const [inputs, setInputs] = useState({});
 
    
@@ -38,8 +44,9 @@ function Register() {
         <div className="row align-items-center justify-content-center">
             <div className="form col-lg-8">
                 <div className="headline">
-                <h1>SignUp</h1>
+                    <h1>SignUp</h1>
                 </div>
+
                 <form id="registerForm" className='needs-validation' onSubmit={handleRegister} noValidate>
                 <div className="form-content">
                     <div className="row">
@@ -113,8 +120,12 @@ function Register() {
                                 </div>
                             </div>
                              
+
                         </div>
+                        <br />
+                        <button type="submit" className="btn btn-primary">SignUp</button>
                     </div>
+
                     <br/>
                     <button type="submit" className="btn btn-outline-primary">SignUp</button>
                 </div>
@@ -122,6 +133,6 @@ function Register() {
             </div>
         </div>
     );
-  }
-  
-  export default Register;
+}
+
+export default Register;
