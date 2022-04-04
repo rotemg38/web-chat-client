@@ -1,22 +1,23 @@
 import Chats from "../chats/chats";
 import ScreenChat from "../screenChat/screenChat";
+import './mainScreenChats.css'
 
 function MainScreenChats() {
+    const chatInfo = {connectedUser:"user1" ,chatId:"chat1"}
     return (
-        <div>
-            <div className="row">
-                <div className="col-3 bg-primary">
+        
+        <div className="container-fluid">
+            <div className="row vh-100">
+                <div className="col-md-3 bg-primary">
                     <Chats/>
                 </div>
-                <div className="col-9 bg-secondary">
-                    <ScreenChat/>
+                {/*position-relative*/}
+                <div className="col-md-9">
+                    <ScreenChat {...chatInfo}/>
                 </div>
             </div>
-           
-
         </div>
-
-
+        
     );
 }
 export default MainScreenChats;
