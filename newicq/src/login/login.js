@@ -1,7 +1,9 @@
+
 import Chats from '../chats/chats';
 import './login.css';
-import {useNavigate } from 'react-router-dom';
-import {userIsExists} from '../dbHandle/dbHardcoded'
+import { useNavigate } from 'react-router-dom';
+import { userIsExists } from '../dbHandle/dbHardcoded'
+
 
 function Login() {
   function checkValid() {
@@ -13,31 +15,54 @@ function Login() {
     } // not valid-right msg?
     else if (!userIsExists(name)) {
       alert("User is not exists")
-    }else{
+    } else {
       navigate("/chats");
     }
   }
 
-  const navigate = useNavigate(); 
-  
+  const navigate = useNavigate();
+
   return (
 
-<div>
 
-  <div className="input-group mb-3">
-  <span className="input-group-text" id="basic-addon1">Username</span>
-  <input type="text" className="form-control" id="username" placeholder="Text" aria-label="Username" aria-describedby="basic-addon1"></input>
-</div>
-<div className="input-group mb-3">
-  <span className="input-group-text" id="basic-addon1">Password</span>
-  <input type="text" className="form-control" id="password" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1"></input>
-</div>
-<button onClick={checkValid} type="button" className="btn btn-outline-primary">Login</button>
-<div>Not register?
-      <button className='btn btn-link' onClick={()=>{navigate("/enroll");}}>Click here </button>to register</div> 
+    <div>
+      <div className="row align-items-center justify-content-center">
+        <div className="form col-lg-10">
+          <div className="headline">
+            <h1>Login</h1>
+          </div>
+          <form onSubmit={checkValid}>
+            <div className="form-content">
+              <div className="row">
+                <div className="col-lg-12 center-block">
+                  <div className="form-group centered">
+                    <div className="col-sm-6">
+                      <input type="text" name="userName" id="username" className="form-control" placeholder="User Name *" />
+                    </div>
+                  </div>
+                  <br />
 
-</div>
-  ); 
+                  <div className="form-group centered">
+                    <div className="col-sm-6">
+                      <input type="text" name="password" id="password" className="form-control" placeholder="Password *" />
+                    </div>
+                  </div>
+                  <div>Not register?
+                    <button className='btn btn-link' onClick={() => { navigate("/enroll"); }}>Click here </button>to register</div>
+                  <br />
+                </div>
+              </div>
+              <br />
+              <button type="submit" className="btn btn-primary">Login</button>
+            </div>
+          </form>
+        </div>
+        <div id="try"></div>
+      </div>
+      );
+
+    </div>
+  );
+
 }
-
 export default Login;

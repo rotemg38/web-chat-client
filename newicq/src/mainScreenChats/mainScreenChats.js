@@ -8,7 +8,7 @@ function MainScreenChats() {
         
         <div className="container-fluid">
             <div className="row vh-100">
-                <div className="col-md-3 bg-primary">
+                <div className="col-md-3">
                     <Chats/>
                 </div>
                 {/*position-relative*/}

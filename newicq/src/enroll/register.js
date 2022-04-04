@@ -7,6 +7,7 @@ import { formValidationByElement } from './registerValidations';
 function Register() {
 
     const navigate = useNavigate(); 
+
     const [inputs, setInputs] = useState({});
 
    
@@ -36,10 +37,11 @@ function Register() {
    
     return (
         <div className="row align-items-center justify-content-center">
-            <div className="form col-lg-8">
+            <div className="form col-lg-10">
                 <div className="headline">
-                <h1>SignUp</h1>
+                    <h1>SignUp</h1>
                 </div>
+
                 <form id="registerForm" className='needs-validation' onSubmit={handleRegister} noValidate>
                 <div className="form-content">
                     <div className="row">
@@ -66,8 +68,8 @@ function Register() {
                             </div>
                             <br/>
                             
-                            {/*
-                            --------TODO: need to add this elements- phone, gender and photo--------
+                            {
+                            /*--------TODO: need to add this elements- phone, gender and photo--------*/}
 
                             <div className="form-group">
                                 <input type="text" className="form-control" placeholder="Phone Number *" value=""/>
@@ -84,11 +86,11 @@ function Register() {
                             <div className="input-group mb-3">
                                 <div className="custom-file">
                                     <input type="file" className="custom-file-input" id="inputGroupFile02"/>
-                                    <label className="custom-file-label" htmlFor="inputGroupFile02">Choose file</label>
+                                    
                                 </div>
                             
                             </div>
-                         */}
+                         
                             
                             {/* password element */}
                             <div className="form-group centered">
@@ -113,8 +115,12 @@ function Register() {
                                 </div>
                             </div>
                              
+
                         </div>
+                        <br />
+                        
                     </div>
+
                     <br/>
                     <button type="submit" className="btn btn-outline-primary">SignUp</button>
                 </div>
@@ -122,6 +128,6 @@ function Register() {
             </div>
         </div>
     );
-  }
-  
-  export default Register;
+}
+
+export default Register;
