@@ -21,7 +21,7 @@ function Register() {
         } else{
             //successfuly enrolled- add user and move to the login page
             addUser(inputs);
-            navigate("/");
+            navigate("/chats");
         }
     }
     
