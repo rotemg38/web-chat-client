@@ -72,7 +72,7 @@ function Register() {
                             /*--------TODO: need to add this elements- phone, gender and photo--------*/}
 
                             <div className="form-group">
-                                <input type="text" className="form-control" placeholder="Phone Number *" value=""/>
+                                <input type="text" className="form-control" placeholder="Phone Number *" value={inputs.phone || ""}/>
                             </div>
                             
                             <div className="form-check form-check-inline">
@@ -83,9 +83,13 @@ function Register() {
                                 <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"/>
                                 <label className="form-check-label" htmlFor="inlineRadio2">female</label>
                             </div>
+                            <div className="form-check form-check-inline">
+                                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"/>
+                                <label className="form-check-label" htmlFor="inlineRadio3">other</label>
+                            </div>
                             <div className="input-group mb-3">
                                 <div className="custom-file">
-                                    <input type="file" className="custom-file-input" id="inputGroupFile02"/>
+                                    <input type="file" className="custom-file-input" value={inputs.img || "/default_picture.jpg"} id="inputGroupFile02"/>
                                     
                                 </div>
                             
