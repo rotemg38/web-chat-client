@@ -10,15 +10,15 @@ function App() {
 
       {/*<Register/>*/}
       {/*<Login/>*/}
-      {/*<MainScreenChats />*/}
+      {<MainScreenChats />}
 
-      {<BrowserRouter>
+      {/*<BrowserRouter>
         <Routes>
           <Route path='/' element={<Login />}></Route>
           <Route path='/enroll' element={<Register />}></Route>
           <Route path='/chats' element={<MainScreenChats />}></Route>
         </Routes>
-  </BrowserRouter>}
+  </BrowserRouter>*/}
     </div>
   );
 }

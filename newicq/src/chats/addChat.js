@@ -2,14 +2,18 @@ import { render } from "react-dom";
 import { connections, connectionsList } from "./chats";
 import React, { useState } from "react";
 import UserChat from "./userChat";
+import { addConectionToList, userIsExists } from "../dbHandle/dbHardcoded";
+import { myUsername } from "../login/login";
 
 
 function AddChat() {
     const [usersOnScreen, setUserOnScreen] = useState([]);
    
     const addConection = () => {
-        
-        setUserOnScreen( connections => [...connections, <UserChat user={document.getElementById("shir").value} />]);
+        var username = document.getElementById("contactname").value
+        if (userIsExists(username)==false){return} // check if user is exist to create a chat with him
+        setUserOnScreen( connections => [...connections, <UserChat user={username} />]);
+        addConectionToList(myUsername, username);
     };
     return (
         <div>
@@ -27,7 +31,7 @@ function AddChat() {
                                 <form>
                                     <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label"></label>
-                                        <input type="text" class="form-control" placeholder="Contuct's identifier" id="shir"></input>
+                                        <input type="text" class="form-control" placeholder="Contuct's identifier" id="contactname"></input>
                                     </div>
                                 </form>
                             </div>

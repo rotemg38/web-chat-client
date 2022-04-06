@@ -4,7 +4,7 @@ import './login.css';
 import { useNavigate } from 'react-router-dom';
 import { userIsExists } from '../dbHandle/dbHardcoded'
 
-
+export var myUsername = "my user" //document.getElementById("username").value;
 function Login() {
   function checkValid() {
     const name = document.getElementById("username").value;
@@ -59,8 +59,6 @@ function Login() {
         </div>
         <div id="try"></div>
       </div>
-      );
-
     </div>
   );
 
