@@ -5,7 +5,8 @@ import {getMsgsByChatId} from '../dbHandle/dbHardcoded';
 import { useState } from "react";
 
 
-function ScreenChat(chatInfo) {
+function ScreenChat(chatInfo, {getCurrentChatId}) {
+    
     var chatMessages= getMsgsByChatId(chatInfo.chatId);
     var connectedUser = chatInfo.connectedUser;
     /*const messages = [{text: "hello",date:"09:00", from:"user1", to:"user2"},
@@ -24,19 +25,29 @@ function ScreenChat(chatInfo) {
     const updateMessages = (msg)=>{
         setMsgsComponents( msgs => [...msgs, <Message {...msg} key={msgs.length}/>]);
     };
-
+    
     return (
         <>
-        <div className="row alert alert-dark">profile</div>
-        {/*<div className="position-absolute bottom-0 start-1 w-100">    position-relative */}
+        {
+            //add check if chatId = -1 need to show empty page
+            chatInfo.chatId !== "-1" ?(
+                <>
+                <div className="row alert alert-dark">profile</div>
+                {/*<div className="position-absolute bottom-0 start-1 w-100">    position-relative */}
+               
+                <div id="messagesList" className="row screenChats-content-msgs">
+                    {msgsComponents}
+                </div>
+               
+                <SendMessage {...chatInfo} funcUpdate={updateMessages}/>
+                {/*</div>*/}
+                </>
+            ):(<></>)}
+
+      
        
-        <div id="messagesList" className="row screenChats-content-msgs">
-            {msgsComponents}
-        </div>
-       
-        <SendMessage {...chatInfo} funcUpdate={updateMessages}/>
-        {/*</div>*/}
         </>
+    
     
     );
 }

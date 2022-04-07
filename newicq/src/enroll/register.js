@@ -79,7 +79,11 @@ function Register() {
                             
                             {/* phone element */}
                             <div className="form-group">
+<<<<<<< HEAD
                                 <input type="text" className="form-control" placeholder="Phone Number *" onChange={handleChange} name="phone" value={inputs.phone}/>
+=======
+                                <input type="text" className="form-control" placeholder="Phone Number *" value={inputs.phone || ""} onChange={handleChange}/>
+>>>>>>> f2205e6d3aa51413f34eb7276453bf3ad895c114
                             </div>
                             {/* gender elemet */}
                             <div className="form-check form-check-inline">
@@ -97,7 +101,12 @@ function Register() {
                             {/* file of picture element */}
                             <div className="input-group mb-3">
                                 <div className="custom-file">
+<<<<<<< HEAD
                                     <input type="file" className="custom-file-input"  accept="image/png, image/jpeg" id="inputGroupFile02" onChange={loadFile}/>
+=======
+                                    <input type="file" className="custom-file-input" id="inputGroupFile02"/>
+                                    
+>>>>>>> f2205e6d3aa51413f34eb7276453bf3ad895c114
                                 </div>
                             </div>
                          

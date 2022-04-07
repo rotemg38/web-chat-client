@@ -3,17 +3,18 @@ import { connections, connectionsList } from "./chats";
 import React, { useState } from "react";
 import UserChat from "./userChat";
 import { addConectionToList, userIsExists } from "../dbHandle/dbHardcoded";
-import { myUsername } from "../login/login";
+import { connectedUser } from "../dbHandle/dbHardcoded";
 
 
-function AddChat() {
+function AddChat(props) {
     const [usersOnScreen, setUserOnScreen] = useState([]);
    
     const addConection = () => {
         var username = document.getElementById("contactname").value
         if (userIsExists(username)==false){return} // check if user is exist to create a chat with him
-        setUserOnScreen( connections => [...connections, <UserChat user={username} />]);
-        addConectionToList(myUsername, username);
+        var chatId = addConectionToList(connectedUser, username);
+        setUserOnScreen( connections => [...connections, <UserChat key={connections.length} user={username} updateChatId={props.updateChatId} chatId={chatId}/>]);
+        
     };
     return (
         <div>
