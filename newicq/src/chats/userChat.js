@@ -53,6 +53,7 @@ function UserChat({user,updateChatId, chatId}) {
                 <div className="d-flex w-100 justify-content-between">
                 <img src={dbUsers[user].img} alt="default" className="img-thumbnail"></img> {/*new ProfilePicture(user).getPic() */}
                     <h5 clclassNameass="mb-1">{user}</h5>
+
                     <span className="text-muted badge badge-info">msg not seen: </span>
                 </div>
                 <p className="mb-1">last message: {new LastMsg(user).state.msg}  

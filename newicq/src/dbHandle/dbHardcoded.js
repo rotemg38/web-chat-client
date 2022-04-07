@@ -3,7 +3,8 @@ export const dbMsg = {msg1:{text: "hello",date:"09:00"}, msg2:{text: "hello frie
 var msgId = 3;
 var chatId = 1;
 export const dbChats = {chat1:["user1","user2"]};
-export const dbMsgInChat = {chat1:[{idMsg: "msg1", from: "user1", to: "user2"}, {idMsg: "msg2", from: "user2", to: "user1"},
+export const dbMsgInChat = {chat1:[{idMsg: "msg1", from: "user1", to: "user2"}, 
+{idMsg: "msg2", from: "user2", to: "user1"},
 {idMsg: "msg3", from: "user1", to: "user2"}]};
 export var connectedUser = "user1";
 
