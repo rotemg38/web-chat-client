@@ -71,10 +71,16 @@ function Register() {
                             {
                             /*--------TODO: need to add this elements- phone, gender and photo--------*/}
 
-                            <div className="form-group">
-                                <input type="text" className="form-control" placeholder="Phone Number *" value={inputs.phone || ""} onChange={handleChange}/>
+                            <div className="form-group centered">
+                                <div className="form-floating col-sm-7">
+                                    <input type="text" id="phoneNumber" name="phoneNumber" className="form-control" placeholder="Phone Number" 
+                                    value={inputs.phoneNumber || ""} onChange={handleChange} 
+                                    pattern="0[0-9]{2}-?[0-9]{7}" required/>
+                                    <label htmlFor="phoneNumber">Phone Number</label>
+                                    <div id="phoneNumberInvalid" className="invalid-feedback">Please fill out this field with valid israeli phone number. (in format 0XX-XXXXXXX or XXXXXXXXXX)</div>
+                                </div>
                             </div>
-                            
+                            {/*
                             <div className="form-check form-check-inline">
                                 <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"/>
                                 <label className="form-check-label" htmlFor="inlineRadio1">male</label>
@@ -87,6 +93,8 @@ function Register() {
                                 <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"/>
                                 <label className="form-check-label" htmlFor="inlineRadio3">other</label>
                             </div>
+                            */}
+
                             <div className="input-group mb-3">
                                 <div className="custom-file">
                                     <input type="file" className="custom-file-input" id="inputGroupFile02"/>
@@ -99,7 +107,6 @@ function Register() {
                             {/* password element */}
                             <div className="form-group centered">
                                 <div className="form-floating col-sm-7">
-                                    
                                     <input type="password" id="password" name="password" className="form-control" placeholder="Password" 
                                     value={inputs.password || ""} onChange={handleChange} 
                                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" required/>

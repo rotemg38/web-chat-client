@@ -73,10 +73,6 @@ export const formValidationByElement = (key, value)=>{
         }
 
     }
-    if(key === "phoneNumber"){
-        //TODO: add validation checks if neccecary
-        return true;
-    }
 
     //to all of the rest fields that only have a "require"- check regulat validation 
     var element = document.getElementById(key);
