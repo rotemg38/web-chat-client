@@ -24,7 +24,7 @@ function SendMessage(props) {
         <div className='row'>
             <form onSubmit={handleSend}>
                 <div className="input-group">
-                    <button className="btn btn-outline-secondary" type="button" id="media">$</button>
+                    <button className="btn btn-outline-secondary" type="button" id="media">media</button>
                     <input type="text" autoComplete="off" id="messageBox" name="messageBox" className="form-control"/>
                     <button className="btn btn-outline-secondary" type="submit" id="send">Send</button>
                 </div>

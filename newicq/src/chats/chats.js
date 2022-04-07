@@ -8,10 +8,10 @@ import AddChat from "./addChat";
 //     return <UserChat user={connect.user} amout={connect.newMsgs} />
 // });
 
-function Chats() {
+function Chats(props) {
     return (
         <div>
-            <AddChat />
+            <AddChat updateChatId={props.updateChatId}/>
             {/*<ul class="list-group">
                 {connectionsList}
     </ul>*/}

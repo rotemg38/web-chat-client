@@ -29,12 +29,13 @@ class LastMsg extends Component {
         }
         var clock = "00:00" 
         var lastMsg = ""
-        
-        for (var i=0; i <dbMsgInChat[currChat].length; i++){
-            // check which msg was the last that arrived from user1:
-            if (dbMsgInChat[currChat][i].from === username && clock < dbMsg[dbMsgInChat[currChat][i].idMsg].date){
-                clock = dbMsg[dbMsgInChat[currChat][i].idMsg].date
-                lastMsg = dbMsg[dbMsgInChat[currChat][i].idMsg].text
+        if(dbMsgInChat[currChat] !== undefined){ 
+            for (var i=0; i <dbMsgInChat[currChat].length; i++){
+                // check which msg was the last that arrived from user1:
+                if (dbMsgInChat[currChat][i].from === username && clock < dbMsg[dbMsgInChat[currChat][i].idMsg].date){
+                    clock = dbMsg[dbMsgInChat[currChat][i].idMsg].date
+                    lastMsg = dbMsg[dbMsgInChat[currChat][i].idMsg].text
+                }
             }
         }
         this.state = {time:clock, msg:lastMsg}
@@ -43,11 +44,17 @@ class LastMsg extends Component {
 }
 
 
-function UserChat({user}) {
+function UserChat({user,updateChatId, chatId}) {
+
+    const handleUserChatClick = (event)=> {
+        updateChatId(chatId);
+    }
+
+
     return (
         <div class="list-group">
-        
-            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+            <button href="#" class="list-group-item list-group-item-action flex-column align-items-start"
+            onClick={handleUserChatClick}>
                 <div class="d-flex w-100 justify-content-between">
                 <img src={new ProfilePicture(user).getPic()} alt="default" class="img-thumbnail"></img> 
                     <h5 class="mb-1">{user}</h5>
@@ -56,7 +63,7 @@ function UserChat({user}) {
                 <p class="mb-1">last message: {new LastMsg(user).state.msg}  
                 <small  class="text-muted"><small> since {new LastMsg(user).state.time} </small></small> 
                 </p>
-            </a>
+            </button>
         </div>
     );
 }
