@@ -1,19 +1,12 @@
-
-<<<<<<< HEAD
-export const dbUsers = {"user1":{password:"123", img: "default_picture.jpg"}};//debug
-=======
-export const dbUsers = {"user1":{password:"123", img: "profile_pic_check.jpg"},"user2":{password:"123", img: "profile_pic_check.jpg"},"user3":{password:"123", img: "profile_pic_check.jpg"},"user4":{password:"123", img: "profile_pic_check.jpg"}};//debug
->>>>>>> f2205e6d3aa51413f34eb7276453bf3ad895c114
+export const dbUsers = {"user1":{password:"123", img: "profile_pic_check.jpg"},"user2":{password:"123", img: "profile_pic_check.jpg"},"user3":{password:"123", img: "profile_pic_check.jpg"},"user4":{password:"123", img: "profile_pic_check.jpg"}};
 export const dbMsg = {msg1:{text: "hello",date:"09:00"}, msg2:{text: "hello friend",date:"09:10"},msg3:{text: "need to go",date:"09:15"}};
 var msgId = 3;
 var chatId = 1;
 export const dbChats = {chat1:["user1","user2"]};
 export const dbMsgInChat = {chat1:[{idMsg: "msg1", from: "user1", to: "user2"}, {idMsg: "msg2", from: "user2", to: "user1"},
 {idMsg: "msg3", from: "user1", to: "user2"}]};
-<<<<<<< HEAD
-=======
 export var connectedUser = "user1";
->>>>>>> f2205e6d3aa51413f34eb7276453bf3ad895c114
+
 
 var msgId = 3
 export function addUser(user) {
@@ -26,14 +19,6 @@ export function userIsExists(name) {
     }
     return false
 }
-<<<<<<< HEAD
-export function addConectionToList(user1, user2) {
-    var i = 1;
-    dbChats.array.forEach(element => {
-        i++;   
-    });
-    dbChats[i] = {first: user1, second: user2};
-=======
 
 export function addConectionToList(user1, user2) {
     chatId+=1;
@@ -44,7 +29,6 @@ export function addConectionToList(user1, user2) {
 function generateMsgId(){
     msgId+=1;
     return "msg" + msgId;
->>>>>>> f2205e6d3aa51413f34eb7276453bf3ad895c114
 }
 
 
@@ -84,15 +68,12 @@ export function getMsgsByChatId(idC) {
     }
    // console.log(result.length)
     return result;
-<<<<<<< HEAD
 }
-
-function generateMsgId(){
-    msgId+=1;
-    return "msg" + msgId;
+//get the chat that contain the convection between 2 users:
+export function getConversation(user){
+    for (const [key, value] of Object.entries(dbChats)) {
+        if (value[0] == user || value[1] == user){
+            return key;
+        }
+    }
 }
-
-=======
-
-}
->>>>>>> f2205e6d3aa51413f34eb7276453bf3ad895c114

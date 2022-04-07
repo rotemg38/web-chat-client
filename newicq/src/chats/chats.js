@@ -12,9 +12,6 @@ function Chats(props) {
     return (
         <div>
             <AddChat updateChatId={props.updateChatId}/>
-            {/*<ul class="list-group">
-                {connectionsList}
-    </ul>*/}
         </div>
     );
 }
