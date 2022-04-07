@@ -22,12 +22,13 @@ class LastMsg extends Component {
         var currChat;
         // get the chat that contain the convection between them:
         currChat = getConversation(username)
-        var clock = "00:00" 
+        var clock = "" 
         var lastMsg = ""
-        if(dbMsgInChat[currChat] !== undefined){ 
-            for (var i=0; i <getMsgsByChatId(currChat).length; i++){
+        var msgsList = getMsgsByChatId(currChat)
+        if(dbMsgInChat[currChat] !== undefined){ // check if there is no msgs between them yet
+            for (var i=0; i < msgsList.length; i++){
                 // check which msg was the last that arrived from user1:
-                if (getMsgsByChatId(currChat)[i].from === username && clock < dbMsg[dbMsgInChat[currChat][i].idMsg].date){
+                if (msgsList[i].from === username && clock < dbMsg[msgsList[i].idMsg].date){
                     clock = dbMsg[dbMsgInChat[currChat][i].idMsg].date
                     lastMsg = dbMsg[dbMsgInChat[currChat][i].idMsg].text
                 }

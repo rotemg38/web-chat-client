@@ -1,9 +1,5 @@
 import './screenChat.css'
 import SendMessage from "./sendMessage";
-import Message from "./message";
-import {getMsgsByChatId} from '../dbHandle/dbHardcoded';
-import { useState } from "react";
-
 
 function ScreenChat(chatInfo) {
     return (
