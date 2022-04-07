@@ -11,6 +11,7 @@ function Register() {
     const [inputs, setInputs] = useState({});
 
    
+
     const handleRegister=(event)=>{
         var form = document.getElementById("registerForm");
         form.classList.add('was-validated')
@@ -35,7 +36,15 @@ function Register() {
         formValidationByElement(key, value);
     }
    
+    // TODO: Im not sure its right- didnt check it
+    const loadFile = (event) =>{
+        var image = document.getElementById('inputGroupFile02');
+        image.src = URL.createObjectURL(event.target.files[0]);
+        console.log(image.src)
+        setInputs(values => ({...values, img: image.src}))
+    }
     return (
+        //title of signup
         <div className="row align-items-center justify-content-center">
             <div className="form col-lg-10">
                 <div className="headline">
@@ -68,13 +77,12 @@ function Register() {
                             </div>
                             <br/>
                             
-                            {
-                            /*--------TODO: need to add this elements- phone, gender and photo--------*/}
-
+                            {/* phone element */}
                             <div className="form-group">
-                                <input type="text" className="form-control" placeholder="Phone Number *" value={inputs.phone || ""} onChange={handleChange}/>
+                                <input type="text" className="form-control" placeholder="Phone Number *" onChange={handleChange} name="phone" value={inputs.phone}/>
+
                             </div>
-                            
+                            {/* gender elemet */}
                             <div className="form-check form-check-inline">
                                 <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"/>
                                 <label className="form-check-label" htmlFor="inlineRadio1">male</label>
@@ -87,12 +95,13 @@ function Register() {
                                 <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"/>
                                 <label className="form-check-label" htmlFor="inlineRadio3">other</label>
                             </div>
+                            {/* file of picture element */}
                             <div className="input-group mb-3">
                                 <div className="custom-file">
-                                    <input type="file" className="custom-file-input" id="inputGroupFile02"/>
-                                    
+
+                                    <input type="file" className="custom-file-input"  accept="image/png, image/jpeg" id="inputGroupFile02" onChange={loadFile}/>
+
                                 </div>
-                            
                             </div>
                          
                             
