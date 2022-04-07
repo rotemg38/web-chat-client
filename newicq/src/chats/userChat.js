@@ -52,16 +52,16 @@ function UserChat({user,updateChatId, chatId}) {
 
 
     return (
-        <div class="list-group">
-            <button href="#" class="list-group-item list-group-item-action flex-column align-items-start"
+        <div className="list-group">
+            <button className="list-group-item list-group-item-action flex-column align-items-start"
             onClick={handleUserChatClick}>
-                <div class="d-flex w-100 justify-content-between">
-                <img src={new ProfilePicture(user).getPic()} alt="default" class="img-thumbnail"></img> 
-                    <h5 class="mb-1">{user}</h5>
-                    <span class="text-muted badge badge-info">msg not seen: </span>
+                <div className="d-flex w-100 justify-content-between">
+                <img src={new ProfilePicture(user).getPic()} alt="default" className="img-thumbnail"></img> 
+                    <h5 className="mb-1">{user}</h5>
+                    <span className="text-muted badge badge-info">msg not seen: </span>
                 </div>
-                <p class="mb-1">last message: {new LastMsg(user).state.msg}  
-                <small  class="text-muted"><small> since {new LastMsg(user).state.time} </small></small> 
+                <p className="mb-1">last message: {new LastMsg(user).state.msg}  
+                <small  className="text-muted"><small> since {new LastMsg(user).state.time} </small></small> 
                 </p>
             </button>
         </div>

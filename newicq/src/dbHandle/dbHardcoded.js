@@ -1,10 +1,10 @@
-
 export const dbUsers = {"user1":{password:"123", img: "profile_pic_check.jpg"},"user2":{password:"123", img: "profile_pic_check.jpg"},"user3":{password:"123", img: "profile_pic_check.jpg"},"user4":{password:"123", img: "profile_pic_check.jpg"}};//debug
 export const dbMsg = {msg1:{text: "hello",date:"09:00"}, msg2:{text: "hello friend",date:"09:10"},msg3:{text: "need to go",date:"09:15"}};
 var msgId = 3;
 var chatId = 1;
 export const dbChats = {chat1:["user1","user2"]};
-export const dbMsgInChat = {chat1:[{idMsg: "msg1", from: "user1", to: "user2"}, {idMsg: "msg2", from: "user2", to: "user1"},
+export const dbMsgInChat = {chat1:[{idMsg: "msg1", from: "user1", to: "user2"}, 
+{idMsg: "msg2", from: "user2", to: "user1"},
 {idMsg: "msg3", from: "user1", to: "user2"}]};
 export var connectedUser = "user1";
 
