@@ -72,7 +72,7 @@ function Register() {
                             /*--------TODO: need to add this elements- phone, gender and photo--------*/}
 
                             <div className="form-group">
-                                <input type="text" className="form-control" placeholder="Phone Number *" value={inputs.phone || ""}/>
+                                <input type="text" className="form-control" placeholder="Phone Number *" value={inputs.phone || ""} onChange={handleChange}/>
                             </div>
                             
                             <div className="form-check form-check-inline">
@@ -89,7 +89,7 @@ function Register() {
                             </div>
                             <div className="input-group mb-3">
                                 <div className="custom-file">
-                                    <input type="file" className="custom-file-input" value={inputs.img || "/default_picture.jpg"} id="inputGroupFile02"/>
+                                    <input type="file" className="custom-file-input" id="inputGroupFile02"/>
                                     
                                 </div>
                             
