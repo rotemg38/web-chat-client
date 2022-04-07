@@ -21,11 +21,7 @@ function AddChat(props) {
             <ul className="list-group">
                 <li className="list-group-item">My User</li>
                 <button type="button" className="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add chat</button>
-<<<<<<< HEAD
-                <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-=======
                 <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
->>>>>>> 091cba147135e21dbd57cc991ad187f04491fb0e
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
