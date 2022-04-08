@@ -75,10 +75,9 @@ function Register() {
                                     <label htmlFor="displayName">Display Name</label>
                                 </div>
                             </div>
-                            <br/>
                             
-                            {
-                            /*--------TODO: need to add this elements- phone, gender and photo--------*/}
+                            
+                            <br/>
                             {/* phone number element */}
                             <div className="form-group centered">
                                 <div className="form-floating col-sm-7">
@@ -91,21 +90,26 @@ function Register() {
                             </div>
                             
                             
-                            {/*
-                            <div className="form-check form-check-inline">
-                                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"/>
-                                <label className="form-check-label" htmlFor="inlineRadio1">male</label>
+                            <br/> 
+                            {/* gender element */}
+                            <div className="form-group centered">
+                                <div className="col-sm-7">
+                                    <div className="form-check  form-check-inline">
+                                        <input className="form-check-input" type="radio" name="gender" id="genderMale" value="male" onChange={handleChange} required/>
+                                        <label className="form-check-label" htmlFor="genderMale">male</label>
+                                    </div>
+                                    <div className="form-check  form-check-inline">
+                                        <input className="form-check-input" type="radio" name="gender" id="genderFemale" value="female" onChange={handleChange} required/>
+                                        <label className="form-check-label" htmlFor="genderFemale">female</label>
+                                    </div>
+                                    <div className="form-check  form-check-inline">
+                                        <input className="form-check-input" type="radio" name="gender" id="genderOther" value="other" onChange={handleChange} required/>
+                                        <label className="form-check-label" htmlFor="genderOther">other</label>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="form-check form-check-inline">
-                                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"/>
-                                <label className="form-check-label" htmlFor="inlineRadio2">female</label>
-                            </div>
-                            <div className="form-check form-check-inline">
-                                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"/>
-                                <label className="form-check-label" htmlFor="inlineRadio3">other</label>
-                            </div>
-                            */}
 
+                            <br/>
                             {/* file of picture element */}
                             <div className="input-group mb-3">
                                 <div className="custom-file">

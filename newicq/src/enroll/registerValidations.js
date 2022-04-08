@@ -73,6 +73,19 @@ export const formValidationByElement = (key, value)=>{
         }
 
     }
+    if(key === "gender"){
+       var radios = document.getElementsByName(key);
+       radios.forEach((radio)=>{
+        if(!radio.checkValidity()){ 
+            radio.classList.remove("is-valid");
+            radio.classList.add("is-invalid");
+            result = false;
+        }
+        radio.classList.remove("is-invalid");
+        radio.classList.add("is-valid");
+       });
+       return result;
+    }
 
     //to all of the rest fields that only have a "require"- check regulat validation 
     var element = document.getElementById(key);
