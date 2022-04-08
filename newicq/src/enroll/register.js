@@ -79,7 +79,7 @@ function Register() {
                             
                             {
                             /*--------TODO: need to add this elements- phone, gender and photo--------*/}
-
+                            {/* phone number element */}
                             <div className="form-group centered">
                                 <div className="form-floating col-sm-7">
                                     <input type="text" id="phoneNumber" name="phoneNumber" className="form-control" placeholder="Phone Number" 
@@ -89,6 +89,8 @@ function Register() {
                                     <div id="phoneNumberInvalid" className="invalid-feedback">Please fill out this field with valid israeli phone number. (in format 0XX-XXXXXXX or XXXXXXXXXX)</div>
                                 </div>
                             </div>
+                            
+                            
                             {/*
                             <div className="form-check form-check-inline">
                                 <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"/>
@@ -113,7 +115,7 @@ function Register() {
                                 </div>
                             </div>
                          
-                            
+                            <br/>
                             {/* password element */}
                             <div className="form-group centered">
                                 <div className="form-floating col-sm-7">
