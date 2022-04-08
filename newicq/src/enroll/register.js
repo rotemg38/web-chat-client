@@ -75,26 +75,41 @@ function Register() {
                                     <label htmlFor="displayName">Display Name</label>
                                 </div>
                             </div>
-                            <br/>
                             
-                            {/* phone element */}
-                            <div className="form-group">
-                                <input type="text" className="form-control" placeholder="Phone Number *" onChange={handleChange} name="phone" value={inputs.phone}/>
+                            
+                            <br/>
+                            {/* phone number element */}
+                            <div className="form-group centered">
+                                <div className="form-floating col-sm-7">
+                                    <input type="text" id="phoneNumber" name="phoneNumber" className="form-control" placeholder="Phone Number" 
+                                    value={inputs.phoneNumber || ""} onChange={handleChange} 
+                                    pattern="0[0-9]{2}-?[0-9]{7}" required/>
+                                    <label htmlFor="phoneNumber">Phone Number</label>
+                                    <div id="phoneNumberInvalid" className="invalid-feedback">Please fill out this field with valid israeli phone number. (in format 0XX-XXXXXXX or XXXXXXXXXX)</div>
+                                </div>
+                            </div>
+                            
+                            
+                            <br/> 
+                            {/* gender element */}
+                            <div className="form-group centered">
+                                <div className="col-sm-7">
+                                    <div className="form-check  form-check-inline">
+                                        <input className="form-check-input" type="radio" name="gender" id="genderMale" value="male" onChange={handleChange} required/>
+                                        <label className="form-check-label" htmlFor="genderMale">male</label>
+                                    </div>
+                                    <div className="form-check  form-check-inline">
+                                        <input className="form-check-input" type="radio" name="gender" id="genderFemale" value="female" onChange={handleChange} required/>
+                                        <label className="form-check-label" htmlFor="genderFemale">female</label>
+                                    </div>
+                                    <div className="form-check  form-check-inline">
+                                        <input className="form-check-input" type="radio" name="gender" id="genderOther" value="other" onChange={handleChange} required/>
+                                        <label className="form-check-label" htmlFor="genderOther">other</label>
+                                    </div>
+                                </div>
+                            </div>
 
-                            </div>
-                            {/* gender elemet */}
-                            <div className="form-check form-check-inline">
-                                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"/>
-                                <label className="form-check-label" htmlFor="inlineRadio1">male</label>
-                            </div>
-                            <div className="form-check form-check-inline">
-                                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"/>
-                                <label className="form-check-label" htmlFor="inlineRadio2">female</label>
-                            </div>
-                            <div className="form-check form-check-inline">
-                                <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"/>
-                                <label className="form-check-label" htmlFor="inlineRadio3">other</label>
-                            </div>
+                            <br/>
                             {/* file of picture element */}
                             <div className="input-group mb-3">
                                 <div className="custom-file">
@@ -104,11 +119,10 @@ function Register() {
                                 </div>
                             </div>
                          
-                            
+                            <br/>
                             {/* password element */}
                             <div className="form-group centered">
                                 <div className="form-floating col-sm-7">
-                                    
                                     <input type="password" id="password" name="password" className="form-control" placeholder="Password" 
                                     value={inputs.password || ""} onChange={handleChange} 
                                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" required/>
