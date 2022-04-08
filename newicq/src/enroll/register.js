@@ -11,6 +11,7 @@ function Register() {
     const [inputs, setInputs] = useState({});
 
    
+
     const handleRegister=(event)=>{
         var form = document.getElementById("registerForm");
         form.classList.add('was-validated')
@@ -35,7 +36,15 @@ function Register() {
         formValidationByElement(key, value);
     }
    
+    // TODO: Im not sure its right- didnt check it
+    const loadFile = (event) =>{
+        var image = document.getElementById('inputGroupFile02');
+        image.src = URL.createObjectURL(event.target.files[0]);
+        console.log(image.src)
+        setInputs(values => ({...values, img: image.src}))
+    }
     return (
+        //title of signup
         <div className="row align-items-center justify-content-center">
             <div className="form col-lg-10">
                 <div className="headline">
@@ -95,12 +104,13 @@ function Register() {
                             </div>
                             */}
 
+                            {/* file of picture element */}
                             <div className="input-group mb-3">
                                 <div className="custom-file">
-                                    <input type="file" className="custom-file-input" id="inputGroupFile02"/>
-                                    
+
+                                    <input type="file" className="custom-file-input"  accept="image/png, image/jpeg" id="inputGroupFile02" onChange={loadFile}/>
+
                                 </div>
-                            
                             </div>
                          
                             

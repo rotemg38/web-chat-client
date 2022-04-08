@@ -5,7 +5,7 @@ function SendMessage(props) {
     const handleSend = (event)=>{
         var inputMsgBox = document.getElementById("messageBox");
         event.preventDefault();//prevent rerender
-        if(inputMsgBox.value != ""){
+        if(inputMsgBox.value !== ""){
             let text = inputMsgBox.value;
             let time = new Date().toLocaleTimeString('en-GB', { hour12: false, hour: "numeric", minute: "numeric"});
             let idMsg = addMsg({text: text, date: time});
