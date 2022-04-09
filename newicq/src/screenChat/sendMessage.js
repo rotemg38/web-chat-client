@@ -36,6 +36,22 @@ function SendMessage(props) {
             inputMsgBox.type = "text";
             inputMsgBox.value = "";
         }
+         //if the input is on video mode- means we want to send an video 
+         else if(msgType == "file"){
+            msgType = "video";
+            let time = new Date().toLocaleTimeString('en-GB', { hour12: false, hour: "numeric", minute: "numeric"});
+            let idMsg = addMsg({type: msgType, date: time, videoSrc: inputMsgBox.src});
+            let otherUser = getOtherUserByChatId(props.chatId, props.connectedUser);
+            addMsgInChat(idMsg, props.chatId, props.connectedUser, otherUser);
+            
+            props.funcUpdate({type: msgType, videoSrc: inputMsgBox.src, date: time, connectedUser: props.connectedUser, from: props.connectedUser, to:otherUser});
+            
+            //clean input
+            inputMsgBox.removeAttribute("src");
+            //return to defult mode- which is text mode
+            inputMsgBox.type = "text";
+            inputMsgBox.value = "";
+        }
         
     };
 

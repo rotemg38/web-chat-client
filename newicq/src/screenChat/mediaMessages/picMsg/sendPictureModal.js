@@ -50,18 +50,22 @@ function PictureModal({handleSend, handleUpload}){
         <div className="modal fade" id="modalSendPicMsg" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered">
             <div className="modal-content">
-            <div className="modal-header">
-                <h5 className="modal-title" id="staticBackdropLabel">Preview Selected Picture</h5>
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleCancel}></button>
-            </div>
-            <div className="modal-body">
-            <input type="file" accept="image/png, image/jpeg" id="pictureInputRegretModal" onChange={handleUpload}/>
-            <img src="" id="showImageMsgModal"/>
-            </div>
-            <div className="modal-footer">
-                <button type="button" id="modalCancelPic" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleCancel}>Cancel</button>
-                <button type="button" id="modalSendPic" className="btn btn-primary" data-bs-dismiss="modal" onClick={handleSendPic} hidden>Send</button>
-            </div>
+
+                <div className="modal-header">
+                    <h5 className="modal-title" id="staticBackdropLabel">Preview Selected Picture</h5>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleCancel}></button>
+                </div>
+
+                <div className="modal-body">
+                <input type="file" accept="image/png, image/jpeg" id="pictureInputRegretModal" onChange={handleUpload}/>
+                <img src="" id="showImageMsgModal"/>
+                </div>
+
+                <div className="modal-footer">
+                    <button type="button" id="modalCancelPic" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleCancel}>Cancel</button>
+                    <button type="button" id="modalSendPic" className="btn btn-primary" data-bs-dismiss="modal" onClick={handleSendPic} hidden>Send</button>
+                </div>
+                
             </div>
         </div>
         </div>
