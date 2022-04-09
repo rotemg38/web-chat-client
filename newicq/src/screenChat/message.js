@@ -11,7 +11,7 @@ function Message(msgInfo) {
                     msgInfo.text
                 ):(<></>)}
                 {msgInfo.type === "image" ?(
-                    <img src={msgInfo.imgSrc} width="300" height="200"></img>
+                    <img alt="" src={msgInfo.imgSrc} width="300" height="200"></img>
                 ):(<></>)}
                 {msgInfo.type === "video" ?(
                     <video controls="controls" src={msgInfo.videoSrc} width="300" height="200"></video>

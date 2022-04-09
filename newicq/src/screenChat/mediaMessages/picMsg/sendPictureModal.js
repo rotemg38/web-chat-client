@@ -58,14 +58,14 @@ function PictureModal({handleSend, handleUpload}){
 
                 <div className="modal-body">
                 <input type="file" accept="image/png, image/jpeg" id="pictureInputRegretModal" onChange={handleUpload}/>
-                <img src="" id="showImageMsgModal"/>
+                <img alt="" src="" id="showImageMsgModal"/>
                 </div>
 
                 <div className="modal-footer">
                     <button type="button" id="modalCancelPic" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleCancel}>Cancel</button>
                     <button type="button" id="modalSendPic" className="btn btn-primary" data-bs-dismiss="modal" onClick={handleSendPic} hidden>Send</button>
                 </div>
-                
+
             </div>
         </div>
         </div>

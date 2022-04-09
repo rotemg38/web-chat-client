@@ -22,7 +22,7 @@ function SendMessage(props) {
 
         }
         //if the input is on image mode- means we want to send an image 
-        else if(msgType == "image"){
+        else if(msgType === "image"){
             let time = new Date().toLocaleTimeString('en-GB', { hour12: false, hour: "numeric", minute: "numeric"});
             let idMsg = addMsg({type: msgType, date: time, imgSrc: inputMsgBox.src});
             let otherUser = getOtherUserByChatId(props.chatId, props.connectedUser);
@@ -37,7 +37,7 @@ function SendMessage(props) {
             inputMsgBox.value = "";
         }
          //if the input is on video mode- means we want to send an video 
-         else if(msgType == "file"){
+         else if(msgType === "file"){
             msgType = "video";
             let time = new Date().toLocaleTimeString('en-GB', { hour12: false, hour: "numeric", minute: "numeric"});
             let idMsg = addMsg({type: msgType, date: time, videoSrc: inputMsgBox.src});
