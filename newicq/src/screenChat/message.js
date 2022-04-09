@@ -7,7 +7,12 @@ function Message(msgInfo) {
         <div className='w-100'>
         <div className="alert alert-primary msg msg-from">
             <p className=''>
-                {msgInfo.text}
+                {msgInfo.type === "text"?(
+                    msgInfo.text
+                ):(<></>)}
+                {msgInfo.type === "image" ?(
+                    <img src={msgInfo.imgSrc} width="300" height="200"></img>
+                ):(<></>)}
                 <br/>
                 <label>{msgInfo.date}</label>
             </p>

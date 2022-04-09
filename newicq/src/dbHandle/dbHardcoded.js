@@ -1,12 +1,17 @@
 export const dbUsers = { "user1": { password: "123", img: "default_picture.jpg" }, "user2": { password: "123", img: "default_picture.jpg" }, "user3": { password: "123", img: "default_picture.jpg" }, "user4": { password: "123", img: "profile_pic_check.jpg" } };
-export const dbMsg = { msg1: { text: "hello", date: "09:00" }, msg2: { text: "hello friend", date: "09:10" }, msg3: { text: "need to go", date: "09:15" } };
-var msgId = 3;
+export const dbMsg = { 
+    msg1: {type:"text", text: "hello", date: "09:00" }, 
+    msg2: { type:"text", text: "hello friend", date: "09:10" }, 
+    msg3: { type:"text", text: "need to go", date: "09:15" },
+    msg4: { type:"image", imgSrc: "default_picture.jpg", date: "09:15" } };
+var msgId = 4;
 var chatId = 1;
 export const dbChats = { chat1: ["user1", "user2"] };
 export const dbMsgInChat = {
     chat1: [{ idMsg: "msg1", from: "user1", to: "user2" },
     { idMsg: "msg2", from: "user2", to: "user1" },
-    { idMsg: "msg3", from: "user1", to: "user2" }]
+    { idMsg: "msg3", from: "user1", to: "user2" },
+    { idMsg: "msg4", from: "user1", to: "user2" }]
 };
 export var connectedUser = "user1";
 

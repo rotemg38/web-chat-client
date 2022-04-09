@@ -1,0 +1,6 @@
+.dropdown-menu > li {
+    float: left;
+}
+.dropdown-menu{
+    min-width: 15rem;
+}

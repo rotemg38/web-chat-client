@@ -48,12 +48,12 @@ function UserChat({user,updateChatId, chatId}) {
 
 
     return (
-        <div classNmae="list-group">
+        <div className="list-group">
             <button href="#" className="list-group-item list-group-item-action flex-column align-items-start"
             onClick={handleUserChatClick}>
                 <div className="d-flex w-100 justify-content-between">
                 <img src={dbUsers[user].img} alt="default" className="img-thumbnail"></img> {/*new ProfilePicture(user).getPic() */}
-                    <h5 clclassNameass="mb-1">{user}</h5>
+                    <h5 className="mb-1">{user}</h5>
 
                     <span className="text-muted badge badge-info">msg not seen: </span>
                 </div>
