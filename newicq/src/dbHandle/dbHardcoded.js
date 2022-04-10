@@ -97,3 +97,7 @@ export function getOtherUser(user) {
     }
     return users
 }
+
+export function getUserPassword(user) {
+    return dbUsers[user].password
+}
