@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import UserChat from "./userChat";
-import { addConectionToList, getOtherUser, getConversationBy2Users, userIsExists } from "../dbHandle/dbHardcoded";
+import { addConectionToList, getOtherUser, getConversationBy2Users, userIsExists, getProfileImg } from "../dbHandle/dbHardcoded";
 import { connectedUser } from "../dbHandle/dbHardcoded";
+import './addChat.css'
 
-
-    function AddChat(props) {
+    function AddChat({updateChatId}) {
         const currUserFriend = getOtherUser(connectedUser)
         const chatsOnScreenList = Object.entries(currUserFriend).map(([key, value]) => (
-            <UserChat user={value} updateChatId={props.updateChatId} chatId={key} key={key} />))
+            <UserChat user={value} updateChatId={updateChatId} chatId={key} key={key} />))
 
         const [usersOnScreen, setUserOnScreen] = useState(chatsOnScreenList);
 
@@ -20,12 +20,13 @@ import { connectedUser } from "../dbHandle/dbHardcoded";
             // check if userChat is allready in lists of userChats:
             if (getConversationBy2Users(username, connectedUser) !== undefined) { return }
             var chatId = addConectionToList(connectedUser, username);
-            setUserOnScreen(connections => [...connections, <UserChat key={connections.length} user={username} updateChatId={props.updateChatId} chatId={chatId} />]);
+            setUserOnScreen(connections => [...connections, <UserChat key={connections.length} user={username} updateChatId={updateChatId} chatId={chatId} />]);
         };
         return (
             <div>
                 <ul className="list-group">
-                    <li className="list-group-item">My User</li>
+                    <li className="list-group-item">My User
+                    <img src={getProfileImg()} className="profile" alt="profile"></img></li>
                     <button type="button" className="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add chat</button>
                     <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div className="modal-dialog">
