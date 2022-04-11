@@ -27,8 +27,8 @@ function MainScreenChats() {
 
     }
    
-    //when messege is sent this function will be activate and update the display of the messeges
-    //this function add the given messege to the list of messeges that we are displaying now
+    //when message is sent this function will be activate and update the display of the messages
+    //this function add the given message to the list of messages that we are displaying now
     const updateMessages = (msg)=>{
        setChatsState((curentState)=>{
             return {chatId: curentState.chatId, msgsComponents: [...curentState.msgsComponents, <Message {...msg} key={curentState.msgsComponents.length}/>]};
