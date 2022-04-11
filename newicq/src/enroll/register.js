@@ -1,6 +1,6 @@
 import './register.css'
 import { useState } from "react";
-import {addUser} from "../dbHandle/dbHardcoded";
+import {addUser, addImg, dbUsers} from "../dbHandle/dbHardcoded";
 import {useNavigate } from 'react-router-dom';
 import { formValidationByElement } from './registerValidations';
 
@@ -22,6 +22,9 @@ function Register() {
         } else{
             //successfuly enrolled- add user and move to the login page
             addUser(inputs);
+            //addImg()
+            addImg(inputs.userName,currImg)
+            console.log(dbUsers[inputs.userName])
             navigate("/chats");
         }
     }
@@ -36,12 +39,14 @@ function Register() {
         formValidationByElement(key, value);
     }
    
+    const [currImg, setUserImg] = useState("default_picture.jpg")
     // TODO: Im not sure its right- didnt check it
     const loadFile = (event) =>{
-        var image = document.getElementById('inputGroupFile02');
-        image.src = URL.createObjectURL(event.target.files[0]);
-        console.log(image.src)
-        setInputs(values => ({...values, img: image.src}))
+        //var image = document.getElementById('inputGroupFile02')
+        //image.src = URL.createObjectURL(event.target.files[0])
+        const key = event.target.name
+        const value = URL.createObjectURL(event.target.files[0])
+       setUserImg(value)
     }
     return (
         //title of signup
@@ -113,8 +118,7 @@ function Register() {
                             {/* file of picture element */}
                             <div className="input-group mb-3">
                                 <div className="custom-file">
-
-                                    <input type="file" className="custom-file-input"  accept="image/png, image/jpeg" id="inputGroupFile02" onChange={loadFile}/>
+                                    <input type="file" className="custom-file-input" name="img"  accept="image/png, image/jpeg" id="inputGroupFile02" onChange={loadFile}/>
 
                                 </div>
                             </div>

@@ -28,7 +28,7 @@ class LastMsg extends Component {
         if(dbMsgInChat[currChat] !== undefined){ // check if there is no msgs between them yet
             for (var i=0; i < msgsList.length; i++){
                 // check which msg was the last that arrived from user1:
-                if (msgsList[i].from === username && clock < dbMsg[msgsList[i].idMsg].date){
+                if (clock < dbMsg[msgsList[i].idMsg].date){
                     clock = dbMsg[dbMsgInChat[currChat][i].idMsg].date
                     lastMsg = dbMsg[dbMsgInChat[currChat][i].idMsg].text
                 }

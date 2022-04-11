@@ -10,6 +10,8 @@ import Message from "../screenChat/message";
 function MainScreenChats() {
     const [chatsState, setChatsState] = useState({chatId: "-1",msgsComponents: [] });
    
+    const [msgState, setMsgs] = useState()
+
     const chatInfo = {connectedUser: connectedUser, chatId: chatsState.chatId, msgsComponents: chatsState.msgsComponents}
 
     //when the user click the chat he wants to see this function will be activate and update the current chatId he is watching
@@ -31,7 +33,7 @@ function MainScreenChats() {
        setChatsState((curentState)=>{
             return {chatId: curentState.chatId, msgsComponents: [...curentState.msgsComponents, <Message {...msg} key={curentState.msgsComponents.length}/>]};
        });
-    };
+    }
 
 
     return (

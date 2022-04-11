@@ -1,4 +1,4 @@
-export const dbUsers = { "user1": { password: "123", img: "default_picture.jpg" }, "user2": { password: "123", img: "default_picture.jpg" }, "user3": { password: "123", img: "default_picture.jpg" }, "user4": { password: "123", img: "profile_pic_check.jpg" } };
+export const dbUsers = { "user1": { password: "123", img: "default_picture.jpg" }, "user2": { password: "123", img: "default_picture.jpg" }, "user3": { password: "123", img: "default_picture.jpg" }, "user4": { password: "123", img: "blob:http://localhost:3000/d3069f08-e5bf-4adf-9a26-3842958e9561" } };
 export const dbMsg = { 
     msg1: {type:"text", text: "hello", date: "09:00" }, 
     msg2: { type:"text", text: "hello friend", date: "09:10" }, 
@@ -16,7 +16,11 @@ export const dbMsgInChat = {
 export var connectedUser = "user1";
 
 export function addUser(user) {
-    dbUsers[user.userName] = { password: user.password, phone: user.phone, img: user.img };
+    dbUsers[user.userName] = { password: user.password, phone: user.phone };
+}
+
+export function addImg(username, imgSrc){
+    dbUsers[username]={img: imgSrc}
 }
 
 export function userIsExists(name) {
@@ -101,4 +105,11 @@ export function getOtherUser(user) {
         }
     }
     return users
+}
+
+export function getUserPassword(user) {
+    return dbUsers[user].password
+}
+export function getProfileImg() {
+    return dbUsers[connectedUser].img
 }

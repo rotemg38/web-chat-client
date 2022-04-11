@@ -1,6 +1,6 @@
 import AddChat from "./addChat";
 
-function Chats(props) {
+function Chats({updateChatId}) {
     
 
        
@@ -8,7 +8,7 @@ function Chats(props) {
         return (
 
             <div>
-                <AddChat updateChatId={props.updateChatId} />
+                <AddChat updateChatId={updateChatId} />
             </div>
         );
     }
