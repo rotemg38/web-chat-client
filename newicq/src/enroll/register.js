@@ -50,8 +50,8 @@ function Register() {
     }
     return (
         //title of signup
-        <div className="row align-items-center justify-content-center">
-            <div className="form col-lg-10">
+        <div className="warp row align-items-center justify-content-center">
+            <div className="form col-lg-6 cardBody">
                 <div className="headline">
                     <h1>SignUp</h1>
                 </div>
@@ -116,10 +116,12 @@ function Register() {
 
                             <br/>
                             {/* file of picture element */}
-                            <div className="input-group mb-3">
-                                <div className="custom-file">
-                                    <input type="file" className="custom-file-input" name="img"  accept="image/png, image/jpeg" id="inputGroupFile02" onChange={loadFile}/>
-
+                            <div className="form-group centered">
+                                <div className="form-floating col-sm-7">
+                                    <div className="custom-file">
+                                        <input type="file" className="form-control" name="img"  accept="image/png, image/jpeg" 
+                                        id="inputGroupFile02" onChange={loadFile}/>
+                                    </div>
                                 </div>
                             </div>
                          
@@ -153,7 +155,7 @@ function Register() {
                     </div>
 
                     <br/>
-                    <button type="submit" className="btn btn-outline-primary">SignUp</button>
+                    <button type="submit" className="btn btn-primary">SignUp</button>
                 </div>
                 </form>
             </div>
