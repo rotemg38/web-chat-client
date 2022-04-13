@@ -1,6 +1,7 @@
 import './sendMessage.css'
 import { addMsg, addMsgInChat, getOtherUserByChatId} from '../dbHandle/dbHardcoded';
 import MediaButton from './mediaMessages/mediaButton';
+import { SendFill } from 'react-bootstrap-icons';
 function SendMessage(props) {
 
     const handleSend = (event)=>{
@@ -61,7 +62,9 @@ function SendMessage(props) {
                 <div className="input-group">
                     <MediaButton handleSend={handleSend}/>
                     <input type="text" autoComplete="off" id="messageBox" name="messageBox" className="form-control"/>
-                    <button className="btn btn-primary" type="submit" id="send">Send</button>
+                    <button className="btn btn-primary" type="submit" id="send">
+                        <SendFill/>
+                    </button>
                 </div>
             </form>
       </div>

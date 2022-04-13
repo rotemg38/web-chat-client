@@ -1,6 +1,13 @@
+
+/*for media button*/
 .dropdown-menu > li {
     float: left;
 }
 .dropdown-menu{
-    min-width: 15rem;
+    min-width: 10rem;
+}
+
+/*for the send message Bar*/
+.input-group{
+    width:auto;
 }
