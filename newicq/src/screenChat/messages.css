@@ -1,0 +1,73 @@
+/*left messages*/
+.msg.left {
+    padding: 0 0 0 3%;
+    text-align: left;
+    float: left;
+}
+.msg {
+    position: relative;
+    max-width: 600px;
+    overflow: hidden;
+    clear: both;
+    word-wrap: break-word;
+}
+.msg.left .text {
+    background: #ebebeb;
+    color: #333333;
+    border-radius: 8px 8px 8px 0;
+}
+.msg .text {
+    padding: 2%;
+    font-size: 16px;
+    position: relative;
+}
+.msg.left .text:before {
+    left: -30px;
+    border-right-color: #ebebeb;
+    border-right-width: 12px;
+}
+.msg .text:before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    border: 18px solid transparent;
+    border-bottom-width: 0;
+}
+.msg.left .time {
+    
+    color: #333333;
+    float: right;
+    font-size: small;
+}
+.msg .time {
+    font-size: 16px;
+    position: relative;
+    padding-bottom: 1px;
+}
+
+
+
+/*right messages*/
+.msg.right {
+    padding: 0 3% 0 0;
+    text-align: right;
+    float: right;
+    margin-left: 40%;
+}
+
+.msg.right .text {
+    background: #aca2e3c3;
+    color: #333333;
+    border-radius: 8px 8px 0 8px;
+}
+.msg.right .text:before {
+    right: -30px;
+    border-left-color: #aca2e3c3;
+    border-left-width: 12px;
+}
+.msg.right .time {
+    color: #333333;
+    float: left;
+    font-size: small;
+}

@@ -1,6 +1,7 @@
 import '../sendMessage.css'
 import { handlePicture, handleVideo, handleUpload } from './sendMediaButtonsHandler';
 import ModalPicVid from './modalPicVid';
+import { Image,CameraReels, Mic, Paperclip } from 'react-bootstrap-icons';
 
 function MediaButton({handleSend}){
     return(
@@ -8,16 +9,24 @@ function MediaButton({handleSend}){
             
             <div className="dropdown">
                 <button className="btn btn-outline-primary" type="button" id="media" 
-                data-bs-toggle="dropdown" aria-expanded="false"> media </button>
+                data-bs-toggle="dropdown" aria-expanded="false"> 
+                <Paperclip/>
+                 </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li>
-                        <button id="pictureMedia" className="dropdown-item" onClick={handlePicture}>picture</button>
+                        <button id="pictureMedia" className="dropdown-item" onClick={handlePicture}>
+                        <Image />
+                        </button>
                     </li>
                     <li>
-                        <button id="videoMedia" className="dropdown-item" onClick={handleVideo}>video</button>
+                        <button id="videoMedia" className="dropdown-item" onClick={handleVideo}>
+                            <CameraReels/>
+                        </button>
                     </li>
                     <li>
-                        <button className="dropdown-item">audio</button>
+                        <button className="dropdown-item">
+                            <Mic/>
+                        </button>
                     </li>
                 </ul>
             </div> 

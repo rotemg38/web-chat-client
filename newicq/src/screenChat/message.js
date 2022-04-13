@@ -1,35 +1,39 @@
-import './screenChat.css'
+import './messages.css'
 function Message(msgInfo) {
 
     return (
         <>
         {msgInfo.from === msgInfo.connectedUser ?(
-        <div className='w-100'>
-        <div className="alert alert-primary msg msg-from">
-            <p className=''>
+        <div className='msg right alert'>
+        <div className="text">
+            <p>
                 {msgInfo.type === "text"?(
                     msgInfo.text
                 ):(<></>)}
                 {msgInfo.type === "image" ?(
-                    <img alt="" src={msgInfo.imgSrc} width="300" height="200"></img>
+                    <img alt="" src={msgInfo.imgSrc} width="250" height="200"></img>
                 ):(<></>)}
                 {msgInfo.type === "video" ?(
-                    <video controls="controls" src={msgInfo.videoSrc} width="300" height="200"></video>
+                    <video controls="controls" src={msgInfo.videoSrc} width="250" height="200"></video>
                 ):(<></>)}
 
                 <br/>
-                <label>{msgInfo.date}</label>
+                <div className='time'>
+                    <label>{msgInfo.date}</label>
+                </div>
             </p>
         </div> 
        
         </div>
         ):(
-        <div className='w-100'>
-        <div className="alert alert-info msg">
+        <div className='msg left alert'>
+        <div className="text">
             <p>
                 {msgInfo.text}
                 <br/>
-                <label>{msgInfo.date}</label>
+                <div className='time'>
+                    <label>{msgInfo.date}</label>
+                </div>
             </p>
         </div>
        

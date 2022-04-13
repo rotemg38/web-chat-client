@@ -1,4 +1,5 @@
 import './register.css'
+import '../App.css'
 import { useState } from "react";
 import {addUser, addImg, dbUsers} from "../dbHandle/dbHardcoded";
 import {useNavigate } from 'react-router-dom';

@@ -1,18 +1,19 @@
 import Chats from "../chats/chats";
 import ScreenChat from "../screenChat/screenChat";
 import './mainScreenChats.css'
-import { connectedUser } from "../dbHandle/dbHardcoded";
+import '../App.css'
+import { connectedUser, getOtherUserByChatId } from "../dbHandle/dbHardcoded";
 import { useState } from "react";
 import {getMsgsByChatId} from '../dbHandle/dbHardcoded';
 import Message from "../screenChat/message";
 
 
 function MainScreenChats() {
-    const [chatsState, setChatsState] = useState({chatId: "-1",msgsComponents: [] });
+    const [chatsState, setChatsState] = useState({chatId: "-1", otherUserName:"", msgsComponents: [] });
    
     const [msgState, setMsgs] = useState()
 
-    const chatInfo = {connectedUser: connectedUser, chatId: chatsState.chatId, msgsComponents: chatsState.msgsComponents}
+    const chatInfo = {connectedUser: connectedUser, chatId: chatsState.chatId, otherUserName: chatsState.otherUserName, msgsComponents: chatsState.msgsComponents}
 
     //when the user click the chat he wants to see this function will be activate and update the current chatId he is watching
     const updateChatId = (chatId)=>{
@@ -23,7 +24,9 @@ function MainScreenChats() {
             msg["connectedUser"] = connectedUser;
             return <Message {...msg} key={key}/>
         });
-        setChatsState({chatId: chatId, msgsComponents: messageList});
+
+        var other = getOtherUserByChatId(chatId, connectedUser);
+        setChatsState({chatId: chatId, otherUserName:other, msgsComponents: messageList});
 
     }
    
@@ -31,18 +34,18 @@ function MainScreenChats() {
     //this function add the given message to the list of messages that we are displaying now
     const updateMessages = (msg)=>{
        setChatsState((curentState)=>{
-            return {chatId: curentState.chatId, msgsComponents: [...curentState.msgsComponents, <Message {...msg} key={curentState.msgsComponents.length}/>]};
+            return {chatId: curentState.chatId, otherUserName: curentState.otherUserName, 
+                msgsComponents: [...curentState.msgsComponents, <Message {...msg} key={curentState.msgsComponents.length}/>]};
        });
     }
 
 
     return (
-        <div className="container-fluid">
-            <div className="row vh-100">
+        <div className="container">
+            <div className="row">
                 <div className="col-md-3">
                     <Chats updateChatId={updateChatId}/>
                 </div>
-                {/*position-relative*/}
                 <div className="col-md-9">
                     <ScreenChat {...chatInfo} updateMessages={updateMessages}/>
                 </div>
