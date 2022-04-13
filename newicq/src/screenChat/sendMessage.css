@@ -11,3 +11,13 @@
 .input-group{
     width:auto;
 }
+
+/*for audio modal*/
+#startRecord{
+    border-radius: 10%;
+    border: 0px;
+}
+#stopRecord{
+    border-radius: 10%;
+    border: 0px;
+}

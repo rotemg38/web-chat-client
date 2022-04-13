@@ -1,6 +1,7 @@
 import '../sendMessage.css'
 import { handlePicture, handleVideo, handleUpload } from './sendMediaButtonsHandler';
 import ModalPicVid from './modalPicVid';
+import ModalAudio from './modalAudio';
 import { Image,CameraReels, Mic, Paperclip } from 'react-bootstrap-icons';
 
 function MediaButton({handleSend}){
@@ -24,7 +25,7 @@ function MediaButton({handleSend}){
                         </button>
                     </li>
                     <li>
-                        <button className="dropdown-item">
+                        <button className="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalMsgAudio">
                             <Mic/>
                         </button>
                     </li>
@@ -36,6 +37,8 @@ function MediaButton({handleSend}){
             data-bs-toggle="modal" data-bs-target="#modalSendMsg" onChange={handleUpload} hidden/>
             
             <ModalPicVid handleSend={handleSend} handleUpload={handleUpload}/>
+
+            <ModalAudio handleSend={handleSend}/>
 
         </div>
     );

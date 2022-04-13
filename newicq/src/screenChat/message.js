@@ -16,11 +16,14 @@ function Message(msgInfo) {
                 {msgInfo.type === "video" ?(
                     <video controls="controls" src={msgInfo.videoSrc} width="250" height="200"></video>
                 ):(<></>)}
+                {msgInfo.type === "audio" ?(
+                   <audio src={msgInfo.audioSrc} controls></audio>
+                ):(<></>)}
 
                 <br/>
-                <div className='time'>
+                <span className='time'>
                     <label>{msgInfo.date}</label>
-                </div>
+                </span>
             </p>
         </div> 
        
@@ -29,11 +32,23 @@ function Message(msgInfo) {
         <div className='msg left alert'>
         <div className="text">
             <p>
-                {msgInfo.text}
+                {msgInfo.type === "text"?(
+                    msgInfo.text
+                ):(<></>)}
+                {msgInfo.type === "image" ?(
+                    <img alt="" src={msgInfo.imgSrc} width="250" height="200"></img>
+                ):(<></>)}
+                {msgInfo.type === "video" ?(
+                    <video controls="controls" src={msgInfo.videoSrc} width="250" height="200"></video>
+                ):(<></>)}
+                {msgInfo.type === "audio" ?(
+                   <audio src={msgInfo.audioSrc} controls></audio>
+                ):(<></>)}
+
                 <br/>
-                <div className='time'>
+                <span className='time'>
                     <label>{msgInfo.date}</label>
-                </div>
+                </span>
             </p>
         </div>
        
