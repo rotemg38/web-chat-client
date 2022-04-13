@@ -31,6 +31,7 @@ function ModalPicVid({handleSend, handleUpload}){
             //set the main mmesage box to image/video mode and set the file data
             var inputMsg = document.getElementById("messageBox");
             inputMsg.type = getCurrentMedia();
+            inputMsg.accept = getCurrentMedia();
             inputMsg.src = showMsgModal.src;
             
             //set the image/video in the modal to nothing- in order to clear the preview
@@ -55,7 +56,7 @@ function ModalPicVid({handleSend, handleUpload}){
 
                 <div className="modal-header">
                     <h5 className="modal-title" id="staticBackdropLabel">
-                        Preview Selected Media 
+                        Preview Your Selected Media 
                     </h5>
                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleCancel}></button>
                 </div>

@@ -5,13 +5,13 @@ import { SendFill } from 'react-bootstrap-icons';
 function SendMessage(props) {
 
     const handleSend = (event)=>{
+        var time = new Date().toLocaleTimeString('en-GB', { hour12: false, hour: "numeric", minute: "numeric"});
         var inputMsgBox = document.getElementById("messageBox");
-        var msgType = inputMsgBox.type;
+        var msgType = inputMsgBox.accept;
         
         event.preventDefault();//prevent rerender
         if(inputMsgBox.value !== ""){
             let text = inputMsgBox.value;
-            let time = new Date().toLocaleTimeString('en-GB', { hour12: false, hour: "numeric", minute: "numeric"});
             let idMsg = addMsg({type: msgType, text: text, date: time});
             let otherUser = getOtherUserByChatId(props.chatId, props.connectedUser);
             addMsgInChat(idMsg, props.chatId, props.connectedUser, otherUser);
@@ -24,7 +24,6 @@ function SendMessage(props) {
         }
         //if the input is on image mode- means we want to send an image 
         else if(msgType === "image"){
-            let time = new Date().toLocaleTimeString('en-GB', { hour12: false, hour: "numeric", minute: "numeric"});
             let idMsg = addMsg({type: msgType, date: time, imgSrc: inputMsgBox.src});
             let otherUser = getOtherUserByChatId(props.chatId, props.connectedUser);
             addMsgInChat(idMsg, props.chatId, props.connectedUser, otherUser);
@@ -35,12 +34,12 @@ function SendMessage(props) {
             inputMsgBox.removeAttribute("src");
             //return to defult mode- which is text mode
             inputMsgBox.type = "text";
+            inputMsgBox.accept = "text";
             inputMsgBox.value = "";
         }
-         //if the input is on video mode- means we want to send an video 
+         //if the input is on file mode- means we want to send an video 
          else if(msgType === "file"){
             msgType = "video";
-            let time = new Date().toLocaleTimeString('en-GB', { hour12: false, hour: "numeric", minute: "numeric"});
             let idMsg = addMsg({type: msgType, date: time, videoSrc: inputMsgBox.src});
             let otherUser = getOtherUserByChatId(props.chatId, props.connectedUser);
             addMsgInChat(idMsg, props.chatId, props.connectedUser, otherUser);
@@ -51,6 +50,22 @@ function SendMessage(props) {
             inputMsgBox.removeAttribute("src");
             //return to defult mode- which is text mode
             inputMsgBox.type = "text";
+            inputMsgBox.accept = "text";
+            inputMsgBox.value = "";
+        }
+        //if the input is on audio mode- means we want to send an audio 
+        else if(msgType === "audio"){
+            let idMsg = addMsg({type: msgType, date: time, audioSrc: inputMsgBox.src});
+            let otherUser = getOtherUserByChatId(props.chatId, props.connectedUser);
+            addMsgInChat(idMsg, props.chatId, props.connectedUser, otherUser);
+            
+            props.funcUpdate({type: msgType, audioSrc: inputMsgBox.src, date: time, connectedUser: props.connectedUser, from: props.connectedUser, to:otherUser});
+            
+            //clean input
+            inputMsgBox.removeAttribute("src");
+            //return to defult mode- which is text mode
+            inputMsgBox.type = "text";
+            inputMsgBox.accept = "text";
             inputMsgBox.value = "";
         }
         
@@ -61,7 +76,7 @@ function SendMessage(props) {
             <form onSubmit={handleSend}>
                 <div className="input-group">
                     <MediaButton handleSend={handleSend}/>
-                    <input type="text" autoComplete="off" id="messageBox" name="messageBox" className="form-control"/>
+                    <input type="text" accept="text" autoComplete="off" id="messageBox" name="messageBox" className="form-control"/>
                     <button className="btn btn-primary" type="submit" id="send">
                         <SendFill/>
                     </button>
