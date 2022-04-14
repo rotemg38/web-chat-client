@@ -1,14 +1,12 @@
 import AddChat from "./addChat";
 
-function Chats({updateChatId}) {
+function Chats(msgState) {
     
-
-       
 
         return (
 
             <div>
-                <AddChat updateChatId={updateChatId} />
+                <AddChat {...msgState} updateChatId={msgState.updateChatId} />
             </div>
         );
     }

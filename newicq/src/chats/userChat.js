@@ -40,10 +40,10 @@ class LastMsg extends Component {
 }
 
 
-function UserChat({user,updateChatId, chatId}) {
+function UserChat(msgState) {
 
     const handleUserChatClick = (event)=> {
-        updateChatId(chatId);
+        msgState.updateChatId(msgState.chatId);
     }
 
 
@@ -52,13 +52,14 @@ function UserChat({user,updateChatId, chatId}) {
             <button href="#" className="list-group-item list-group-item-action flex-column align-items-start"
             onClick={handleUserChatClick}>
                 <div className="d-flex w-100 justify-content-between">
-                <img src={dbUsers[user].img} alt="default" className="img-thumbnail"></img> {/*new ProfilePicture(user).getPic() */}
-                    <h5 className="mb-1">{user}</h5>
+
+                <img src={dbUsers[msgState.user].img} alt="default" className="img-thumbnail"></img> {/*new ProfilePicture(user).getPic() */}
+                    <h5 className="mb-1">{msgState.user}</h5>
 
                     <span className="text-muted badge badge-info">msg not seen: </span>
                 </div>
-                <p className="mb-1">last message: {new LastMsg(user).state.msg}  
-                <small  className="text-muted"><small> since {new LastMsg(user).state.time} </small></small> 
+                <p className="mb-1">last message: {msgState.msgState===undefined ? (new LastMsg(msgState.user).state.text):(msgState.text)}  
+                <small  className="text-muted"><small> since {new LastMsg(msgState.user).state.time} </small></small> 
                 </p>
             </button>
         </div>
