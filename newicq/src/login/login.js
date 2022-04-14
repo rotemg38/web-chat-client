@@ -1,6 +1,6 @@
 import './login.css';
 import { useNavigate } from 'react-router-dom';
-import { userIsExists } from '../dbHandle/dbHardcoded'
+import { setConnectedUser } from '../dbHandle/dbHardcoded'
 import { useState } from 'react';
 import { checkValidation } from './loginValidation'
 
@@ -17,8 +17,9 @@ function Login() {
         event.preventDefault();
         event.stopPropagation();
     } else{
-        //successfuly login:
-        navigate("/chats");
+      setConnectedUser(inputs.userName);
+      //successfuly login:
+       navigate("/chats");
     }
   }
 
