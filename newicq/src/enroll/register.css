@@ -2,28 +2,40 @@
 {
     text-align: center;
     height: 90px;
-    background: -webkit-linear-gradient(left, #0072ff, #8811c5);
-    color: #fff;
+    color: black;
     font-weight: bold;
     line-height: 80px;
     padding: 2%;
+    border: 1px solid #fff;
+    background-color: white;
+    
+    background: -webkit-linear-gradient(#0072ff, #8811c5);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
+.headline > h1{
+    font-size: 3.5rem;
+}
+
+
 .form
 {
     padding: 1%;
 }
 .form-content
 {
-    padding: 5%;
-    border: 1px solid #ced4da;
+    background-color: white;
+    padding-top: 5%;
+    border: 1px solid #fff;
     margin-bottom: 2%;
 }
 .centered {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+}
 
-  .radioValidation{
+.radioValidation{
     margin-left: 1em;
-  }
+}
