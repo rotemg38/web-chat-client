@@ -7,6 +7,7 @@
     width: 100%;
     border-bottom: 1px solid #eee;
     margin-bottom: 2%;
+    height: 20%;
 
     background: -webkit-linear-gradient(#0072ff, #8811c5);
     background-clip: text;
@@ -15,6 +16,7 @@
 }
 .col-11{
     padding-top: 2%;
+    
 }
 .col-11 > h3{
     float: left;

@@ -6,3 +6,20 @@ img {
     width: 20px;
     
 }
+.btn-sm {
+    float: right;
+}
+{/*not workong*/}
+.btn-outline-dark { 
+    color: blueviolet;
+}
+/* .list-group-item {
+    background-color: #aca2e3c3;
+} */
+.col {
+    background: -webkit-linear-gradient(#0072ff, #8811c5);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    width: 100%;
+}
