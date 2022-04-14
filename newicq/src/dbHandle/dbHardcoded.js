@@ -1,13 +1,15 @@
-export const dbUsers = { 
-    "user1": { displayName: "USER1", password: "123", img: "default_picture.jpg" }, 
-    "user2": { displayName: "USER2", password: "123", img: "default_picture.jpg" }, 
-    "user3": { displayName: "USER3", password: "123", img: "default_picture.jpg" }, 
-    "user4": { displayName: "USER4", password: "123", img: "blob:http://localhost:3000/d3069f08-e5bf-4adf-9a26-3842958e9561" } };
-export const dbMsg = { 
-    msg1: {type:"text", text: "hello", date: "09:00" }, 
-    msg2: { type:"text", text: "hello friend", date: "09:10" }, 
-    msg3: { type:"text", text: "need to go", date: "09:15" },
-    msg4: { type:"image", imgSrc: "default_picture.jpg", date: "09:15" } };
+export const dbUsers = {
+    "user1": { displayName: "USER1", password: "123", img: "default_picture.jpg" },
+    "user2": { displayName: "USER2", password: "123", img: "default_picture.jpg" },
+    "user3": { displayName: "USER3", password: "123", img: "default_picture.jpg" },
+    "user4": { displayName: "USER4", password: "123", img: "blob:http://localhost:3000/d3069f08-e5bf-4adf-9a26-3842958e9561" }
+};
+export const dbMsg = {
+    msg1: { type: "text", text: "hello", date: "09:00" },
+    msg2: { type: "text", text: "hello friend", date: "09:10" },
+    msg3: { type: "text", text: "need to go", date: "09:15" },
+    msg4: { type: "image", imgSrc: "default_picture.jpg", date: "09:15" }
+};
 var msgId = 4;
 var chatId = 1;
 export const dbChats = { chat1: ["user1", "user2"] };
@@ -17,20 +19,28 @@ export const dbMsgInChat = {
     { idMsg: "msg3", from: "user1", to: "user2" },
     { idMsg: "msg4", from: "user1", to: "user2" }]
 };
-export var connectedUser = "user1";
+export var connectedUser = "";
+
+export function setConnectedUser(username) {
+    connectedUser = username
+}
 
 export function addUser(user) {
-    dbUsers[user.userName] = { password: user.password, phone: user.phone };
+    if (user.img === undefined) {
+        dbUsers[user.userName] = { password: user.password, phone: user.phone, displayName: user.displayName, img: "default_picture.jpg" };
+    } else {
+        dbUsers[user.userName] = { password: user.password, phone: user.phone, displayName: user.displayName, img: user.img };
+    }
 }
 
-export function addImg(username, imgSrc){
-    dbUsers[username]={img: imgSrc};
+export function addImg(username, imgSrc) {
+    dbUsers[username] = { img: imgSrc };
 }
 
-export function getImgByUsername(username){
+export function getImgByUsername(username) {
     return dbUsers[username].img;
 }
-export function getDisNameByUsername(username){
+export function getDisNameByUsername(username) {
     return dbUsers[username].displayName;
 }
 

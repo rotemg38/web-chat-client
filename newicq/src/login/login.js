@@ -1,6 +1,6 @@
 import './login.css';
 import { useNavigate } from 'react-router-dom';
-import { userIsExists } from '../dbHandle/dbHardcoded'
+import { setConnectedUser } from '../dbHandle/dbHardcoded'
 import { useState } from 'react';
 import { checkValidation } from './loginValidation'
 
@@ -17,8 +17,9 @@ function Login() {
         event.preventDefault();
         event.stopPropagation();
     } else{
-        //successfuly login:
-        navigate("/chats");
+      setConnectedUser(inputs.userName);
+      //successfuly login:
+       navigate("/chats");
     }
   }
 
@@ -36,7 +37,7 @@ function Login() {
 
     <div>
       <div className="row align-items-center justify-content-center">
-      <div className="form col-lg-6 cardBody">
+      <div className="form col-lg-5 cardBody">
           <div className="headline">
             <h1>Login</h1>
           </div>

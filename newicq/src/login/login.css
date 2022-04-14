@@ -2,23 +2,9 @@
     margin: 50px;
 }
 
-.headline
-{
-    text-align: center;
-    height: 90px;
-    color: black;
-    font-weight: bold;
-    line-height: 80px;
-    padding: 2%;
-    border: 1px solid #fff;
-    background-color: white;
-    
-    background: -webkit-linear-gradient(#0072ff, #8811c5);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.col-lg-5 {
+    margin-top: 5%;
 }
-
 .form
 {
     padding: 1%;
@@ -38,9 +24,4 @@
 
 .radioValidation{
     margin-left: 1em;
-}
-
-.form
-{
-    padding: 1%;
 }

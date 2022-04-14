@@ -1,9 +1,10 @@
 import './register.css'
 import '../App.css'
 import { useState } from "react";
-import {addUser, addImg, dbUsers} from "../dbHandle/dbHardcoded";
+import {addUser, addImg, dbUsers, setConnectedUser} from "../dbHandle/dbHardcoded";
 import {useNavigate } from 'react-router-dom';
 import { formValidationByElement } from './registerValidations';
+import { ViewStacked } from 'react-bootstrap-icons';
 
 function Register() {
 
@@ -24,8 +25,9 @@ function Register() {
             //successfuly enrolled- add user and move to the login page
             addUser(inputs);
             //addImg()
-            addImg(inputs.userName,currImg)
+            //addImg(inputs.userName,currImg)
             console.log(dbUsers[inputs.userName])
+            setConnectedUser(inputs.userName);
             navigate("/chats");
         }
     }
@@ -39,18 +41,14 @@ function Register() {
         //check the validility of the current changing element
         formValidationByElement(key, value);
     }
-   
-    const [currImg, setUserImg] = useState("default_picture.jpg")
-    // TODO: Im not sure its right- didnt check it
+
     const loadFile = (event) =>{
-        //var image = document.getElementById('inputGroupFile02')
-        //image.src = URL.createObjectURL(event.target.files[0])
         const key = event.target.name
         const value = URL.createObjectURL(event.target.files[0])
-       setUserImg(value)
+       inputs.img = value
     }
     return (
-        //title of signup
+        //title of signup:
         <div className="warp row align-items-center justify-content-center">
             <div className="form col-lg-6 cardBody">
                 <div className="headline">
