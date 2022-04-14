@@ -7,19 +7,31 @@
     
 }
 .btn-sm {
-    float: right;
-}
-{/*not workong*/}
-.btn-outline-dark { 
-    color: blueviolet;
-}
-/* .list-group-item {
     background-color: #aca2e3c3;
-} */
-.col {
-    background: -webkit-linear-gradient(#0072ff, #8811c5);
+    margin-top: 7%;
+}
+
+.chats-title {
+    float: left;
+    padding-left: 7%;
+}
+ 
+.col-5 {
+    background: -webkit-linear-gradient(#0072ff, #8811c5); 
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    width: 100%;
+    /*width: 100%;*/
+    padding-top: 8%;
+    float: left;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.modal-content {
+    background: -webkit-linear-gradient(#aca2e3c3, #8811c5);
+    -webkit-text-fill-color:black; 
+}
+.addbutton {
+    background-color: #aca2e3c3;
 }
