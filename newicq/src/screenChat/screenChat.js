@@ -11,7 +11,7 @@ function ScreenChat(chatInfo) {
                 <>
                 <div className="row profileBar">
                     <div className="col-1">
-                        <img className='imageProfile' alt="profile image" src={getImgByUsername(chatInfo.otherUserName)} width="70" height="70" ></img>
+                        <img className='imageProfile' alt="profile image" src={getImgByUsername(chatInfo.otherUserName)} width="100%" height="100%" ></img>
                     </div>
                     <div className="col-11">
                         <h3>{getDisNameByUsername(chatInfo.otherUserName)}</h3>
