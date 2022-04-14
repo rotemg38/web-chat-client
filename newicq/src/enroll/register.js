@@ -41,19 +41,14 @@ function Register() {
         //check the validility of the current changing element
         formValidationByElement(key, value);
     }
-   
-    //const [currImg, setUserImg] = useState("default_picture.jpg")
-    // TODO: Im not sure its right- didnt check it
+
     const loadFile = (event) =>{
-        //var image = document.getElementById('inputGroupFile02')
-        //image.src = URL.createObjectURL(event.target.files[0])
         const key = event.target.name
         const value = URL.createObjectURL(event.target.files[0])
-       //setUserImg(value)
        inputs.img = value
     }
     return (
-        //title of signup
+        //title of signup:
         <div className="warp row align-items-center justify-content-center">
             <div className="form col-lg-6 cardBody">
                 <div className="headline">

@@ -19,7 +19,6 @@ export const dbMsgInChat = {
     { idMsg: "msg3", from: "user1", to: "user2" },
     { idMsg: "msg4", from: "user1", to: "user2" }]
 };
-//export var connectedUser = "user1";
 export var connectedUser = "";
 
 export function setConnectedUser(username) {
