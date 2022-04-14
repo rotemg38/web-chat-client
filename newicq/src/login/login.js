@@ -36,7 +36,7 @@ function Login() {
 
     <div>
       <div className="row align-items-center justify-content-center">
-      <div className="form col-lg-6 cardBody">
+      <div className="form col-lg-5 cardBody">
           <div className="headline">
             <h1>Login</h1>
           </div>
