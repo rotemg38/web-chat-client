@@ -6,7 +6,7 @@
 }
 .msg {
     position: relative;
-    max-width: 600px;
+    max-width: 60%;
     overflow: hidden;
     clear: both;
     word-wrap: break-word;

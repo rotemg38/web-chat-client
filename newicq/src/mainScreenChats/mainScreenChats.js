@@ -28,6 +28,9 @@ function MainScreenChats() {
         var other = getOtherUserByChatId(chatId, connectedUser);
         setChatsState({chatId: chatId, otherUserName:other, msgsComponents: messageList});
 
+        //change the display to be 100% - handle design
+        document.getElementById("mainScreenChat").style = "height:100%";
+
     }
    
     //when message is sent this function will be activate and update the display of the messages
@@ -41,7 +44,7 @@ function MainScreenChats() {
 
 
     return (
-        <div className="container">
+        <div id="mainScreenChat" className="container">
             <div className="row">
                 <div className="col-md-3">
                     <Chats updateChatId={updateChatId}/>
