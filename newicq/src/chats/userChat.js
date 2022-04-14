@@ -52,7 +52,6 @@ function UserChat(msgState) {
             <button href="#" className="list-group-item list-group-item-action flex-column align-items-start"
             onClick={handleUserChatClick}>
                 <div className="d-flex w-100 justify-content-between">
-
                 <img src={dbUsers[msgState.user].img} alt="default" className="img-thumbnail"></img> {/*new ProfilePicture(user).getPic() */}
                     <h5 className="mb-1">{msgState.user}</h5>
 

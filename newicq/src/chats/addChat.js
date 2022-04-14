@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import UserChat from "./userChat";
-import { addConectionToList, getOtherUser, getConversationBy2Users, userIsExists, getProfileImg } from "../dbHandle/dbHardcoded";
+import { addConectionToList,getConnectedUserByCaps, getOtherUser, getConversationBy2Users, userIsExists, getProfileImg } from "../dbHandle/dbHardcoded";
 import { connectedUser } from "../dbHandle/dbHardcoded";
 import './addChat.css'
 
@@ -25,9 +25,9 @@ import './addChat.css'
         return (
             <div>
                 <ul className="list-group">
-                    <li className="list-group-item">My User
-                    <img src={getProfileImg()} className="profile" alt="profile"></img></li>
-                    <button type="button" className="btn btn-outline-dark btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"> <img src="add-user.png" className="addLogo"></img>Add chat</button>
+                    <li className="list-group-item col">{getConnectedUserByCaps()}
+                    <img src={getProfileImg()} className="profile" alt="profile"></img>
+                    <button type="button" className="btn btn-outline-dark btn-sm " data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"> <img src="add-user.png" className="addLogo"></img></button>
                     <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div className="modal-dialog">
                             <div className="modal-content">
@@ -51,7 +51,7 @@ import './addChat.css'
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div></li>
                     <div className="user"> {usersOnScreen}</div>
 
                 </ul>

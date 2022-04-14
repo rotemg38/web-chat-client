@@ -19,6 +19,10 @@ export const dbMsgInChat = {
 };
 export var connectedUser = "user1";
 
+export function getConnectedUserByCaps() {
+    var caps = connectedUser.toUpperCase();
+    return caps;
+}
 export function addUser(user) {
     dbUsers[user.userName] = { password: user.password, phone: user.phone };
 }
