@@ -1,0 +1,23 @@
+
+/*for media button*/
+.dropdown-menu > li {
+    float: left;
+}
+.dropdown-menu{
+    min-width: 10rem;
+}
+
+/*for the send message Bar*/
+.input-group{
+    width:auto;
+}
+
+/*for audio modal*/
+#startRecord{
+    border-radius: 10%;
+    border: 0px;
+}
+#stopRecord{
+    border-radius: 10%;
+    border: 0px;
+}

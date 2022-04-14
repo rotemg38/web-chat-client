@@ -1,26 +1,54 @@
-import './screenChat.css'
+import './messages.css'
 function Message(msgInfo) {
 
     return (
         <>
         {msgInfo.from === msgInfo.connectedUser ?(
-        <div className='w-100'>
-        <div className="alert alert-primary msg msg-from">
-            <p className=''>
-                {msgInfo.text}
+        <div className='msg right alert'>
+        <div className="text">
+            <p>
+                {msgInfo.type === "text"?(
+                    msgInfo.text
+                ):(<></>)}
+                {msgInfo.type === "image" ?(
+                    <img alt="" src={msgInfo.imgSrc} width="250" height="200"></img>
+                ):(<></>)}
+                {msgInfo.type === "video" ?(
+                    <video controls="controls" src={msgInfo.videoSrc} width="250" height="200"></video>
+                ):(<></>)}
+                {msgInfo.type === "audio" ?(
+                   <audio src={msgInfo.audioSrc} controls></audio>
+                ):(<></>)}
+
                 <br/>
-                <label>{msgInfo.date}</label>
+                <span className='time'>
+                    <label>{msgInfo.date}</label>
+                </span>
             </p>
         </div> 
        
         </div>
         ):(
-        <div className='w-100'>
-        <div className="alert alert-info msg">
+        <div className='msg left alert'>
+        <div className="text">
             <p>
-                {msgInfo.text}
+                {msgInfo.type === "text"?(
+                    msgInfo.text
+                ):(<></>)}
+                {msgInfo.type === "image" ?(
+                    <img alt="" src={msgInfo.imgSrc} width="250" height="200"></img>
+                ):(<></>)}
+                {msgInfo.type === "video" ?(
+                    <video controls="controls" src={msgInfo.videoSrc} width="250" height="200"></video>
+                ):(<></>)}
+                {msgInfo.type === "audio" ?(
+                   <audio src={msgInfo.audioSrc} controls></audio>
+                ):(<></>)}
+
                 <br/>
-                <label>{msgInfo.date}</label>
+                <span className='time'>
+                    <label>{msgInfo.date}</label>
+                </span>
             </p>
         </div>
        

@@ -1,32 +1,25 @@
-.positionBotton {
-    position : absolute;
-    bottom   : 0;
-    margin-bottom: 1%;
-}
-.msg{
-    text-align: left;
-    width: 30%;
-}
-.restMsg{
-    width: 70%;
-}
-.msg-from{
-    /*margin-left: 68%;*/
-    margin-left: 70%;
-}
-label {
-    float: right;
-    font-size: small;
-   
-}
 .screenChats-content-msgs{
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 80vh;
    
 }
-.send-msg{
-    padding-right: 30px;
+.profileBar {
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 2%;
+
+    background: -webkit-linear-gradient(#0072ff, #8811c5);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
-.input-group{
-    width:auto;
+.col-11{
+    padding-top: 2%;
 }
+.col-11 > h3{
+    float: left;
+}
+.imageProfile{
+    border-radius: 50%;
+}
+
