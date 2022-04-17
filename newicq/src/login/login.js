@@ -12,14 +12,21 @@ function Login() {
   const handleLogin = (event) => {
     var form = document.getElementById("loginForm");
     form.classList.add('was-validated')
+    var user = document.getElementById("username")
+    var pass = document.getElementById("password")
+
     //check form validility before submitting
-    if (!form.checkValidity()) {
+    if(!checkValidation("username", user.value) && !checkValidation("password", pass.value)){
         event.preventDefault();
         event.stopPropagation();
     } else{
-      setConnectedUser(inputs.userName);
-      //successfuly login:
-       navigate("/chats");
+      
+     
+     
+        setConnectedUser(inputs.userName);
+        //successfuly login:
+        navigate("/chats");
+      
     }
   }
 
@@ -41,27 +48,42 @@ function Login() {
           <div className="headline">
             <h1>Login</h1>
           </div>
-          <form id="loginForm" onSubmit={handleLogin}>
+          <form id="loginForm" onSubmit={handleLogin} className='needs-validation' noValidate>
             <div className="form-content">
               <div className="row">
                 <div className="col-lg-12 center-block">
+
+                
+
+                  {/* user name element */}
                   <div className="form-group centered">
-                    <div className="col-sm-6">
-                      <input type="text" name="userName" id="username" className="form-control" placeholder="User Name *"
-                      value={inputs.userName || ""} onChange={handleChange} required/>
-                    </div>
+                      <div className="form-floating col-sm-7">
+                          <input type="text" id="username" name="userName" className="form-control" placeholder="User Name" 
+                          value={inputs.userName || ""} onChange={handleChange} required/>
+                          <div id="userNameInvalid" className="invalid-feedback">User Name doesn't exists or the field is empty.</div>
+                          <label htmlFor="userName">Username</label>
+                      </div>
                   </div>
                   <br />
 
+
+                  {/* password element */}
                   <div className="form-group centered">
-                    <div className="col-sm-6">
-                      <input type="text" name="password" id="password" className="form-control" placeholder="Password *"
-                      value={inputs.password || ""} onChange={handleChange} required/>
-                    </div>
+                      <div className="form-floating col-sm-7">
+                          <input type="password" id="password" name="password" className="form-control" placeholder="Password" 
+                          value={inputs.password || ""} onChange={handleChange} 
+                           required/>
+                          <label htmlFor="password">Password</label>
+                          <div id="passwordInvalid" className="invalid-feedback">Please fill out this field with your password.</div>
+                      </div>
                   </div>
+
+
+
                   <div>Not register?
-                    <button className='btn btn-link' onClick={() => { navigate("/enroll"); }}>Click here </button>to register</div>
-                  <br />
+                    <button className='btn btn-link' onClick={() => { navigate("/enroll"); }}>Click here </button>to register
+                  </div>
+                  
                 </div>
               </div>
               <br />

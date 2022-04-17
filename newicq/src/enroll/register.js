@@ -24,9 +24,7 @@ function Register() {
         } else{
             //successfuly enrolled- add user and move to the login page
             addUser(inputs);
-            //addImg()
-            //addImg(inputs.userName,currImg)
-            console.log(dbUsers[inputs.userName])
+            
             setConnectedUser(inputs.userName);
             navigate("/chats");
         }
