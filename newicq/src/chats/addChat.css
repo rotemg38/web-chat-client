@@ -1,6 +1,7 @@
 .profile {
     width: 70px;
     float: left;
+    border-radius: 50%;
 }
 .addLogo {
     width: 20px;
