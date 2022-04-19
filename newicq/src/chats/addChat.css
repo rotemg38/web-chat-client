@@ -29,9 +29,11 @@
     font-size: larger;
 }
 
-.modal-content {
-    background: -webkit-linear-gradient(#aca2e3c3, #8811c5);
-    -webkit-text-fill-color:black; 
+.modal-header {
+    background: -webkit-linear-gradient(#0072ff, #8811c5); 
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 .addbutton {
     background-color: #aca2e3c3;

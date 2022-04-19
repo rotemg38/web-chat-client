@@ -2,7 +2,7 @@ export const dbUsers = {
     "user1": { displayName: "USER1", password: "123", img: "default_picture.jpg" },
     "user2": { displayName: "USER2", password: "123", img: "default_picture.jpg" },
     "user3": { displayName: "USER3", password: "123", img: "default_picture.jpg" },
-    "user4": { displayName: "USER4", password: "123", img: "blob:http://localhost:3000/d3069f08-e5bf-4adf-9a26-3842958e9561" }
+    "user4": { displayName: "USER4", password: "123", img: "https://cdn.w600.comps.canstockphoto.co.il/%D7%A6%D7%99%D7%95%D7%A8-%D7%94%D7%99%D7%AA%D7%95%D7%9C%D7%99-%D7%90%D7%99%D7%A9-%D7%95%D7%A7%D7%98%D7%95%D7%A8%D7%99%D7%9D-%D7%90%D7%99%D7%A4%D7%99%D7%90%D7%A1_csp15427430.jpg" }
 };
 export const dbMsg = {
     msg1: { type: "text", text: "hello", date: "09:00" },

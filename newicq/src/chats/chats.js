@@ -6,7 +6,7 @@ function Chats(msgState) {
         return (
 
             <div>
-                <AddChat {...msgState} updateChatId={msgState.updateChatId} />
+                <AddChat {...msgState} updateChatId={msgState.updateChatId} getMsgState={msgState.getMsgState}/>
             </div>
         );
     }

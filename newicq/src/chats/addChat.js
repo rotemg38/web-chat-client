@@ -7,10 +7,23 @@ import './addChat.css'
 function AddChat(msgState) {
     const currUserFriend = getOtherUser(connectedUser)
     const chatsOnScreenList = Object.entries(currUserFriend).map(([key, value]) => (
-        <UserChat {...msgState} user={value} updateChatId={msgState.updateChatId} chatId={key} key={key} />))
+        <UserChat {...msgState} user={value} updateChatId={msgState.updateChatId} chatId={key} key={key} getMsgState={msgState.getMsgState} />))
 
     const [usersOnScreen, setUserOnScreen] = useState(chatsOnScreenList);
 
+    const checkUserID = (event) => {
+        const value = event.target.value;
+        var user = document.getElementById("contactname")
+        if (!userIsExists(value) || value === connectedUser || getConversationBy2Users(value, connectedUser) !== undefined) {
+            user.classList.remove("is-valid")
+            user.classList.add("is-invalid")
+            user.setCustomValidity('Wrong username')
+        } else {
+            user.classList.remove("is-invalid")
+            user.classList.add("is-valid")
+            user.setCustomValidity('')
+        }
+    }
     const addConection = () => {
         var username = document.getElementById("contactname").value
         // check if the user wants to add himself
@@ -20,13 +33,13 @@ function AddChat(msgState) {
         // check if userChat is allready in lists of userChats:
         if (getConversationBy2Users(username, connectedUser) !== undefined) { return }
         var chatId = addConectionToList(connectedUser, username);
-        setUserOnScreen(connections => [...connections, <UserChat {...msgState} key={connections.length} user={username} updateChatId={msgState.updateChatId} chatId={chatId} />]);
+        setUserOnScreen(connections => [...connections, <UserChat {...msgState} key={connections.length} user={username} getMsgState={msgState.getMsgState} updateChatId={msgState.updateChatId} chatId={chatId} />]);
     };
     return (
         <div>
             <ul className="list-group">
                 <ul className="chats-title"><img src={getProfileImg()} className="col profile" alt="profile"></img>
-                    <div className= "col-5">{getDisNameByUsername(connectedUser)}</div>
+                    <div className="col-5">{getDisNameByUsername(connectedUser)}</div>
                     <button type="button" className="col btn btn-sm " data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"> <img src="add-user.png" className="addLogo"></img></button>
                     <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div className="modal-dialog">
@@ -36,12 +49,15 @@ function AddChat(msgState) {
                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div className="modal-body">
-                                    <form>
+                                    <form id="contucts-identifier" className='needs-validation' noValidate>
                                         <div className="mb-3">
 
                                             <label htmlFor="recipient-name" className="col-form-label"></label>
 
-                                            <input type="text" className="form-control" placeholder="Contuct's identifier" id="contactname"></input>
+                                            <input type="text" className="form-control" onChange={checkUserID} placeholder="Contuct's identifier" id="contactname" required></input>
+                                            <div class="invalid-feedback">
+                                                User is not exists or chat is allready exists
+                                            </div>
                                         </div>
                                     </form>
                                 </div>

@@ -7,11 +7,14 @@ import { useState } from "react";
 import {getMsgsByChatId} from '../dbHandle/dbHardcoded';
 import Message from "../screenChat/message";
 
-
 function MainScreenChats() {
+    const getMsgState = () => {
+        return msgState;
+    }
+   
     const [chatsState, setChatsState] = useState({chatId: "-1", otherUserName:"", msgsComponents: [] });
    
-    const [msgState, setLastMsgs] = useState({text:"", date:""});
+    const [msgState, setLastMsgs] = useState({type:"", text:"", date:""});
 
     const chatInfo = {connectedUser: connectedUser, chatId: chatsState.chatId, otherUserName: chatsState.otherUserName, msgsComponents: chatsState.msgsComponents}
 
@@ -21,7 +24,7 @@ function MainScreenChats() {
         var connectedUser = chatInfo.connectedUser;
    
         var messageList = chatMessages.map((msg, key)=>{
-            msg["connectedUser"] = connectedUser; /// didnt understand
+            msg["connectedUser"] = connectedUser;
             return <Message {...msg} key={key}/>
         });
 
@@ -42,15 +45,27 @@ function MainScreenChats() {
                 msgsComponents: [...curentState.msgsComponents, <Message {...msg} key={curentState.msgsComponents.length}/>]};
        });
        setLastMsgs((current)=>{
-           return { text: msg.text, date: msg.date}})
+           if (msg.type === "text") {
+            return { type:msg.type, text: msg.text, date: msg.date}
+           } else if (msg.type === "image") {
+            return { type:msg.type, text: "image", date: msg.date}
+           } else if (msg.type === "file") {
+            return { type:msg.type, text: "file", date: msg.date}
+           } else if (msg.type === "audio") {
+            return { type:msg.type, text: "audio", date: msg.date}
+           }
+    
+       });
     }
+    
 
 
     return (
         <div id="mainScreenChat" className="container">
             <div className="row">
                 <div className="col-md-3">
-                    <Chats {...msgState} updateChatId={updateChatId} msgState={msgState}/>
+                    <Chats {...msgState} updateChatId={updateChatId} getMsgState={getMsgState}/>
+                    {console.log(msgState.text)}
                 </div>
                 <div className="col-md-9">
                     <ScreenChat {...chatInfo} updateMessages={updateMessages}/>
