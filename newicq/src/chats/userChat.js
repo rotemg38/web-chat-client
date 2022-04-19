@@ -1,5 +1,5 @@
 import './userChat.css'
-import { dbMsg, dbMsgInChat, dbUsers, getDisNameByUsername , getConversation, getMsgsByChatId } from '../dbHandle/dbHardcoded';
+import { dbMsg, dbMsgInChat, dbUsers, getDisNameByUsername , getConversation, getMsgsByChatId, getLastMsg } from '../dbHandle/dbHardcoded';
 import { Component } from 'react';
 
 class ProfilePicture extends Component {
@@ -55,7 +55,7 @@ function UserChat(msgState) {
                     <img src={dbUsers[msgState.user].img} alt="default" className="img-thumbnail col"></img> {/*new ProfilePicture(user).getPic() */}
                     <div className='maintext'><h5 className="mb-1 col-10">{getDisNameByUsername(msgState.user)}</h5>
                     {/*last message: */}
-                    <span className="mb-1 col-9"> some msg {/*new LastMsg(msgState.user).state.text*/}
+                    <span className="mb-1 col-9">{msgState.text} {/*getLastMsg(getConversation(msgState.user)).msg*/} {/*new LastMsg(msgState.user).state.text*/}
                     </span></div>
                     {/*time of last message: */}
                     <small className="text-muted col"><small> {new LastMsg(msgState.user).state.time} </small></small>
