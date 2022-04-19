@@ -11,7 +11,7 @@ import Message from "../screenChat/message";
 function MainScreenChats() {
     const [chatsState, setChatsState] = useState({chatId: "-1", otherUserName:"", msgsComponents: [] });
    
-    const [msgState, setLastMsgs] = useState({})
+    const [msgState, setLastMsgs] = useState({text:"", date:""});
 
     const chatInfo = {connectedUser: connectedUser, chatId: chatsState.chatId, otherUserName: chatsState.otherUserName, msgsComponents: chatsState.msgsComponents}
 
@@ -21,7 +21,7 @@ function MainScreenChats() {
         var connectedUser = chatInfo.connectedUser;
    
         var messageList = chatMessages.map((msg, key)=>{
-            msg["connectedUser"] = connectedUser;
+            msg["connectedUser"] = connectedUser; /// didnt understand
             return <Message {...msg} key={key}/>
         });
 
@@ -42,7 +42,7 @@ function MainScreenChats() {
                 msgsComponents: [...curentState.msgsComponents, <Message {...msg} key={curentState.msgsComponents.length}/>]};
        });
        setLastMsgs((current)=>{
-           return {chatId: chatInfo.chatId, text: msg.text, date: msg.date, firstMsg:"no"}})
+           return { text: msg.text, date: msg.date}})
     }
 
 
@@ -50,7 +50,7 @@ function MainScreenChats() {
         <div id="mainScreenChat" className="container">
             <div className="row">
                 <div className="col-md-3">
-                    <Chats {...msgState} updateChatId={updateChatId}/>
+                    <Chats {...msgState} updateChatId={updateChatId} msgState={msgState}/>
                 </div>
                 <div className="col-md-9">
                     <ScreenChat {...chatInfo} updateMessages={updateMessages}/>

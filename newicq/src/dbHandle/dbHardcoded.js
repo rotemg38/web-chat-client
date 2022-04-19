@@ -27,9 +27,9 @@ export function setConnectedUser(username) {
 
 export function addUser(user) {
     if (user.img === undefined) {
-        dbUsers[user.userName] = { password: user.password, phone: user.phoneNumber, displayName: user.displayName, gender:user.gender, img: "default_picture.jpg" };
+        dbUsers[user.userName] = { password: user.password, phone: user.phoneNumber, displayName: user.displayName, gender: user.gender, img: "default_picture.jpg" };
     } else {
-        dbUsers[user.userName] = { password: user.password, phone: user.phoneNumber, displayName: user.displayName, gender:user.gender, img: user.img };
+        dbUsers[user.userName] = { password: user.password, phone: user.phoneNumber, displayName: user.displayName, gender: user.gender, img: user.img };
     }
 }
 
@@ -134,4 +134,21 @@ export function getUserPassword(user) {
 }
 export function getProfileImg() {
     return dbUsers[connectedUser].img
+}
+export function getLastMsg(chatId) {
+    var clock = ""
+    var lastMsg = ""
+    var msgsList = getMsgsByChatId(chatId)
+    if (dbMsgInChat[chatId] !== undefined) { // check if there is no msgs between them yet
+        for (var i = 0; i < msgsList.length; i++) {
+            // check which msg was the last that arrived from user1:
+            if (clock < dbMsg[msgsList[i].idMsg].date) {
+                clock = dbMsg[dbMsgInChat[chatId][i].idMsg].date
+                lastMsg = dbMsg[dbMsgInChat[chatId][i].idMsg].text
+            }
+        }
+    }
+    var lstMsg = { time: clock, msg: lastMsg }
+    return lstMsg
+
 }
