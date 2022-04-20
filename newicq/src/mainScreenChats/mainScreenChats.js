@@ -23,7 +23,7 @@ function MainScreenChats() {
         var connectedUser = chatInfo.connectedUser;
    
         var messageList = chatMessages.map((msg, key)=>{
-            msg["connectedUser"] = connectedUser;
+            msg["connectedUser"] = connectedUser; /// didnt understand
             return <Message {...msg} key={key}/>
         });
 

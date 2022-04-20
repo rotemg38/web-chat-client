@@ -27,9 +27,9 @@ export function setConnectedUser(username) {
 
 export function addUser(user) {
     if (user.img === undefined) {
-        dbUsers[user.userName] = { password: user.password, phone: user.phoneNumber, displayName: user.displayName, gender:user.gender, img: "default_picture.jpg" };
+        dbUsers[user.userName] = { password: user.password, phone: user.phoneNumber, displayName: user.displayName, gender: user.gender, img: "default_picture.jpg" };
     } else {
-        dbUsers[user.userName] = { password: user.password, phone: user.phoneNumber, displayName: user.displayName, gender:user.gender, img: user.img };
+        dbUsers[user.userName] = { password: user.password, phone: user.phoneNumber, displayName: user.displayName, gender: user.gender, img: user.img };
     }
 }
 
