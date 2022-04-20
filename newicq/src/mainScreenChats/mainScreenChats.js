@@ -4,14 +4,16 @@ import './mainScreenChats.css'
 import '../App.css'
 import { connectedUser, getOtherUserByChatId } from "../dbHandle/dbHardcoded";
 import { useState } from "react";
-import {getMsgsByChatId} from '../dbHandle/dbHardcoded';
+import {getMsgsByChatId, getOtherUser, getLastMsg} from '../dbHandle/dbHardcoded';
 import Message from "../screenChat/message";
+import UserChat from "../chats/userChat";
+import { addConectionToList, getConversationBy2Users, userIsExists } from "../dbHandle/dbHardcoded";
+
 
 
 function MainScreenChats() {
-    const [chatsState, setChatsState] = useState({chatId: "-1", otherUserName:"", msgsComponents: [] });
-   
-    const [msgState, setLastMsgs] = useState({text:"", date:""});
+    const [chatsState, setChatsState] = useState({chatId: "-1", otherUserName:"", msgsComponents: [], lastMsg:{} });
+
 
     const chatInfo = {connectedUser: connectedUser, chatId: chatsState.chatId, otherUserName: chatsState.otherUserName, msgsComponents: chatsState.msgsComponents}
 
@@ -27,30 +29,66 @@ function MainScreenChats() {
 
 
         var other = getOtherUserByChatId(chatId, connectedUser);
-        setChatsState({chatId: chatId, otherUserName:other, msgsComponents: messageList});
+        setChatsState({chatId: chatId, otherUserName:other, msgsComponents: messageList, lastMsg:{}});
 
         //change the display to be 100% - handle design
         document.getElementById("mainScreenChat").style = "height:100%";
 
     }
    
+    const currUserFriend = getOtherUser(connectedUser)
+    
+    const chatsOnScreenList = currUserFriend.map((value, key) => {
+        return <UserChat lastMsg={getLastMsg(value[0])} user={value[1]} updateChatId={updateChatId} chatId={value[0]} key={key} />});
+
+    const [usersOnScreen, setUserOnScreen] = useState(chatsOnScreenList);
+
     //when message is sent this function will be activate and update the display of the messages
     //this function add the given message to the list of messages that we are displaying now
+    //also this function update the last message for te specific chat
     const updateMessages = (msg)=>{
        setChatsState((curentState)=>{
             return {chatId: curentState.chatId, otherUserName: curentState.otherUserName, 
-                msgsComponents: [...curentState.msgsComponents, <Message {...msg} key={curentState.msgsComponents.length}/>]};
+                msgsComponents: [...curentState.msgsComponents, <Message {...msg} key={curentState.msgsComponents.length}/>],
+                lastMsg: msg};
        });
-       setLastMsgs((current)=>{
-           return { text: msg.text, date: msg.date}})
+       
+       
+       setUserOnScreen((current)=>{ 
+           return current.map((value, key)=>{
+                if(value.props.chatId === chatsState.chatId)
+                    return <UserChat lastMsg={msg} user={chatsState.otherUserName} updateChatId={updateChatId} chatId={chatsState.chatId} key={key} />
+                return value;
+           });
+    
+    });
     }
 
+    const addConection = () => {
+        console.log("here");
+        var username = document.getElementById("contactname").value
+        // check if the user wants to add himself
+        if (username === connectedUser) { return }
+        // check if user is exist to create a chat with him:
+        if (userIsExists(username) === false) { return }
+        // check if userChat is allready in lists of userChats:
+        if (getConversationBy2Users(username, connectedUser) !== undefined) { return }
+        var chatId = addConectionToList(connectedUser, username);
+        var newList = usersOnScreen;
+        newList.push(<UserChat lastMsg={{}} key={usersOnScreen.length} user={username} updateChatId={updateChatId} chatId={chatId} />);
+        setUserOnScreen(
+            (current)=>{ 
+                return newList.map((value, key)=>{
+                    return value;
+                });
+        });
+    };
 
     return (
         <div id="mainScreenChat" className="container">
             <div className="row">
                 <div className="col-md-3">
-                    <Chats {...msgState} updateChatId={updateChatId} msgState={msgState}/>
+                    <Chats addConection={addConection} setUserOnScreen={setUserOnScreen} usersOnScreen={usersOnScreen} lastMsg={chatsState.lastMsg} updateChatId={updateChatId}/>
                 </div>
                 <div className="col-md-9">
                     <ScreenChat {...chatInfo} updateMessages={updateMessages}/>

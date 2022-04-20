@@ -24,11 +24,11 @@ function SendMessage(props) {
         }
         //if the input is on image mode- means we want to send an image 
         else if(msgType === "image"){
-            let idMsg = addMsg({type: msgType, date: time, imgSrc: inputMsgBox.src});
+            let idMsg = addMsg({type: msgType, text: "image", date: time, imgSrc: inputMsgBox.src});
             let otherUser = getOtherUserByChatId(props.chatId, props.connectedUser);
             addMsgInChat(idMsg, props.chatId, props.connectedUser, otherUser);
             
-            props.funcUpdate({type: msgType, imgSrc: inputMsgBox.src, date: time, connectedUser: props.connectedUser, from: props.connectedUser, to:otherUser});
+            props.funcUpdate({type: msgType ,text: "image", imgSrc: inputMsgBox.src, date: time, connectedUser: props.connectedUser, from: props.connectedUser, to:otherUser});
             
             //clean input
             inputMsgBox.removeAttribute("src");
@@ -40,11 +40,11 @@ function SendMessage(props) {
          //if the input is on file mode- means we want to send an video 
          else if(msgType === "file"){
             msgType = "video";
-            let idMsg = addMsg({type: msgType, date: time, videoSrc: inputMsgBox.src});
+            let idMsg = addMsg({type: msgType,text: "video", date: time, videoSrc: inputMsgBox.src});
             let otherUser = getOtherUserByChatId(props.chatId, props.connectedUser);
             addMsgInChat(idMsg, props.chatId, props.connectedUser, otherUser);
             
-            props.funcUpdate({type: msgType, videoSrc: inputMsgBox.src, date: time, connectedUser: props.connectedUser, from: props.connectedUser, to:otherUser});
+            props.funcUpdate({type: msgType,text: "video", videoSrc: inputMsgBox.src, date: time, connectedUser: props.connectedUser, from: props.connectedUser, to:otherUser});
             
             //clean input
             inputMsgBox.removeAttribute("src");
@@ -55,11 +55,11 @@ function SendMessage(props) {
         }
         //if the input is on audio mode- means we want to send an audio 
         else if(msgType === "audio"){
-            let idMsg = addMsg({type: msgType, date: time, audioSrc: inputMsgBox.src});
+            let idMsg = addMsg({type: msgType,text: "audio", date: time, audioSrc: inputMsgBox.src});
             let otherUser = getOtherUserByChatId(props.chatId, props.connectedUser);
             addMsgInChat(idMsg, props.chatId, props.connectedUser, otherUser);
             
-            props.funcUpdate({type: msgType, audioSrc: inputMsgBox.src, date: time, connectedUser: props.connectedUser, from: props.connectedUser, to:otherUser});
+            props.funcUpdate({type: msgType,text: "audio", audioSrc: inputMsgBox.src, date: time, connectedUser: props.connectedUser, from: props.connectedUser, to:otherUser});
             
             //clean input
             inputMsgBox.removeAttribute("src");

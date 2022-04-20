@@ -8,7 +8,7 @@ export const dbMsg = {
     msg1: { type: "text", text: "hello", date: "09:00" },
     msg2: { type: "text", text: "hello friend", date: "09:10" },
     msg3: { type: "text", text: "need to go", date: "09:15" },
-    msg4: { type: "image", imgSrc: "default_picture.jpg", date: "09:15" }
+    msg4: { type: "image",text:"image", imgSrc: "default_picture.jpg", date: "09:15" }
 };
 var msgId = 4;
 var chatId = 1;
@@ -118,37 +118,43 @@ export function getConversationBy2Users(user1, user2) {
 }
 
 export function getOtherUser(user) {
-    var users = {} // {chatNum: user}
+    var users = [] // {chatNum: user}
     for (const [key, value] of Object.entries(dbChats)) {
         if (value[0] === user) {
-            users[key] = value[1]
+            users.push([key , value[1]]);
         } else if (value[1] === user) {
-            users[key] = value[0]
+            users.push([key , value[0]]);
         }
     }
     return users
 }
 
+
 export function getUserPassword(user) {
     return dbUsers[user].password
 }
+
 export function getProfileImg() {
     return dbUsers[connectedUser].img
 }
+
 export function getLastMsg(chatId) {
     var clock = ""
-    var lastMsg = ""
+    var indexLastMsg = -1
     var msgsList = getMsgsByChatId(chatId)
     if (dbMsgInChat[chatId] !== undefined) { // check if there is no msgs between them yet
         for (var i = 0; i < msgsList.length; i++) {
             // check which msg was the last that arrived from user1:
-            if (clock < dbMsg[msgsList[i].idMsg].date) {
-                clock = dbMsg[dbMsgInChat[chatId][i].idMsg].date
-                lastMsg = dbMsg[dbMsgInChat[chatId][i].idMsg].text
+            if (clock <= dbMsg[msgsList[i].idMsg].date) {
+                clock = dbMsg[dbMsgInChat[chatId][i].idMsg].date;
+                indexLastMsg = i;
             }
         }
     }
-    var lstMsg = { time: clock, msg: lastMsg }
-    return lstMsg
+    if(indexLastMsg !== -1){
+        return msgsList[indexLastMsg]
+    }
+    
+    return {}
 
 }

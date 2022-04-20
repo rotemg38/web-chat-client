@@ -1,27 +1,10 @@
-import React, { useState } from "react";
-import UserChat from "./userChat";
-import { addConectionToList, getDisNameByUsername, getOtherUser, getConversationBy2Users, userIsExists, getProfileImg } from "../dbHandle/dbHardcoded";
+import { getDisNameByUsername, getProfileImg } from "../dbHandle/dbHardcoded";
 import { connectedUser } from "../dbHandle/dbHardcoded";
 import './addChat.css'
 
 function AddChat(msgState) {
-    const currUserFriend = getOtherUser(connectedUser)
-    const chatsOnScreenList = Object.entries(currUserFriend).map(([key, value]) => (
-        <UserChat {...msgState} user={value} updateChatId={msgState.updateChatId} chatId={key} key={key} />))
+    
 
-    const [usersOnScreen, setUserOnScreen] = useState(chatsOnScreenList);
-
-    const addConection = () => {
-        var username = document.getElementById("contactname").value
-        // check if the user wants to add himself
-        if (username === connectedUser) { return }
-        // check if user is exist to create a chat with him:
-        if (userIsExists(username) === false) { return }
-        // check if userChat is allready in lists of userChats:
-        if (getConversationBy2Users(username, connectedUser) !== undefined) { return }
-        var chatId = addConectionToList(connectedUser, username);
-        setUserOnScreen(connections => [...connections, <UserChat {...msgState} key={connections.length} user={username} updateChatId={msgState.updateChatId} chatId={chatId} />]);
-    };
     return (
         <div>
             <ul className="list-group">
@@ -47,15 +30,16 @@ function AddChat(msgState) {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button onClick={addConection} value="Update" type="button" className="btn addbutton" data-bs-dismiss="modal">Add</button>
+                                    <button onClick={msgState.addConection} value="Update" type="button" className="btn addbutton" data-bs-dismiss="modal">Add</button>
                                 </div>
                             </div>
                         </div>
                     </div></ul>
-                <div className="user"> {usersOnScreen}</div>
+                <div className="user"> {msgState.usersOnScreen}</div>
 
             </ul>
         </div>
     );
 }
+
 export default AddChat;
