@@ -1,5 +1,7 @@
 import { getCurrentShowElementModal, getCurrentMedia } from "./sendMediaButtonsHandler";
 
+/* This function is responisable about sending picture and video message */
+
 function ModalPicVid({handleSend, handleUpload}){
 
     //handle the case we canceled sending the pic/video
@@ -81,8 +83,6 @@ function ModalPicVid({handleSend, handleUpload}){
             </div>
         </div>
         </div>
-
-
     );
 }
 export default ModalPicVid;

@@ -1,20 +1,36 @@
 .img-thumbnail {
-    width: 50px;
+    width: 70px;
     height: auto;
     float: left;
     padding: 0rem;
     border: 0ch;
     border-radius: 50%;
 }
+
 .mb-1 {
-    padding-top: 10%;
+    margin-bottom: 0rem;
+    padding-top: 7%;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+.text {
+    padding-top: 0%;
+}
+
+.justify-content-between {
+    width: 100%;
+    margin-right: 0rem;
 }
 .text-muted {
-    padding-top: 5%;
+    float: right;
+    font-size: small;
 }
+
 .maintext {
     margin-left: 3%;
 }
+
 .list-group-item:hover {
     background: -webkit-linear-gradient(#aca2e3c3, #E0FFFF);
 }
