@@ -5,7 +5,7 @@ This is a Web Client side of our chat application which is part of a bigger proj
 The web client includes the following **pages**:
 - **LogIn screen**
 
-    <img alt="LogIn Screen" src="assets/images/logIn_screen.png"  height="300" />
+    <img alt="LogIn Screen" src="assets/images/logIn_screen.png" height="300" />
 
 - **SignUp screen**
 
