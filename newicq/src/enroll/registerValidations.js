@@ -1,6 +1,6 @@
 import {userIsExists} from "../dbHandle/dbHardcoded";
 
-//this function checks the validation of the password field and the confirmPass field related to each other
+/* This function checks the validation of the password field and the confirmPass field related to each other */
 const passwordValidation = (pass, confirmPass) => {
     if(pass === undefined || confirmPass === undefined)
         return false;
@@ -16,7 +16,7 @@ const passwordValidation = (pass, confirmPass) => {
     return true;
 } 
  
- 
+/* This function checks the validation for each element in the register */ 
 ///receive key- the field name we are checking
 ///and value- the value of the field
 export const formValidationByElement = (key, value)=>{
@@ -29,14 +29,9 @@ export const formValidationByElement = (key, value)=>{
             pass.classList.remove("is-valid");
             pass.classList.add("is-invalid");
             result = false;
-            //pass.setCustomValidity('error');
-            //return false;
         }else{
             pass.classList.remove("is-invalid");
-            pass.classList.add("is-valid");
-            //pass.setCustomValidity('')
-            //return true;
-            
+            pass.classList.add("is-valid");            
         }
         //after the password is checked, check also the confirmPassword because the password might effect the confirm
         key = "confirmPass";
@@ -71,7 +66,6 @@ export const formValidationByElement = (key, value)=>{
             userName.setCustomValidity('')
             return true;
         }
-
     }
     if(key === "gender"){
        var radios = document.getElementsByName(key);
@@ -86,7 +80,6 @@ export const formValidationByElement = (key, value)=>{
        });
        return result;
     }
-
     //to all of the rest fields that only have a "require"- check regulat validation 
     var element = document.getElementById(key);
     if(!element.checkValidity()){ 
@@ -94,7 +87,6 @@ export const formValidationByElement = (key, value)=>{
         element.classList.add("is-invalid");
         return false;
     }
-
     element.classList.remove("is-invalid");
     element.classList.add("is-valid");
     return true;

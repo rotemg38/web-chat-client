@@ -4,10 +4,11 @@ import ModalPicVid from './modalPicVid';
 import ModalAudio from './modalAudio';
 import { Image,CameraReels, Mic, Paperclip } from 'react-bootstrap-icons';
 
+/* This function is responisable about the media button on the chat screen panel */
+
 function MediaButton({handleSend}){
     return(
         <div>
-            
             <div className="dropdown">
                 <button className="btn btn-outline-primary" type="button" id="media" 
                 data-bs-toggle="dropdown" aria-expanded="false"> 
@@ -43,5 +44,4 @@ function MediaButton({handleSend}){
         </div>
     );
 }
-
 export default MediaButton;

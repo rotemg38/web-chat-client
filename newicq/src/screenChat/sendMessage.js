@@ -2,8 +2,11 @@ import './sendMessage.css'
 import { addMsg, addMsgInChat, getOtherUserByChatId} from '../dbHandle/dbHardcoded';
 import MediaButton from './mediaMessages/mediaButton';
 import { SendFill } from 'react-bootstrap-icons';
+
+/* This function is responsiable about the act of sending a message- notify any component involved and act accordingly */
 function SendMessage(props) {
 
+    /* Handler for each message that sent */
     const handleSend = (event)=>{
         var time = new Date().toLocaleTimeString('en-GB', { hour12: false, hour: "numeric", minute: "numeric"});
         var inputMsgBox = document.getElementById("messageBox");
@@ -83,7 +86,6 @@ function SendMessage(props) {
                 </div>
             </form>
       </div>
-    
     );
 }
 export default SendMessage;

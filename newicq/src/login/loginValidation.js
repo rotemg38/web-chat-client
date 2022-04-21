@@ -1,5 +1,6 @@
  import { userIsExists, getUserPassword } from "../dbHandle/dbHardcoded"
  
+ /* This function checks the validation of the password field  */
  function correctPassword (user, password) {
     if (userIsExists(user) && getUserPassword(user) === password) {
         return true
@@ -7,6 +8,7 @@
     return false
  }
 
+ /* This function checks the validation for each element in the login */ 
  export function checkValidation(key, value) {
     var result = true;
     var user = document.getElementById("username")
@@ -16,13 +18,11 @@
             user.classList.add("is-invalid")
             user.setCustomValidity('Wrong username')
             result = false
-            
         }
         else{
             user.classList.remove("is-invalid")
             user.classList.add("is-valid")
             user.setCustomValidity('')
-
         }
         //if username changed check the password also
         key = "password"

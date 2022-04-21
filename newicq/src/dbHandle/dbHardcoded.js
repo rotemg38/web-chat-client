@@ -1,3 +1,6 @@
+
+/* ALL DATA BASES THAT ARE REALEVANT FOR THE APP: */
+
 export const dbUsers = {
     "user1": { displayName: "USER1", password: "123", img: "default_picture.jpg" },
     "user2": { displayName: "USER2", password: "123", img: "default_picture.jpg" },
@@ -21,10 +24,14 @@ export const dbMsgInChat = {
 };
 export var connectedUser = "";
 
+/* HELPFUL FUNCTION TO USE THE DATE BASES: */
+
+/* Set the connected user var to the one who was log in or register */
 export function setConnectedUser(username) {
     connectedUser = username
 }
 
+/* Add user to data base */
 export function addUser(user) {
     if (user.img === undefined) {
         dbUsers[user.userName] = { password: user.password, phone: user.phoneNumber, displayName: user.displayName, gender: user.gender, img: "default_picture.jpg" };
@@ -33,18 +40,22 @@ export function addUser(user) {
     }
 }
 
+/* Add profile image to data base by user */
 export function addImg(username, imgSrc) {
     dbUsers[username] = { img: imgSrc };
 }
 
+/* Get profile image by user */
 export function getImgByUsername(username) {
     return dbUsers[username].img;
 }
+
+/* Get display name by username */
 export function getDisNameByUsername(username) {
     return dbUsers[username].displayName;
 }
 
-
+/* Check if user is exists on system (users data base) */
 export function userIsExists(name) {
     if (dbUsers[name] != null) {
         return true;
@@ -52,24 +63,27 @@ export function userIsExists(name) {
     return false
 }
 
+/* Add chat to chats data base */
 export function addConectionToList(user1, user2) {
     chatId += 1;
     dbChats["chat" + chatId] = [user1, user2];
     return "chat" + chatId;
 }
 
+/* Create last message id for current message */
 function generateMsgId() {
     msgId += 1;
     return "msg" + msgId;
 }
 
-
+/* Add a message to data base */
 export function addMsg(msg) {
     var id = generateMsgId();
     dbMsg[id] = msg;
     return id;
 }
 
+/* Add message to data base by chat id */
 export function addMsgInChat(idM, idC, from, to) {
     if (dbMsgInChat[idC] === undefined) {
         dbMsgInChat[idC] = [];
@@ -77,6 +91,7 @@ export function addMsgInChat(idM, idC, from, to) {
     dbMsgInChat[idC].push({ idMsg: idM, from: from, to: to });
 }
 
+/* Get the other user of a specific chat */
 export function getOtherUserByChatId(idC, user1) {
     var users = dbChats[idC];
     if (users[0] === user1)
@@ -84,10 +99,12 @@ export function getOtherUserByChatId(idC, user1) {
     return users[0];
 }
 
+/* Get message info by id */
 export function getMsgById(id) {
     return dbMsg[id];
 }
 
+/* Get messages list by chat id */
 export function getMsgsByChatId(idC) {
     var result = [];
     var lstMsg = dbMsgInChat[idC];
@@ -98,10 +115,10 @@ export function getMsgsByChatId(idC) {
             result.push(elm);
         });
     }
-    // console.log(result.length)
     return result;
 }
-//get the chat that contain the convection between 2 users:
+
+/* Get the chat that contain the convection between 2 users: */
 export function getConversation(user) {
     for (const [key, value] of Object.entries(dbChats)) {
         if (value[0] === user || value[1] === user) {
@@ -109,6 +126,8 @@ export function getConversation(user) {
         }
     }
 }
+
+/* Get chat between 2 users by these users */
 export function getConversationBy2Users(user1, user2) {
     for (const [key, value] of Object.entries(dbChats)) {
         if ((value[0] === user1 && value[1] === user2) || (value[0] === user2 && value[1] === user1)) {
@@ -117,6 +136,7 @@ export function getConversationBy2Users(user1, user2) {
     }
 }
 
+/* Get a list of other user for all chats */
 export function getOtherUser(user) {
     var users = [] // {chatNum: user}
     for (const [key, value] of Object.entries(dbChats)) {
@@ -129,15 +149,17 @@ export function getOtherUser(user) {
     return users
 }
 
-
+/* Get user password by username */
 export function getUserPassword(user) {
     return dbUsers[user].password
 }
 
+/* Get profile image of connected user */
 export function getProfileImg() {
     return dbUsers[connectedUser].img
 }
 
+/* Get last message info of a specific chat */
 export function getLastMsg(chatId) {
     var clock = ""
     var indexLastMsg = -1
@@ -154,7 +176,5 @@ export function getLastMsg(chatId) {
     if(indexLastMsg !== -1){
         return msgsList[indexLastMsg]
     }
-    
     return {}
-
 }
