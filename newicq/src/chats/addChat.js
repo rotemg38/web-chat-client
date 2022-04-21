@@ -1,8 +1,22 @@
 import { getDisNameByUsername, getProfileImg } from "../dbHandle/dbHardcoded";
-import { connectedUser } from "../dbHandle/dbHardcoded";
+import { connectedUser, userIsExists, getConversationBy2Users } from "../dbHandle/dbHardcoded";
 import './addChat.css'
 
 function AddChat(msgState) {
+
+    const checkUserID = (event) => {
+        const value = event.target.value;
+        var user = document.getElementById("contactname")
+        if (!userIsExists(value) || value === connectedUser || getConversationBy2Users(value, connectedUser) !== undefined) {
+            user.classList.remove("is-valid")
+            user.classList.add("is-invalid")
+            user.setCustomValidity('Wrong username')
+        } else {
+            user.classList.remove("is-invalid")
+            user.classList.add("is-valid")
+            user.setCustomValidity('')
+        }
+    }
     return (
         <div>
             <ul className="list-group">
