@@ -3,9 +3,16 @@ This is a Web Client side of our chat application which is part of a bigger proj
 
 ## Description
 The web client includes the following **pages**:
-- **SignUp screen**
 - **LogIn screen**
+
+    <img alt="LogIn Screen" src="assets/images/logIn_screen.png"  height="300" />
+
+- **SignUp screen**
+
+     <img alt="SignUp Screen" src="assets/images/signUp_screen.png"  height="300" />
+
 - **The Chats screen**
+
 
 With the following **features**:
 - Add new user to the app
