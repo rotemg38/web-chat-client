@@ -1,12 +1,13 @@
 import AddChat from "./addChat";
 
 function Chats(msgState) {
-    
 
         return (
 
             <div>
-                <AddChat {...msgState} updateChatId={msgState.updateChatId} getMsgState={msgState.getMsgState}/>
+
+                <AddChat addConection={msgState.addConection} usersOnScreen={msgState.usersOnScreen} lastMsg={msgState.lastMsg} updateChatId={msgState.updateChatId} />
+
             </div>
         );
     }

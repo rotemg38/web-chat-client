@@ -1,6 +1,7 @@
 import './userChat.css'
-import { dbMsg, dbMsgInChat, dbUsers, getDisNameByUsername , getConversation, getMsgsByChatId, getLastMsg } from '../dbHandle/dbHardcoded';
+import { dbMsg, dbMsgInChat, dbUsers, getDisNameByUsername, getConversation, getMsgsByChatId } from '../dbHandle/dbHardcoded';
 import { Component } from 'react';
+import React from 'react';
 
 class ProfilePicture extends Component {
     constructor(username) {
@@ -41,29 +42,33 @@ class LastMsg extends Component {
 
 
 function UserChat(msgState) {
+    
 
     const handleUserChatClick = (event) => {
         msgState.updateChatId(msgState.chatId);
     }
-
+    
 
     return (
+
+
         <div className="list-group">
             <button href="#" className="list-group-item list-group-item-action flex-column align-items-start"
                 onClick={handleUserChatClick}>
                 <div className="d-flex w-100 justify-content-between">
                     <img src={dbUsers[msgState.user].img} alt="default" className="img-thumbnail col"></img> {/*new ProfilePicture(user).getPic() */}
                     <div className='maintext'><h5 className="mb-1 col-10">{getDisNameByUsername(msgState.user)}</h5>
-                    {/*last message: */}
-                    <span className="mb-1 col-9"> {msgState.text==="" ?(new LastMsg(msgState.user).state.text):(msgState.text)}{/*זה הפוך בתנאים */} 
-                    </span></div>
+                        {/*last message: */}
+                        <span className="mb-1 col-9"> {msgState.lastMsg.text}
+                        </span></div>
                     {/*time of last message: */}
-                    <small className="text-muted col"><small> {new LastMsg(msgState.user).state.time} </small></small>
+                    <small className="text-muted col"><small> {msgState.lastMsg.date} </small></small>
                 </div>
-                {/*msgState.text*/}{/*getLastMsg(getConversation(msgState.user)).msg*/} {/*new LastMsg(msgState.user).state.text*/}
 
             </button>
         </div>
+
     );
 }
+
 export default UserChat;
