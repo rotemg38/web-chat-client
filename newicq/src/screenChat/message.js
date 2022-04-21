@@ -1,6 +1,8 @@
 import './messages.css'
-function Message(msgInfo) {
 
+/* This function is responisable about the message component */
+
+function Message(msgInfo) {
     return (
         <>
         {msgInfo.from === msgInfo.connectedUser ?(
