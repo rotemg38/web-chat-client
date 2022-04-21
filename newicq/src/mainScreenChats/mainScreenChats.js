@@ -10,10 +10,9 @@ import UserChat from "../chats/userChat";
 import { addConectionToList, getConversationBy2Users, userIsExists } from "../dbHandle/dbHardcoded";
 
 
-
 function MainScreenChats() {
-    const [chatsState, setChatsState] = useState({chatId: "-1", otherUserName:"", msgsComponents: [], lastMsg:{} });
 
+    const [chatsState, setChatsState] = useState({chatId: "-1", otherUserName:"", msgsComponents: [], lastMsg:{} });
 
     const chatInfo = {connectedUser: connectedUser, chatId: chatsState.chatId, otherUserName: chatsState.otherUserName, msgsComponents: chatsState.msgsComponents}
 
@@ -23,7 +22,7 @@ function MainScreenChats() {
         var connectedUser = chatInfo.connectedUser;
    
         var messageList = chatMessages.map((msg, key)=>{
-            msg["connectedUser"] = connectedUser; /// didnt understand
+            msg["connectedUser"] = connectedUser;
             return <Message {...msg} key={key}/>
         });
 
@@ -63,6 +62,7 @@ function MainScreenChats() {
     
     });
     }
+    
 
     const addConection = () => {
         console.log("here");
@@ -89,6 +89,7 @@ function MainScreenChats() {
             <div className="row">
                 <div className="col-md-3">
                     <Chats addConection={addConection} setUserOnScreen={setUserOnScreen} usersOnScreen={usersOnScreen} lastMsg={chatsState.lastMsg} updateChatId={updateChatId}/>
+
                 </div>
                 <div className="col-md-9">
                     <ScreenChat {...chatInfo} updateMessages={updateMessages}/>

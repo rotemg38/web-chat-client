@@ -64,6 +64,7 @@ function UserChat(msgState) {
                     {/*time of last message: */}
                     <small className="text-muted col"><small> {msgState.lastMsg.date} </small></small>
                 </div>
+
             </button>
         </div>
 

@@ -2,7 +2,7 @@ export const dbUsers = {
     "user1": { displayName: "USER1", password: "123", img: "default_picture.jpg" },
     "user2": { displayName: "USER2", password: "123", img: "default_picture.jpg" },
     "user3": { displayName: "USER3", password: "123", img: "default_picture.jpg" },
-    "user4": { displayName: "USER4", password: "123", img: "blob:http://localhost:3000/d3069f08-e5bf-4adf-9a26-3842958e9561" }
+    "user4": { displayName: "USER4", password: "123", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUqFxzIoDWZ8bRMo9noLJzFYP0MyC0snBxkg&usqp=CAU" }
 };
 export const dbMsg = {
     msg1: { type: "text", text: "hello", date: "09:00" },
