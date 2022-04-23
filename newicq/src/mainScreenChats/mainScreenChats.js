@@ -8,6 +8,7 @@ import { getMsgsByChatId, getOtherUser, getLastMsg } from '../dbHandle/dbHardcod
 import Message from "../screenChat/message";
 import UserChat from "../chats/userChat";
 import { addConectionToList } from "../dbHandle/dbHardcoded";
+import UserConnectionError from "../errorPages/userNotSignIn";
 
 /* This function is responsiable about the the main screen of the chats page- merge between the chats list and
 the chat screen */
@@ -91,17 +92,23 @@ function MainScreenChats() {
     };
 
     return (
-        <div id="mainScreenChat" className="container">
-            <div className="row">
-                <div className="col-md-3">
-                    <Chats addConection={addConection} setUserOnScreen={setUserOnScreen} usersOnScreen={usersOnScreen} lastMsg={chatsState.lastMsg} updateChatId={updateChatId} />
-                </div>
-                <div className="col-md-9">
-                    <ScreenChat {...chatInfo} updateMessages={updateMessages} />
+        <>
+        {
+        connectedUser === ""?(
+           <UserConnectionError/> 
+        ):(
+            <div id="mainScreenChat" className="container">
+                <div className="row">
+                    <div className="col-md-3">
+                        <Chats addConection={addConection} setUserOnScreen={setUserOnScreen} usersOnScreen={usersOnScreen} lastMsg={chatsState.lastMsg} updateChatId={updateChatId} />
+                    </div>
+                    <div className="col-md-9">
+                        <ScreenChat {...chatInfo} updateMessages={updateMessages} />
+                    </div>
                 </div>
             </div>
-        </div>
-
+        )}
+        </>
     );
 }
 export default MainScreenChats;

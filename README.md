@@ -9,9 +9,15 @@ The web client includes the following **pages**:
 
 - **SignUp screen**
 
-     <img alt="SignUp Screen" src="assets/images/signUp_screen.png"  height="300" />
+     <img alt="SignUp Screen" src="assets/images/signUp_screen.png" height="300" />
 
 - **The Chats screen**
+
+    <img alt="Chats Screen" src="assets/images/chats_screen.png" height="300" />
+
+- **Error Access screen**
+
+    <img alt="Error Access Screen" src="assets/images/error_access_screen.png" height="300" />
 
 
 With the following **features**:
@@ -19,6 +25,7 @@ With the following **features**:
 - Connect to your app account
 - Add new chat
 - Sending a message from 4 different types: text, image, video and audio
+- Enforce access restrictions
 
 ## Technologies
 - ReactJs

@@ -48,7 +48,9 @@ function AddChat(msgState) {
                        <h3> {getDisNameByUsername(connectedUser)}</h3>
                     </div>
 
-                    <button type="button" className="col btn btn-sm " data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"> <img src="add-user.png" alt="add-user-logo" className="addLogo"></img></button>
+                    <button type="button" className="col btn btn-sm " data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" title="Add Chat"> 
+                        <img src="add-user.png" alt="add-user-logo" className="addLogo"></img>
+                    </button>
                     
 
                     <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

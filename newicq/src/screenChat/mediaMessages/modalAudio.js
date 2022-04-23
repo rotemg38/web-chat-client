@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { RecordCircle, StopFill } from 'react-bootstrap-icons';
+import "./modalDesign.css"
 
 /* This function is responisable about sending voice message */
 
@@ -89,7 +90,7 @@ function ModalAudio({ handleSend }) {
 
                     <div className="modal-footer">
                         <button type="button" id="modalCancelAudio" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleCancelSend}>Cancel</button>
-                        <button type="button" id="modalSendAudio" className="btn btn-primary" data-bs-dismiss="modal" onClick={handleSendAudio} hidden>Send</button>
+                        <button type="button" id="modalSendAudio" className="btn btnSendModal" data-bs-dismiss="modal" onClick={handleSendAudio} hidden>Send</button>
                     </div>
 
                 </div>
