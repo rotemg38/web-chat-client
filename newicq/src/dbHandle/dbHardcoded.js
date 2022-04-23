@@ -1,22 +1,22 @@
 
 /* ALL DATABASES THAT ARE REALEVANT FOR THE APP: */
 
-export const dbUsers = {
+const dbUsers = {
     "user1": { displayName: "USER1", password: "123", img: "default_picture.jpg" },
     "user2": { displayName: "USER2", password: "123", img: "default_picture.jpg" },
     "user3": { displayName: "USER3", password: "123", img: "default_picture.jpg" },
     "user4": { displayName: "USER4", password: "123", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUqFxzIoDWZ8bRMo9noLJzFYP0MyC0snBxkg&usqp=CAU" }
 };
-export const dbMsg = {
+var msgId = 4;
+const dbMsg = {
     msg1: { type: "text", text: "hello", date: "09:00" },
     msg2: { type: "text", text: "hello friend", date: "09:10" },
     msg3: { type: "text", text: "need to go", date: "09:15" },
     msg4: { type: "image",text:"image", imgSrc: "default_picture.jpg", date: "09:15" }
 };
-var msgId = 4;
 var chatId = 1;
-export const dbChats = { chat1: ["user1", "user2"] };
-export const dbMsgInChat = {
+const dbChats = { chat1: ["user1", "user2"] };
+const dbMsgInChat = {
     chat1: [{ idMsg: "msg1", from: "user1", to: "user2" },
     { idMsg: "msg2", from: "user2", to: "user1" },
     { idMsg: "msg3", from: "user1", to: "user2" },
@@ -156,7 +156,7 @@ export function getUserPassword(user) {
 
 /* Get profile image of connected user */
 export function getProfileImg() {
-    return dbUsers[connectedUser].img
+    return getImgByUsername(connectedUser);
 }
 
 /* Get last message info of a specific chat */
