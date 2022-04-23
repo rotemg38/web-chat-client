@@ -1,7 +1,7 @@
 import { getCurrentShowElementModal, getCurrentMedia } from "./sendMediaButtonsHandler";
+import "./modalDesign.css"
 
 /* This function is responisable about sending picture and video message */
-
 function ModalPicVid({handleSend, handleUpload}){
 
     //handle the case we canceled sending the pic/video
@@ -77,7 +77,7 @@ function ModalPicVid({handleSend, handleUpload}){
 
                 <div className="modal-footer">
                     <button type="button" id="modalCancel" className="btn btn-secondary" data-bs-dismiss="modal" onClick={handleCancel}>Cancel</button>
-                    <button type="button" id="modalSend" className="btn btn-primary" data-bs-dismiss="modal" onClick={handleSendPic} hidden>Send</button>
+                    <button type="button" id="modalSend" className="btn btnSendModal" data-bs-dismiss="modal" onClick={handleSendPic} hidden>Send</button>
                 </div>
 
             </div>

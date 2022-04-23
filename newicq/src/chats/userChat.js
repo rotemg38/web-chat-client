@@ -1,10 +1,10 @@
 import './userChat.css'
-import { dbUsers, getDisNameByUsername } from '../dbHandle/dbHardcoded';
+import { getImgByUsername, getDisNameByUsername } from '../dbHandle/dbHardcoded';
 import React from 'react';
 
 /* This function is responsiable about the componenet of every chat from chat list the connected user has */
-
 function UserChat(msgState) {
+    
     /* Handle on click the chats that choisen- notify the main screen the current chat ID  */
     const handleUserChatClick = (event) => {
         msgState.updateChatId(msgState.chatId);
@@ -16,7 +16,7 @@ function UserChat(msgState) {
                 {/* the content of the user and the last message: */}
                 <div className="justify-content-between">
                     {/* profile image: */}
-                    <img src={dbUsers[msgState.user].img} alt="default" className="img-thumbnail col"></img>
+                    <img src={getImgByUsername(msgState.user)} alt="default" className="img-thumbnail col"></img>
                     {/* the last message info: */}
                     <div className='maintext col-10'>
                         <h5 className="mb-1">{getDisNameByUsername(msgState.user)}</h5>

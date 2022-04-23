@@ -8,10 +8,10 @@ import { getMsgsByChatId, getOtherUser, getLastMsg } from '../dbHandle/dbHardcod
 import Message from "../screenChat/message";
 import UserChat from "../chats/userChat";
 import { addConectionToList } from "../dbHandle/dbHardcoded";
+import UserConnectionError from "../errorPages/userNotSignIn";
 
-/* This function is responsiable about the the main screen of the chats page- merge between the chats list and
-the chat screen */
-
+/* This function is responsiable about the the main screen of the chats page- 
+merge between the chats list and the chat screen */
 function MainScreenChats() {
 
     const [chatsState, setChatsState] = useState({ chatId: "-1", otherUserName: "", msgsComponents: [], lastMsg: {} });
@@ -70,7 +70,13 @@ function MainScreenChats() {
 
     /* Add the chat to the chat list in the left side of screen */
     const addConection = () => {
-        var username = document.getElementById("contactname").value
+        var user = document.getElementById("contactname")
+        var username = user.value
+        //clear the field and the validation checks for the next time and hide the add button
+        user.classList.remove("is-valid")
+        user.value= "";
+        document.getElementById("btnAddChatModal").setAttribute("hidden", true);
+
         var chatId = addConectionToList(connectedUser, username);
         var newList = usersOnScreen;
         // add the new chat
@@ -85,17 +91,23 @@ function MainScreenChats() {
     };
 
     return (
-        <div id="mainScreenChat" className="container">
-            <div className="row">
-                <div className="col-md-3">
-                    <Chats addConection={addConection} setUserOnScreen={setUserOnScreen} usersOnScreen={usersOnScreen} lastMsg={chatsState.lastMsg} updateChatId={updateChatId} />
-                </div>
-                <div className="col-md-9">
-                    <ScreenChat {...chatInfo} updateMessages={updateMessages} />
+        <>
+        {
+        connectedUser === ""?(
+           <UserConnectionError/> 
+        ):(
+            <div id="mainScreenChat" className="container">
+                <div className="row">
+                    <div className="col-md-3">
+                        <Chats addConection={addConection} setUserOnScreen={setUserOnScreen} usersOnScreen={usersOnScreen} lastMsg={chatsState.lastMsg} updateChatId={updateChatId} />
+                    </div>
+                    <div className="col-md-9">
+                        <ScreenChat {...chatInfo} updateMessages={updateMessages} />
+                    </div>
                 </div>
             </div>
-        </div>
-
+        )}
+        </>
     );
 }
 export default MainScreenChats;
