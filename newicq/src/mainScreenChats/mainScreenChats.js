@@ -10,9 +10,8 @@ import UserChat from "../chats/userChat";
 import { addConectionToList } from "../dbHandle/dbHardcoded";
 import UserConnectionError from "../errorPages/userNotSignIn";
 
-/* This function is responsiable about the the main screen of the chats page- merge between the chats list and
-the chat screen */
-
+/* This function is responsiable about the the main screen of the chats page- 
+merge between the chats list and the chat screen */
 function MainScreenChats() {
 
     const [chatsState, setChatsState] = useState({ chatId: "-1", otherUserName: "", msgsComponents: [], lastMsg: {} });

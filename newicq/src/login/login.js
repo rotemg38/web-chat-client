@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { checkValidation } from './loginValidation'
 
 /* This function is responsiable about the login page component */
-
 function Login() {
 
   const navigate = useNavigate();

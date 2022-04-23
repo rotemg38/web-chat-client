@@ -1,6 +1,7 @@
 import './userNotSignIn.css'
 import { useNavigate } from 'react-router-dom';
 
+/*This component show the error message for access page*/
 function UserConnectionError() {
     const navigate = useNavigate();
 

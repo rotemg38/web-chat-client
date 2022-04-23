@@ -5,7 +5,6 @@ import ModalAudio from './modalAudio';
 import { Image,CameraReels, Mic, Paperclip } from 'react-bootstrap-icons';
 
 /* This function is responisable about the media button on the chat screen panel */
-
 function MediaButton({handleSend}){
     return(
         <div>

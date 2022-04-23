@@ -3,8 +3,8 @@ import { dbUsers, getDisNameByUsername } from '../dbHandle/dbHardcoded';
 import React from 'react';
 
 /* This function is responsiable about the componenet of every chat from chat list the connected user has */
-
 function UserChat(msgState) {
+    
     /* Handle on click the chats that choisen- notify the main screen the current chat ID  */
     const handleUserChatClick = (event) => {
         msgState.updateChatId(msgState.chatId);

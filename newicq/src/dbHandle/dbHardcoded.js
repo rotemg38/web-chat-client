@@ -1,5 +1,5 @@
 
-/* ALL DATA BASES THAT ARE REALEVANT FOR THE APP: */
+/* ALL DATABASES THAT ARE REALEVANT FOR THE APP: */
 
 export const dbUsers = {
     "user1": { displayName: "USER1", password: "123", img: "default_picture.jpg" },

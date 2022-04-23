@@ -3,7 +3,6 @@ import { connectedUser, userIsExists, getConversationBy2Users } from "../dbHandl
 import './addChat.css'
 
 /* This function responsiable about the title of the left size chats and the add chat button */
-
 function AddChat(msgState) {
     /* Validation of the add chat button- check if the the user we want to add is legal */
     const checkUserID = (event) => {
@@ -36,6 +35,7 @@ function AddChat(msgState) {
          user.value= "";
          document.getElementById("btnAddChatModal").setAttribute("hidden", true);
     }
+    
     return (
         <div>
             <ul className="list-group">

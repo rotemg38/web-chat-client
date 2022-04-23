@@ -3,7 +3,6 @@ import { RecordCircle, StopFill } from 'react-bootstrap-icons';
 import "./modalDesign.css"
 
 /* This function is responisable about sending voice message */
-
 function ModalAudio({ handleSend }) {
 
     const handleCancelSend = (e) => {
