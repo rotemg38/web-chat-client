@@ -70,7 +70,13 @@ function MainScreenChats() {
 
     /* Add the chat to the chat list in the left side of screen */
     const addConection = () => {
-        var username = document.getElementById("contactname").value
+        var user = document.getElementById("contactname")
+        var username = user.value
+        //clear the field and the validation checks for the next time and hide the add button
+        user.classList.remove("is-valid")
+        user.value= "";
+        document.getElementById("btnAddChatModal").setAttribute("hidden", true);
+
         var chatId = addConectionToList(connectedUser, username);
         var newList = usersOnScreen;
         // add the new chat
