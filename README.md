@@ -42,6 +42,8 @@ With the following **features**:
 - react-dom
 
 ### Installing & Executing program
+At first, make sure that npm is installed on your computer. (you can download via Node.js installer)
+
 Download the project and via your prefered IDE run the application.
 
 We recommend on VSCode as an excellent IDE therefore we will explain how to run our project on this IDE.
@@ -52,6 +54,8 @@ Make sure you are in the "newicq" folder, if not run the command:
 ```
 cd newicq
 ```
+And make sure to **delete package-lock.json file.**
+
 Then run the following commands:
 
 1)
