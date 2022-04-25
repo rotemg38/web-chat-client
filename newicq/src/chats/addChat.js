@@ -11,7 +11,7 @@ function AddChat(msgState) {
         
         // if the user is not exists, the user is the current user that loged in or the user chat is allready
         // shown- then the user is not valid
-        if (!userIsExists(value) || value === connectedUser || getConversationBy2Users(value, connectedUser) !== undefined) {
+        if (!userIsExists(value) || value === connectedUser || getConversationBy2Users(value, connectedUser) !== false) {
             user.classList.remove("is-valid")
             user.classList.add("is-invalid")
             user.setCustomValidity('Wrong username')
