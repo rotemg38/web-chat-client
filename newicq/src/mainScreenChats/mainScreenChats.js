@@ -78,12 +78,12 @@ function MainScreenChats() {
         if (userIsExists(username) === false) { return }
         // check if userChat is allready in lists of userChats:
         if (getConversationBy2Users(username, connectedUser) !== undefined) { return }
-
         
         //clear the field and the validation checks for the next time and hide the add button
         user.classList.remove("is-valid")
         user.value= "";
         document.getElementById("btnAddChatModal").setAttribute("hidden", true);
+
 
         var chatId = addConectionToList(connectedUser, username);
         var newList = usersOnScreen;
