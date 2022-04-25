@@ -2,7 +2,7 @@ import Chats from "../chats/chats";
 import ScreenChat from "../screenChat/screenChat";
 import './mainScreenChats.css'
 import '../App.css'
-import { connectedUser, getOtherUserByChatId } from "../dbHandle/dbHardcoded";
+import { connectedUser, getOtherUserByChatId, userIsExists, getConversationBy2Users } from "../dbHandle/dbHardcoded";
 import { useState } from "react";
 import { getMsgsByChatId, getOtherUser, getLastMsg } from '../dbHandle/dbHardcoded';
 import Message from "../screenChat/message";
@@ -71,6 +71,12 @@ function MainScreenChats() {
     /* Add the chat to the chat list in the left side of screen */
     const addConection = () => {
         var username = document.getElementById("contactname").value
+        // check if the user wants to add himself
+        if (username === connectedUser) { return }
+        // check if user is exist to create a chat with him:
+        if (userIsExists(username) === false) { return }
+        // check if userChat is allready in lists of userChats:
+        if (getConversationBy2Users(username, connectedUser) !== undefined) { return }
         var chatId = addConectionToList(connectedUser, username);
         var newList = usersOnScreen;
         // add the new chat
