@@ -11,7 +11,7 @@ const dbUsers = {
     "michael": { displayName: "Michael Jackson", password: "TheKIng3", img: "https://geo-media.beatport.com/image_size/590x404/080c6217-0efa-4323-8b7e-2ad3546a1def.jpg" },
     "obama": { displayName: "Barak Obama", password: "Prsident7", img: "https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTE4MDAzNDEwNzg5ODI4MTEw/barack-obama-12782369-1-402.jpg" },
 };
-var msgId = 15;
+var msgId = 19;
 const dbMsg = {
     msg1: { type: "text", text: "Yes we can", date: "09:00" },
     msg2: { type: "text", text: "I love the movie Moana", date: "09:10" },
@@ -27,12 +27,16 @@ const dbMsg = {
     msg12: { type: "text", text: "And I love this app! Looks good", date: "09:12" },
     msg13: { type: "text", text: "And yours app is MY favorite :)", date: "09:18" },
     msg14: { type: "text", text: "Thats right. And that why we built this app", date: "09:05" },
-    msg15: { type: "text", text: "Soon. We need to talk about the future of this app", date: "09:05" }
+    msg15: { type: "text", text: "Soon. We need to talk about the future of this app", date: "09:05" },
+    msg16: { type: "text", text: "את חייבת לשמוע את השיר המעולה הזה", date: "09:00" },
+    msg17: { type: "audio", text: "audio", audioSrc:"record.m4a",  date: "09:00" },
+    msg18: { type: "text", text: "ואת חייבת לראות את הסרטון הקורע הזה ", date: "09:02" },
+    msg19: { type: "video", text: "video", videoSrc:"cool_video.mov", date: "09:02" }
 };
-var chatId = 7;
+var chatId = 8;
 const dbChats = {
     chat1: ["shir", "dwayne johnson"], chat2: ["rotem", "obama"], chat3: ["michael", "rihanna"],
-    chat4: ["shir", "ryan"], chat5: ["rotem", "elon"], chat6: ["ryan", "elon"], chat7: ["dwayne johnson", "rihanna"]
+    chat4: ["shir", "ryan"], chat5: ["rotem", "elon"], chat6: ["ryan", "elon"], chat7: ["dwayne johnson", "rihanna"], chat8: ["shir", "rotem"]
 };
 
 const dbMsgInChat = {
@@ -42,7 +46,9 @@ const dbMsgInChat = {
     chat4: [{ idMsg: "msg3", from: "shir", to: "ryan" }, { idMsg: "msg8", from: "shir", to: "ryan" }, { idMsg: "msg13", from: "ryan", to: "shir" }],
     chat5: [{ idMsg: "msg7", from: "rotem", to: "elon" }, { idMsg: "msg15", from: "elon", to: "rotem" }],
     chat6: [{ idMsg: "msg6", from: "elon", to: "ryan" }, { idMsg: "msg9", from: "ryan", to: "elon" }],
-    chat7: [{ idMsg: "msg10", from: "rihanna", to: "dwayne johnson" }, { idMsg: "msg11", from: "dwayne johnson", to: "rihanna" }]
+    chat7: [{ idMsg: "msg10", from: "rihanna", to: "dwayne johnson" }, { idMsg: "msg11", from: "dwayne johnson", to: "rihanna" }],
+    chat8:[{ idMsg: "msg16", from: "rotem", to: "shir" }, { idMsg: "msg17", from: "rotem", to: "shir" },
+    { idMsg: "msg18", from: "shir", to: "rotem" }, { idMsg: "msg19", from: "shir", to: "rotem" }]
 };
 export var connectedUser = "";
 
