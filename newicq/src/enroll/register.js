@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import { formValidationByElement } from './registerValidations';
 
 /* This function is responsiable about the register page component */
-
 function Register() {
 
     const navigate = useNavigate();

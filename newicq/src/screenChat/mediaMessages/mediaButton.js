@@ -5,28 +5,27 @@ import ModalAudio from './modalAudio';
 import { Image,CameraReels, Mic, Paperclip } from 'react-bootstrap-icons';
 
 /* This function is responisable about the media button on the chat screen panel */
-
 function MediaButton({handleSend}){
     return(
         <div>
             <div className="dropdown">
                 <button className="btn btn-outline-primary" type="button" id="media" 
-                data-bs-toggle="dropdown" aria-expanded="false"> 
+                data-bs-toggle="dropdown" aria-expanded="false" title="Send Media"> 
                 <Paperclip/>
                  </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li>
-                        <button id="pictureMedia" className="dropdown-item" onClick={handlePicture}>
+                        <button id="pictureMedia" className="dropdown-item" onClick={handlePicture} title="Send Picture">
                         <Image />
                         </button>
                     </li>
                     <li>
-                        <button id="videoMedia" className="dropdown-item" onClick={handleVideo}>
+                        <button id="videoMedia" className="dropdown-item" onClick={handleVideo} title="Send Video">
                             <CameraReels/>
                         </button>
                     </li>
                     <li>
-                        <button className="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalMsgAudio">
+                        <button className="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalMsgAudio" title="Send Audio">
                             <Mic/>
                         </button>
                     </li>

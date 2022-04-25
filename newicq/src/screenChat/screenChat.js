@@ -3,7 +3,6 @@ import SendMessage from "./sendMessage";
 import { getImgByUsername, getDisNameByUsername } from '../dbHandle/dbHardcoded';
 
 /* This function is responisable the chat screen that present the correspondence between the users */
-
 function ScreenChat(chatInfo) {
     return (
         <>
