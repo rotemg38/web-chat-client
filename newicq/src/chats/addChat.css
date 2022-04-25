@@ -38,3 +38,7 @@
 .addbutton {
     background-color: #aca2e3c3;
 }
+.user {
+    overflow-y: scroll;
+    height: 80vh;
+}
