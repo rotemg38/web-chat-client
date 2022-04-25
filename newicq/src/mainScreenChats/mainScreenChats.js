@@ -2,7 +2,7 @@ import Chats from "../chats/chats";
 import ScreenChat from "../screenChat/screenChat";
 import './mainScreenChats.css'
 import '../App.css'
-import { connectedUser, getOtherUserByChatId } from "../dbHandle/dbHardcoded";
+import { connectedUser, getOtherUserByChatId, userIsExists, getConversationBy2Users } from "../dbHandle/dbHardcoded";
 import { useState } from "react";
 import { getMsgsByChatId, getOtherUser, getLastMsg } from '../dbHandle/dbHardcoded';
 import Message from "../screenChat/message";
@@ -72,10 +72,18 @@ function MainScreenChats() {
     const addConection = () => {
         var user = document.getElementById("contactname")
         var username = user.value
+        // check if the user wants to add himself
+        if (username === connectedUser) { return }
+        // check if user is exist to create a chat with him:
+        if (userIsExists(username) === false) { return }
+        // check if userChat is allready in lists of userChats:
+        if (getConversationBy2Users(username, connectedUser) !== false) { return }
+        
         //clear the field and the validation checks for the next time and hide the add button
         user.classList.remove("is-valid")
         user.value= "";
         document.getElementById("btnAddChatModal").setAttribute("hidden", true);
+
 
         var chatId = addConectionToList(connectedUser, username);
         var newList = usersOnScreen;
