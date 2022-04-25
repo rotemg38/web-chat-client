@@ -71,6 +71,19 @@ npm start
 
 After running this command the brwoser should open with the SignIn screen.
 
+### Users Who Allready Registered
+
+Main users with example of all messages type:
+- **Username:** shir, **Password:** Shir1998
+- **Username:** rotem, **Password:** Rotem100
+
+Other users in the system:
+- **Username:** rihanna
+- **Username:** elon
+- **Username:** ryan
+- **Username:** dwayne johnson
+- **Username:** obama
+
 ## Authors
 
 Contributors names:

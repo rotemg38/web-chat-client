@@ -10,6 +10,8 @@
 /*for the send message Bar*/
 .input-group{
     width:auto;
+    margin: 2%;
+    margin-top: 60px;
 }
 
 /*for audio modal*/

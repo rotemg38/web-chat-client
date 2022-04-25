@@ -35,8 +35,14 @@ const dbMsg = {
 };
 var chatId = 8;
 const dbChats = {
-    chat1: ["shir", "dwayne johnson"], chat2: ["rotem", "obama"], chat3: ["michael", "rihanna"],
-    chat4: ["shir", "ryan"], chat5: ["rotem", "elon"], chat6: ["ryan", "elon"], chat7: ["dwayne johnson", "rihanna"], chat8: ["shir", "rotem"]
+    chat1: ["shir", "dwayne johnson"], 
+    chat2: ["rotem", "obama"], 
+    chat3: ["michael", "rihanna"],
+    chat4: ["shir", "ryan"], 
+    chat5: ["rotem", "elon"], 
+    chat6: ["ryan", "elon"], 
+    chat7: ["dwayne johnson", "rihanna"], 
+    chat8: ["shir", "rotem"]
 };
 
 const dbMsgInChat = {
