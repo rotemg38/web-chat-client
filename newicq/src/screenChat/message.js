@@ -1,7 +1,6 @@
 import './messages.css'
 
 /* This function is responisable about the message component */
-
 function Message(msgInfo) {
     return (
         <>
