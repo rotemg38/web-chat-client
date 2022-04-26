@@ -40,7 +40,9 @@
     background-color: #aca2e3c3;
 }
 .user {
-    overflow-y: scroll;
-    height: 85vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100vh;
+    border-right: 1px solid #eee;
 
 }
