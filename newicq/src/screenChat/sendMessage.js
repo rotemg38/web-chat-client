@@ -28,7 +28,9 @@ function SendMessage(props) {
 
     /* Handler for each message that sent */
     const handleSend = (event)=>{
-        let time = new Date().toLocaleTimeString('en-GB', { hour12: false, hour: "numeric", minute: "numeric"});
+        var today = new Date();
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        let time = today.toLocaleTimeString('en-GB', { hour12: false, hour: "numeric", minute: "numeric"});
         let inputMsgBox = document.getElementById("messageBox");
         let msgType = inputMsgBox.accept;
         
@@ -37,20 +39,20 @@ function SendMessage(props) {
         let msg;
         if(inputMsgBox.value !== ""){
             let text = inputMsgBox.value;
-            msg = {type: msgType, text: text, date: time};
+            msg = {type: msgType, text: text, date: time, fullDate: date+' '+time};
         }
         //if the input is on image mode- means we want to send an image 
         else if(msgType === "image"){
-            msg = {type: msgType, text: "image", date: time, imgSrc: inputMsgBox.src};    
+            msg = {type: msgType, text: "image", date: time, imgSrc: inputMsgBox.src, fullDate: date+' '+time};    
         }
          //if the input is on file mode- means we want to send an video 
          else if(msgType === "file"){
             msgType = "video";
-            msg = {type: msgType,text: "video", date: time, videoSrc: inputMsgBox.src};
+            msg = {type: msgType,text: "video", date: time, videoSrc: inputMsgBox.src, fullDate: date+' '+time};
         }
         //if the input is on audio mode- means we want to send an audio 
         else if(msgType === "audio"){
-            msg = {type: msgType,text: "audio", date: time, audioSrc: inputMsgBox.src};
+            msg = {type: msgType,text: "audio", date: time, audioSrc: inputMsgBox.src, fullDate: date+' '+time};
         } else {
             return;//end the function- dont send anything
         }

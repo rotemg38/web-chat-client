@@ -15,6 +15,7 @@
 .chats-title {
     float: left;
     padding-left: 7%;
+    border-right: 1px solid #eee;
 }
  
 .col-5 {
@@ -40,5 +41,5 @@
 }
 .user {
     overflow-y: scroll;
-    height: 90vh;
+    height: 80vh;
 }

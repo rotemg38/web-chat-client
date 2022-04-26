@@ -13,30 +13,36 @@ const dbUsers = {
 };
 var msgId = 19;
 const dbMsg = {
-    msg1: { type: "text", text: "Yes we can", date: "09:00" },
-    msg2: { type: "text", text: "I love the movie Moana", date: "09:10" },
-    msg3: { type: "image", text: "image", imgSrc: "https://www.cnet.com/a/img/resize/2d182bccac072cff2ae775f47484ee46602f91b4/2021/11/19/73203c5f-bb09-4470-b61a-8383db890b83/free-guy-2020.jpg?auto=webp&fit=crop&height=630&width=1200", date: "09:15" },
-    msg4: { type: "text", text: "Love never felt so good", date: "09:15" },
-    msg5: { type: "text", text: "shine bright like a diamond", date: "09:20" },
-    msg6: { type: "image", text: "image", imgSrc: "https://www.tesla.com/ownersmanual/images/GUID-BEE67A59-6DD7-460C-9C49-0DD47E707A02-online-en-US.jpg", date: "8:00" },
-    msg7: { type: "text", text: "When will we meet?", date: "09:34" },
-    msg8: { type: "text", text: "My favorite movie", date: "09:16" },
-    msg9: { type: "text", text: "Love youre car. I have that one too!", date: "08:45" },
-    msg10: { type: "text", text: "ראית את האפליקציה של שיר ורותם? ממש יפה", date: "09:46" },
-    msg11: { type: "text", text: "כן! וגם עובד מעולה", date: "09:49" },
-    msg12: { type: "text", text: "And I love this app! Looks good", date: "09:12" },
-    msg13: { type: "text", text: "And yours app is MY favorite :)", date: "09:18" },
-    msg14: { type: "text", text: "Thats right. And that why we built this app", date: "09:05" },
-    msg15: { type: "text", text: "Soon. We need to talk about the future of this app", date: "09:05" },
-    msg16: { type: "text", text: "את חייבת לשמוע את השיר המעולה הזה", date: "09:00" },
-    msg17: { type: "audio", text: "audio", audioSrc:"record.m4a",  date: "09:00" },
-    msg18: { type: "text", text: "ואת חייבת לראות את הסרטון הקורע הזה ", date: "09:02" },
-    msg19: { type: "video", text: "video", videoSrc:"cool_video.mov", date: "09:02" }
+    msg1: { type: "text", text: "Yes we can", date: "09:00", fullDate:"2022-04-25 09:00" },
+    msg2: { type: "text", text: "I love the movie Moana", date: "09:10", fullDate:"2022-04-25 09:10" },
+    msg3: { type: "image", text: "image", imgSrc: "https://www.cnet.com/a/img/resize/2d182bccac072cff2ae775f47484ee46602f91b4/2021/11/19/73203c5f-bb09-4470-b61a-8383db890b83/free-guy-2020.jpg?auto=webp&fit=crop&height=630&width=1200", date: "09:15" , fullDate:"2022-04-25 09:15" },
+    msg4: { type: "text", text: "Love never felt so good", date: "09:15", fullDate:"2022-04-25 09:15"  },
+    msg5: { type: "text", text: "shine bright like a diamond", date: "09:20" , fullDate:"2022-04-25 09:20" },
+    msg6: { type: "image", text: "image", imgSrc: "https://www.tesla.com/ownersmanual/images/GUID-BEE67A59-6DD7-460C-9C49-0DD47E707A02-online-en-US.jpg", date: "08:00", fullDate:"2022-04-25 08:00"  },
+    msg7: { type: "text", text: "When will we meet?", date: "09:34", fullDate:"2022-04-25 09:34" },
+    msg8: { type: "text", text: "My favorite movie", date: "09:16", fullDate:"2022-04-25 09:16"  },
+    msg9: { type: "text", text: "Love youre car. I have that one too!", date: "08:45" , fullDate:"2022-04-25 08:45" },
+    msg10: { type: "text", text: "ראית את האפליקציה של שיר ורותם? ממש יפה", date: "09:46", fullDate:"2022-04-25 09:46"  },
+    msg11: { type: "text", text: "כן! וגם עובד מעולה", date: "09:49", fullDate:"2022-04-25 09:49"},
+    msg12: { type: "text", text: "And I love this app! Looks good", date: "09:12", fullDate:"2022-04-25 09:12" },
+    msg13: { type: "text", text: "And yours app is MY favorite :)", date: "09:18", fullDate:"2022-04-25 09:18" },
+    msg14: { type: "text", text: "Thats right. And that why we built this app", date: "09:05", fullDate:"2022-04-25 09:05" },
+    msg15: { type: "text", text: "Soon. We need to talk about the future of this app", date: "09:05", fullDate:"2022-04-25 09:05"  },
+    msg16: { type: "text", text: "את חייבת לשמוע את השיר המעולה הזה", date: "09:00", fullDate:"2022-04-25 09:00" },
+    msg17: { type: "audio", text: "audio", audioSrc:"record.m4a",  date: "09:00", fullDate:"2022-04-25 09:00" },
+    msg18: { type: "text", text: "ואת חייבת לראות את הסרטון הקורע הזה ", date: "09:02", fullDate:"2022-04-25 09:02" },
+    msg19: { type: "video", text: "video", videoSrc:"cool_video.mov", date: "09:02", fullDate:"2022-04-25 09:02" }
 };
 var chatId = 8;
 const dbChats = {
-    chat1: ["shir", "dwayne johnson"], chat2: ["rotem", "obama"], chat3: ["michael", "rihanna"],
-    chat4: ["shir", "ryan"], chat5: ["rotem", "elon"], chat6: ["ryan", "elon"], chat7: ["dwayne johnson", "rihanna"], chat8: ["shir", "rotem"]
+    chat1: ["shir", "dwayne johnson"], 
+    chat2: ["rotem", "obama"], 
+    chat3: ["michael", "rihanna"],
+    chat4: ["shir", "ryan"], 
+    chat5: ["rotem", "elon"], 
+    chat6: ["ryan", "elon"], 
+    chat7: ["dwayne johnson", "rihanna"], 
+    chat8: ["shir", "rotem"]
 };
 
 const dbMsgInChat = {
