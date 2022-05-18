@@ -1,19 +1,22 @@
  import { userIsExists, getUserPassword } from "../dbHandle/dbHardcoded"
  
  /* This function checks the validation of the password field  */
- function correctPassword (user, password) {
-    if (userIsExists(user) && getUserPassword(user) === password) {
+ async function correctPassword (user, password) {
+    var isExists = await userIsExists(user);
+    var pass = getUserPassword(user);
+    if (isExists && pass === password) {
         return true
     }
     return false
  }
 
  /* This function checks the validation for each element in the login */ 
- export function checkValidation(key, value) {
+ export async function checkValidation(key, value) {
     var result = true;
     var user = document.getElementById("username")
      if (key === "userName") {
-        if(value === "" || !userIsExists(value)){
+         var isExists = await userIsExists(value);
+        if(value === "" || !isExists){
             user.classList.remove("is-valid")
             user.classList.add("is-invalid")
             user.setCustomValidity('Wrong username')
