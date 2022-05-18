@@ -66,12 +66,33 @@ export function setConnectedUser(username) {
 }
 
 /* Add user to data base */
-export function addUser(user) {
+export async function addUser(user) {
+    
     if (user.img === undefined) {
         dbUsers[user.userName] = { password: user.password, phone: user.phoneNumber, displayName: user.displayName, gender: user.gender, img: "default_picture.jpg" };
     } else {
         dbUsers[user.userName] = { password: user.password, phone: user.phoneNumber, displayName: user.displayName, gender: user.gender, img: user.img };
     }
+    
+    if (user.img === undefined) {
+        user.img = "default_picture.jpg";
+    }
+
+    const response = await fetch('https://localhost:5000/api/setup/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "id": user.userName,
+                "name": user.displayName,
+                "password": user.password,
+                "image": "default_picture.jpg",
+                "last": null,
+                "lastdate": null
+            })
+    });
+    
+    console.log(response);
+            
 }
 
 /* Add profile image to data base by user */
@@ -90,11 +111,20 @@ export function getDisNameByUsername(username) {
 }
 
 /* Check if user is exists on system (users data base) */
-export function userIsExists(name) {
-    if (dbUsers[name] != null) {
+export async function userIsExists(name) {
+    
+    var respons = await fetch("https://localhost:5000/api/contacts/" + name);
+    var data = await respons.json();
+    
+    console.log(data);
+    if(data != null){
         return true;
     }
-    return false
+    return false;
+    /*if (dbUsers[name] != null) {
+        return true;
+    }
+    return false*/
 }
 
 /* Add chat to chats data base */
