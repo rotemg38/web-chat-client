@@ -61,8 +61,22 @@ export var connectedUser = "";
 /* HELPFUL FUNCTION TO USE THE DATE BASES: */
 
 /* Set the connected user var to the one who was log in or register */
-export function setConnectedUser(username) {
-    connectedUser = username
+export async function setConnectedUser(username) {
+    connectedUser = username;
+    const response = await fetch('https://localhost:5000/api/setup/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "id": username,
+                "name": getDisNameByUsername(username),
+                "password": getUserPassword(username),
+                "image": getImgByUsername(username),
+                "last": null,
+                "lastdate": null
+            })
+    });
+    
+    console.log(response);
 }
 
 /* Add user to data base */
@@ -112,14 +126,14 @@ export function getDisNameByUsername(username) {
 
 /* Check if user is exists on system (users data base) */
 export async function userIsExists(name) {
-    
     var respons = await fetch("https://localhost:5000/api/contacts/" + name);
     var data = await respons.json();
     
     console.log(data);
-    if(data != null){
+    if(data.Id !== ""){
         return true;
     }
+    
     return false;
     /*if (dbUsers[name] != null) {
         return true;
@@ -128,9 +142,20 @@ export async function userIsExists(name) {
 }
 
 /* Add chat to chats data base */
-export function addConectionToList(user1, user2) {
+export async function addConectionToList(user1, user2) {
     var chatExists = getConversationBy2Users(user1, user2);
     if (chatExists === false) {
+        const response = await fetch('https://localhost:5000/api/contacts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "id": user2,
+                "name": getDisNameByUsername(user2),
+                "server": "localhost:5000"
+            })
+    });
+    
+    console.log(response);
         chatId += 1;
         dbChats["chat" + chatId] = [user1, user2];
         return "chat" + chatId;

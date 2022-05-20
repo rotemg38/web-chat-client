@@ -4,14 +4,8 @@ import './addChat.css'
 
 /* This function responsiable about the title of the left size chats and the add chat button */
 function AddChat(msgState) {
-    /* Validation of the add chat button- check if the the user we want to add is legal */
-    const checkUserID = (event) => {
-        const value = event.target.value;
-        let user = document.getElementById("contactname")
-        
-        // if the user is not exists, the user is the current user that loged in or the user chat is allready
-        // shown- then the user is not valid
-        if (!userIsExists(value) || value === connectedUser || getConversationBy2Users(value, connectedUser) !== false) {
+    const checkValid = (exists, value, user) => {
+        if (exists == false || value === connectedUser || getConversationBy2Users(value, connectedUser) !== false) {
             user.classList.remove("is-valid")
             user.classList.add("is-invalid")
             user.setCustomValidity('Wrong username')
@@ -25,6 +19,20 @@ function AddChat(msgState) {
             document.getElementById("btnAddChatModal").removeAttribute("hidden");
             
         }
+    }
+        
+    /* Validation of the add chat button- check if the the user we want to add is legal */
+    const checkUserID = (event) => {
+        const value = event.target.value;
+        let user = document.getElementById("contactname")
+        userIsExists(value).then(exists => checkValid(exists, value, user))
+        //var exists = userIsExists(value).then(checkValid(exists, value))
+        
+        
+        
+        // if the user is not exists, the user is the current user that loged in or the user chat is allready
+        // shown- then the user is not valid
+        
     }
 
     const cancleBtn = (e)=>{
