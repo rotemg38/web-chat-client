@@ -1,9 +1,22 @@
+import {useEffect, useState} from 'react';
 import { getDisNameByUsername, getProfileImg } from "../dbHandle/dbHardcoded";
 import { connectedUser, userIsExists, getConversationBy2Users } from "../dbHandle/dbHardcoded";
 import './addChat.css'
 
 /* This function responsiable about the title of the left size chats and the add chat button */
 function AddChat(msgState) {
+
+    const [logedInUser, setLogedInUser] = useState({img : "", displayName: ""});
+    //get the logedInUser data- one time at page loading
+    useEffect(()=>{
+        async function fetchData() {
+        var name = await getDisNameByUsername(connectedUser);
+        var img = await getProfileImg();
+        setLogedInUser({img: img, displayName: name});
+    }
+    fetchData();
+    },[]);
+
     const checkValid = (exists, value, user) => {
         if (exists == false || value === connectedUser || getConversationBy2Users(value, connectedUser) !== false) {
             user.classList.remove("is-valid")
@@ -49,11 +62,11 @@ function AddChat(msgState) {
             <ul className="list-group">
                 <ul className="chats-title">
                     <div className="col-1">
-                        <img src={getProfileImg()} className="col profile" alt="profile" width="100%" height="100%"/>
+                        <img src={logedInUser.img} className="col profile" alt="profile" width="100%" height="100%"/>
                     </div>
 
                     <div className="col-5">
-                       <h3> {getDisNameByUsername(connectedUser)}</h3>
+                       <h3> {logedInUser.displayName}</h3>
                     </div>
 
                     <button type="button" className="col btn btn-sm " data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" title="Add Chat"> 
