@@ -149,7 +149,7 @@ export async function getDisNameByUsername(username) {
     //return dbUsers[username].displayName;
     var data = await getUserByUsername(username);
     if(data !== null){
-        return data.name;
+        return data.Name;
     }
     return null;
 }
@@ -159,6 +159,7 @@ export async function userIsExists(name) {
     if(name == ''){
         return false;
     }
+    //getUserByUsername(name).then(data => )
     var data = await getUserByUsername(name);
     
     console.log(data);

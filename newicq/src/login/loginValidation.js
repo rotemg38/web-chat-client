@@ -2,12 +2,12 @@
  
  function isExistsNonSyncPassword (isExists, pass, password, result) {
     if (isExists && pass === password) {
-        result = true;
+        return true;
     }
-    result = false;
+    return false;
  }
 
- function isExistsNonSyncName(isExists, value, user, result) {
+ async function isExistsNonSyncName(isExists, value, user, result) {
     if(value === "" || !isExists){
         user.classList.remove("is-valid")
         user.classList.add("is-invalid")
@@ -23,9 +23,10 @@
  /* This function checks the validation of the password field  */
  async function correctPassword (user, password) {
     var result = true;
-    var pass = getUserPassword(user);
-    userIsExists(user).then(isExists => isExistsNonSyncPassword(isExists, pass, password, result));
-    return result;
+    var pass = await getUserPassword(user);
+    var isExists = await userIsExists(user);
+    return isExistsNonSyncPassword(isExists, pass, password, result);
+    //userIsExists(user).then(isExists => isExistsNonSyncPassword(isExists, pass, password, result));
 
  }
 
@@ -34,8 +35,10 @@
     var result = true;
     var user = document.getElementById("username")
      if (key === "userName") {
-         var name = value;
-        userIsExists(value).then(isExists => isExistsNonSyncName(isExists, name, user, result));
+        var name = value;
+        var isExists = await userIsExists(name);
+        await isExistsNonSyncName(isExists, name, user, result);
+        //userIsExists(value).then(isExists => isExistsNonSyncName(isExists, name, user, result));
          //var isExists = await userIsExists(value);
         
         //if username changed check the password also
@@ -43,8 +46,10 @@
         value = document.getElementById("password").value
      }
      if (key === "password") {
-        var pass = document.getElementById("password")
-        if (value === "" || value === " " || !correctPassword(user.value , value)) {
+        var pass = document.getElementById("password");
+        var correct = await correctPassword(user.value , value);
+
+        if (value === "" || value === " " || !correct) {
             pass.classList.remove("is-valid")
             pass.classList.add("is-invalid")
             pass.setCustomValidity('Wrong password')
