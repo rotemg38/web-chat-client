@@ -22,10 +22,19 @@
  }
  /* This function checks the validation of the password field  */
  async function correctPassword (user, password) {
+<<<<<<< HEAD
     var result = true;
     var pass = getUserPassword(user);
     userIsExists(user).then(isExists => isExistsNonSyncPassword(isExists, pass, password, result));
     return result;
+=======
+    var isExists = await userIsExists(user);
+    var pass = await getUserPassword(user);
+    if (isExists && pass === password) {
+        return true
+    }
+    return false
+>>>>>>> 8e5fdf59e9d99a2dd866cf35383596b7e955975c
  }
 
  /* This function checks the validation for each element in the login */ 
