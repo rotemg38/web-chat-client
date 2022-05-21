@@ -68,9 +68,9 @@ export async function setConnectedUser(username) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 "id": username,
-                "name": getDisNameByUsername(username),
-                "password": getUserPassword(username),
-                "image": getImgByUsername(username),
+                "name": "",
+                "password": "",
+                "image": "",
                 "last": null,
                 "lastdate": null
             })
@@ -108,29 +108,61 @@ export async function addUser(user) {
     console.log(response);
             
 }
-
+//------------NOT FOUND USE OF THE FUNCTION- DELETE?----------
 /* Add profile image to data base by user */
-export function addImg(username, imgSrc) {
+/*export function addImg(username, imgSrc) {
     dbUsers[username] = { img: imgSrc };
+}*/
+
+async function getUserByUsername(username) {
+    var respons = await fetch("https://localhost:5000/api/contacts/" + username);
+    var data = await respons.json();
+    return data;
+}
+/* Get user password by username */
+export async function getUserPassword(username) {
+    //return dbUsers[user].password
+    var data = await getUserByUsername(username);
+    if(data !== null){
+        return data.Password;
+    }
+    return null;
+}
+
+/* Get profile image of connected user */
+export async function getProfileImg() {
+    return await getImgByUsername(connectedUser);
 }
 
 /* Get profile image by user */
-export function getImgByUsername(username) {
-    return dbUsers[username].img;
+export async function getImgByUsername(username) {
+    //return dbUsers[username].img;
+    var data = await getUserByUsername(username);
+    if(data !== null){
+        return data.Image;
+    }
+    return null;
 }
 
 /* Get display name by username */
-export function getDisNameByUsername(username) {
-    return dbUsers[username].displayName;
+export async function getDisNameByUsername(username) {
+    //return dbUsers[username].displayName;
+    var data = await getUserByUsername(username);
+    if(data !== null){
+        return data.name;
+    }
+    return null;
 }
 
 /* Check if user is exists on system (users data base) */
 export async function userIsExists(name) {
-    var respons = await fetch("https://localhost:5000/api/contacts/" + name);
-    var data = await respons.json();
+    if(name == ''){
+        return false;
+    }
+    var data = await getUserByUsername(name);
     
     console.log(data);
-    if(data.Id !== ""){
+    if(data !== null && data.Id !== ""){
         return true;
     }
     
@@ -167,6 +199,18 @@ export async function addConectionToList(user1, user2) {
     // return "chat" + chatId;
 }
 
+
+export async function addMsg(msg, to){
+    const response = await fetch('https://localhost:5000/api/contacts/'+to+"/Messages", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            "content": msg.text
+        })
+    });
+}
+
+//---------------------------------TO DELETE(replacement above)----------------------------------
 /* Create last message id for current message */
 function generateMsgId() {
     msgId += 1;
@@ -174,7 +218,7 @@ function generateMsgId() {
 }
 
 /* Add a message to data base */
-export function addMsg(msg) {
+export function addMsgOld(msg) {
     var id = generateMsgId();
     dbMsg[id] = msg;
     return id;
@@ -187,6 +231,8 @@ export function addMsgInChat(idM, idC, from, to) {
     }
     dbMsgInChat[idC].push({ idMsg: idM, from: from, to: to });
 }
+
+///-------------------------------END--------------------------------
 
 /* Get the other user of a specific chat */
 export function getOtherUserByChatId(idC, user1) {
@@ -247,15 +293,6 @@ export function getOtherUser(user) {
     return users
 }
 
-/* Get user password by username */
-export function getUserPassword(user) {
-    return dbUsers[user].password
-}
-
-/* Get profile image of connected user */
-export function getProfileImg() {
-    return getImgByUsername(connectedUser);
-}
 
 /* Get last message info of a specific chat */
 export function getLastMsg(chatId) {

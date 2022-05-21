@@ -3,7 +3,7 @@
  /* This function checks the validation of the password field  */
  async function correctPassword (user, password) {
     var isExists = await userIsExists(user);
-    var pass = getUserPassword(user);
+    var pass = await getUserPassword(user);
     if (isExists && pass === password) {
         return true
     }

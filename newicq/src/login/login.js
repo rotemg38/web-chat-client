@@ -12,7 +12,7 @@ function Login() {
   const [inputs, setInputs] = useState({});
 
   /* Handel login after submit the form (and check form validation) */
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     var form = document.getElementById("loginForm");
     form.classList.add('was-validated')
     var user = document.getElementById("username")
