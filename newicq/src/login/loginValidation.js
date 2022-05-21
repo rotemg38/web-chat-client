@@ -1,13 +1,31 @@
  import { userIsExists, getUserPassword } from "../dbHandle/dbHardcoded"
  
+ function isExistsNonSyncPassword (isExists, pass, password, result) {
+    if (isExists && pass === password) {
+        result = true;
+    }
+    result = false;
+ }
+
+ function isExistsNonSyncName(isExists, value, user, result) {
+    if(value === "" || !isExists){
+        user.classList.remove("is-valid")
+        user.classList.add("is-invalid")
+        user.setCustomValidity('Wrong username')
+        result = false
+    }
+    else{
+        user.classList.remove("is-invalid")
+        user.classList.add("is-valid")
+        user.setCustomValidity('')
+    }
+ }
  /* This function checks the validation of the password field  */
  async function correctPassword (user, password) {
-    var isExists = await userIsExists(user);
+    var result = true;
     var pass = getUserPassword(user);
-    if (isExists && pass === password) {
-        return true
-    }
-    return false
+    userIsExists(user).then(isExists => isExistsNonSyncPassword(isExists, pass, password, result));
+    return result;
  }
 
  /* This function checks the validation for each element in the login */ 
@@ -15,18 +33,10 @@
     var result = true;
     var user = document.getElementById("username")
      if (key === "userName") {
-         var isExists = await userIsExists(value);
-        if(value === "" || !isExists){
-            user.classList.remove("is-valid")
-            user.classList.add("is-invalid")
-            user.setCustomValidity('Wrong username')
-            result = false
-        }
-        else{
-            user.classList.remove("is-invalid")
-            user.classList.add("is-valid")
-            user.setCustomValidity('')
-        }
+         var name = value;
+        userIsExists(value).then(isExists => isExistsNonSyncName(isExists, name, user, result));
+         //var isExists = await userIsExists(value);
+        
         //if username changed check the password also
         key = "password"
         value = document.getElementById("password").value
