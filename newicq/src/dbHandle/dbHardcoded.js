@@ -89,22 +89,7 @@ export async function addUser(user) {
     if (user.img === undefined) {
         user.img = "default_picture.jpg";
     }
-    //const response = await fetch("http://localhost:5067/api/register/" + user.userName +"/"+ user.displayName +"/"+ user.img +"/"+ user.password);
     
-    // const response = await fetch("http://localhost:5067/api/register", {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify({
-    //             "id": user.userName,
-    //             "name": user.displayName,
-    //             "password": user.password,
-    //             "image": "default_picture.jpg",
-    //             "last": null,
-    //             "lastdate": null
-    //         })
-    // });
-
-
     var addedUser = {
                     "id": user.userName,
                     "name": user.displayName,
@@ -118,11 +103,6 @@ export async function addUser(user) {
     console.log(response.data);
             
 }
-//------------NOT FOUND USE OF THE FUNCTION- DELETE?----------
-/* Add profile image to data base by user */
-/*export function addImg(username, imgSrc) {
-    dbUsers[username] = { img: imgSrc };
-}*/
 
 async function getUserByUsername(username) {
     try
@@ -222,56 +202,51 @@ export async function addMsg(msg, to){
     await server.post('/contacts/'+to+"/Messages", {
         "content": msg.text
     });
-    /*
-    const response = await fetch('http://localhost:5067/api/contacts/'+to+"/Messages", {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            "content": msg.text
-        })
-    });*/
+   
 }
 
-//---------------------------------TO DELETE(replacement above)----------------------------------
+//---------------------------------TO DELETE(replacement - function above)----------------------------------
+
 /* Create last message id for current message */
-function generateMsgId() {
+/*function generateMsgId() {
     msgId += 1;
     return "msg" + msgId;
 }
-
+*/
 /* Add a message to data base */
+/*
 export function addMsgOld(msg) {
     var id = generateMsgId();
     dbMsg[id] = msg;
     return id;
-}
+}*/
 
 /* Add message to data base by chat id */
+/*
 export function addMsgInChat(idM, idC, from, to) {
     if (dbMsgInChat[idC] === undefined) {
         dbMsgInChat[idC] = [];
     }
     dbMsgInChat[idC].push({ idMsg: idM, from: from, to: to });
-}
+}*/
 
 ///-------------------------------END--------------------------------
 
-/* Get the other user of a specific chat */
-export function getOtherUserByChatId(idC, user1) {
-    var users = dbChats[idC];
-    if (users[0] === user1)
-        return users[1];
-    return users[0];
-}
 
-/* Get message info by id */
+
+/* Get message info by id 
 export function getMsgById(id) {
     return dbMsg[id];
-}
+}*/
 
 /* Get messages list by chat id */
-export function getMsgsByChatId(idC) {
-    var result = [];
+export async function getMsgsByChatId(idC) {
+
+    var respons = await server.get('/chats/'+idC);
+    var data = await respons.data;
+    return data;
+
+    /*var result = [];
     var lstMsg = dbMsgInChat[idC];
     if (lstMsg !== undefined) {
         lstMsg.forEach(element => {
@@ -280,7 +255,21 @@ export function getMsgsByChatId(idC) {
             result.push(elm);
         });
     }
-    return result;
+    return result;*/
+}
+
+/* Get the other user of a specific chat */
+export async function getOtherUserByChatId(idC, user1) {
+
+    var respons = await server.get('/chats/'+user1+'/'+idC);
+    var data = await respons.data;
+    return data;
+
+/*
+    var users = dbChats[idC];
+    if (users[0] === user1)
+        return users[1];
+    return users[0];*/
 }
 
 /* Get the chat that contain the convection between 2 users: */
@@ -303,7 +292,13 @@ export function getConversationBy2Users(user1, user2) {
 }
 
 /* Get a list of other user for all chats */
-export function getOtherUser(user) {
+export async function getOtherUser(user) {
+
+    var respons = await server.get('/chats/user/'+user);
+    var data = await respons.data;
+    console.log(data);
+    return data;
+    /*
     var users = [] // {chatNum: user}
     for (const [key, value] of Object.entries(dbChats)) {
         if (value[0] === user) {
@@ -312,7 +307,7 @@ export function getOtherUser(user) {
             users.push([key, value[0]]);
         }
     }
-    return users
+    return users*/
 }
 
 

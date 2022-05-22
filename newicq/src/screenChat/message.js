@@ -4,11 +4,11 @@ import './messages.css'
 function Message(msgInfo) {
     return (
         <>
-        {msgInfo.from === msgInfo.connectedUser ?(
+        {msgInfo.Sent ?(
         <div className='msg right alert'>
         <div className="text">
             <p>
-                {msgInfo.text}
+                {msgInfo.Content}
                 {/*
                 {msgInfo.type === "text"?(
                     msgInfo.text
@@ -25,7 +25,7 @@ function Message(msgInfo) {
                 */}
                 <br/>
                 <span className='time'>
-                    <label>{msgInfo.date}</label>
+                    <label>{msgInfo.Created}</label>
                 </span>
             </p>
         </div> 
@@ -35,7 +35,7 @@ function Message(msgInfo) {
         <div className='msg left alert'>
         <div className="text">
             <p>
-                {msgInfo.text}
+                {msgInfo.Content}
                 {/*
                 {msgInfo.type === "text"?(
                     msgInfo.text
@@ -52,7 +52,7 @@ function Message(msgInfo) {
                 */}
                 <br/>
                 <span className='time'>
-                    <label>{msgInfo.date}</label>
+                    <label>{msgInfo.Created}</label>
                 </span>
             </p>
         </div>
