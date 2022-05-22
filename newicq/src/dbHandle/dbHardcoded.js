@@ -63,20 +63,21 @@ export var connectedUser = "";
 /* Set the connected user var to the one who was log in or register */
 export async function setConnectedUser(username) {
     connectedUser = username;
-    const response = await fetch('https://localhost:5000/api/setup/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                "id": username,
-                "name": "",
-                "password": "",
-                "image": "",
-                "last": null,
-                "lastdate": null
-            })
-    });
+    const response = await fetch("https://localhost:5000/api/setup/" + username)
+    // const response = await fetch("https://localhost:5000/api/setup/" + username, {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({
+    //             "id": username,
+    //             "name": "",
+    //             "password": "",
+    //             "image": "",
+    //             "last": null,
+    //             "lastdate": null
+    //         })
+    // });
     
-    console.log(response);
+    console.log(response.json());
 }
 
 /* Add user to data base */
@@ -91,21 +92,22 @@ export async function addUser(user) {
     if (user.img === undefined) {
         user.img = "default_picture.jpg";
     }
+    const response = await fetch("https://localhost:5000/api/register/" + user.userName +"/"+ user.displayName +"/"+ user.img +"/"+ user.password);
+    // const response = await fetch("https://localhost:5000/api/register", {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({
+    //             "id": user.userName,
+    //             "name": user.displayName,
+    //             "password": user.password,
+    //             "image": "default_picture.jpg",
+    //             "last": null,
+    //             "lastdate": null
+    //         })
+    // });
 
-    const response = await fetch('https://localhost:5000/api/setup/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                "id": user.userName,
-                "name": user.displayName,
-                "password": user.password,
-                "image": "default_picture.jpg",
-                "last": null,
-                "lastdate": null
-            })
-    });
     
-    console.log(response);
+    console.log(response.json());
             
 }
 //------------NOT FOUND USE OF THE FUNCTION- DELETE?----------
@@ -149,7 +151,7 @@ export async function getDisNameByUsername(username) {
     //return dbUsers[username].displayName;
     var data = await getUserByUsername(username);
     if(data !== null){
-        return data.name;
+        return data.Name;
     }
     return null;
 }
@@ -159,6 +161,7 @@ export async function userIsExists(name) {
     if(name == ''){
         return false;
     }
+    //getUserByUsername(name).then(data => )
     var data = await getUserByUsername(name);
     
     console.log(data);
