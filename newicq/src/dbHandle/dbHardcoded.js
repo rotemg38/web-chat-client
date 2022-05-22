@@ -1,4 +1,5 @@
 
+import axios from 'axios'
 /* ALL DATABASES THAT ARE REALEVANT FOR THE APP: */
 
 const dbUsers = {
@@ -58,13 +59,25 @@ const dbMsgInChat = {
 };
 export var connectedUser = "";
 
+
+axios.defaults.withCredentials = true;
+const server = axios.create({
+    withCredentials: true,
+    baseURL: "http://localhost:5067/api" 
+  });
+
 /* HELPFUL FUNCTION TO USE THE DATE BASES: */
 
 /* Set the connected user var to the one who was log in or register */
 export async function setConnectedUser(username) {
     connectedUser = username;
-    const response = await fetch("https://localhost:5000/api/setup/" + username)
-    // const response = await fetch("https://localhost:5000/api/setup/" + username, {
+
+    server.get("/setup/" + username).then((response) => {
+        console.log(response);
+    });
+
+    //const response = await fetch("http://localhost:5067/api/setup/" + username)
+    // const response = await fetch("http://localhost:5067/api/setup/" + username, {
     //         method: 'POST',
     //         headers: { 'Content-Type': 'application/json' },
     //         body: JSON.stringify({
@@ -77,7 +90,7 @@ export async function setConnectedUser(username) {
     //         })
     // });
     
-    console.log(response.json());
+    //console.log(response.json());
 }
 
 /* Add user to data base */
@@ -92,8 +105,8 @@ export async function addUser(user) {
     if (user.img === undefined) {
         user.img = "default_picture.jpg";
     }
-    const response = await fetch("https://localhost:5000/api/register/" + user.userName +"/"+ user.displayName +"/"+ user.img +"/"+ user.password);
-    // const response = await fetch("https://localhost:5000/api/register", {
+    const response = await fetch("http://localhost:5067/api/register/" + user.userName +"/"+ user.displayName +"/"+ user.img +"/"+ user.password);
+    // const response = await fetch("http://localhost:5067/api/register", {
     //         method: 'POST',
     //         headers: { 'Content-Type': 'application/json' },
     //         body: JSON.stringify({
@@ -117,8 +130,11 @@ export async function addUser(user) {
 }*/
 
 async function getUserByUsername(username) {
-    var respons = await fetch("https://localhost:5000/api/contacts/" + username);
-    var data = await respons.json();
+    
+    var respons = await server.get("/contacts/" + username);
+    
+    //var respons = await fetch("http://localhost:5067/api/contacts/" + username);
+    var data = await respons.data;
     return data;
 }
 /* Get user password by username */
@@ -180,13 +196,13 @@ export async function userIsExists(name) {
 export async function addConectionToList(user1, user2) {
     var chatExists = getConversationBy2Users(user1, user2);
     if (chatExists === false) {
-        const response = await fetch('https://localhost:5000/api/contacts', {
+        const response = await fetch('http://localhost:5067/api/contacts', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 "id": user2,
                 "name": getDisNameByUsername(user2),
-                "server": "localhost:5000"
+                "server": "localhost:5067"
             })
     });
     
@@ -204,13 +220,19 @@ export async function addConectionToList(user1, user2) {
 
 
 export async function addMsg(msg, to){
-    const response = await fetch('https://localhost:5000/api/contacts/'+to+"/Messages", {
+
+
+    server.post('/contacts/'+to+"/Messages", {
+        "content": msg.text
+    });
+    /*
+    const response = await fetch('http://localhost:5067/api/contacts/'+to+"/Messages", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             "content": msg.text
         })
-    });
+    });*/
 }
 
 //---------------------------------TO DELETE(replacement above)----------------------------------
