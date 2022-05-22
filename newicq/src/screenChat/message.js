@@ -8,6 +8,8 @@ function Message(msgInfo) {
         <div className='msg right alert'>
         <div className="text">
             <p>
+                {msgInfo.text}
+                {/*
                 {msgInfo.type === "text"?(
                     msgInfo.text
                 ):(<></>)}
@@ -20,7 +22,7 @@ function Message(msgInfo) {
                 {msgInfo.type === "audio" ?(
                    <audio src={msgInfo.audioSrc} controls></audio>
                 ):(<></>)}
-
+                */}
                 <br/>
                 <span className='time'>
                     <label>{msgInfo.date}</label>
@@ -33,6 +35,8 @@ function Message(msgInfo) {
         <div className='msg left alert'>
         <div className="text">
             <p>
+                {msgInfo.text}
+                {/*
                 {msgInfo.type === "text"?(
                     msgInfo.text
                 ):(<></>)}
@@ -45,7 +49,7 @@ function Message(msgInfo) {
                 {msgInfo.type === "audio" ?(
                    <audio src={msgInfo.audioSrc} controls></audio>
                 ):(<></>)}
-
+                */}
                 <br/>
                 <span className='time'>
                     <label>{msgInfo.date}</label>

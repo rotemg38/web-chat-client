@@ -72,25 +72,9 @@ const server = axios.create({
 export async function setConnectedUser(username) {
     connectedUser = username;
 
-    server.get("/setup/" + username).then((response) => {
+    await server.get("/setup/" + username).then((response) => {
         console.log(response);
     });
-
-    //const response = await fetch("http://localhost:5067/api/setup/" + username)
-    // const response = await fetch("http://localhost:5067/api/setup/" + username, {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify({
-    //             "id": username,
-    //             "name": "",
-    //             "password": "",
-    //             "image": "",
-    //             "last": null,
-    //             "lastdate": null
-    //         })
-    // });
-    
-    //console.log(response.json());
 }
 
 /* Add user to data base */
@@ -105,7 +89,8 @@ export async function addUser(user) {
     if (user.img === undefined) {
         user.img = "default_picture.jpg";
     }
-    const response = await fetch("http://localhost:5067/api/register/" + user.userName +"/"+ user.displayName +"/"+ user.img +"/"+ user.password);
+    //const response = await fetch("http://localhost:5067/api/register/" + user.userName +"/"+ user.displayName +"/"+ user.img +"/"+ user.password);
+    
     // const response = await fetch("http://localhost:5067/api/register", {
     //         method: 'POST',
     //         headers: { 'Content-Type': 'application/json' },
@@ -119,8 +104,18 @@ export async function addUser(user) {
     //         })
     // });
 
+
+    var addedUser = {
+                    "id": user.userName,
+                    "name": user.displayName,
+                    "password": user.password,
+                    "image": user.img,
+                    "last": null,
+                    "lastdate": null,
+                    "server": "localhost:5067"}
+    var response = await server.post("/setup/register", addedUser);
     
-    console.log(response.json());
+    console.log(response.data);
             
 }
 //------------NOT FOUND USE OF THE FUNCTION- DELETE?----------
@@ -130,12 +125,16 @@ export async function addUser(user) {
 }*/
 
 async function getUserByUsername(username) {
-    
-    var respons = await server.get("/contacts/" + username);
-    
-    //var respons = await fetch("http://localhost:5067/api/contacts/" + username);
-    var data = await respons.data;
-    return data;
+    try
+    {
+        var respons = await server.get("/contacts/" + username);
+        var data = await respons.data;
+        return data;
+    } catch(e){
+        //user not found- thus return null
+        return null;
+        
+    }
 }
 /* Get user password by username */
 export async function getUserPassword(username) {
@@ -220,9 +219,7 @@ export async function addConectionToList(user1, user2) {
 
 
 export async function addMsg(msg, to){
-
-
-    server.post('/contacts/'+to+"/Messages", {
+    await server.post('/contacts/'+to+"/Messages", {
         "content": msg.text
     });
     /*
