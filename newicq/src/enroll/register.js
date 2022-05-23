@@ -13,7 +13,7 @@ function Register() {
     const [inputs, setInputs] = useState({});
 
     /* Handel register after submit the form (and check form validation) */
-    const handleRegister = (event) => {
+    const handleRegister = async (event) => {
         var form = document.getElementById("registerForm");
         form.classList.add('was-validated')
         //check form validility before submitting
@@ -21,9 +21,10 @@ function Register() {
             event.preventDefault();
             event.stopPropagation();
         } else {
+            event.preventDefault();
             //successfuly enrolled- add user and move to the login page
-            addUser(inputs);
-            setConnectedUser(inputs.userName);
+            await addUser(inputs);
+            await setConnectedUser(inputs.userName);
             navigate("/chats");
         }
     }
@@ -109,8 +110,8 @@ function Register() {
                                     </div>
                                 </div>
 
-                                <br />
-                                {/* file of picture element */}
+                                {/*<br />
+                                 file of picture element 
                                 <div className="form-group centered">
                                     <div className="form-floating col-sm-7">
                                         <div className="custom-file">
@@ -119,7 +120,7 @@ function Register() {
                                         </div>
                                     </div>
                                 </div>
-
+                                */}
                                 <br />
                                 {/* password element */}
                                 <div className="form-group centered">

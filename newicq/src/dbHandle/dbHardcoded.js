@@ -1,4 +1,5 @@
 
+import axios from 'axios'
 /* ALL DATABASES THAT ARE REALEVANT FOR THE APP: */
 
 const dbUsers = {
@@ -58,49 +59,133 @@ const dbMsgInChat = {
 };
 export var connectedUser = "";
 
+
+axios.defaults.withCredentials = true;
+const server = axios.create({
+    withCredentials: true,
+    baseURL: "http://localhost:5067/api" 
+  });
+
 /* HELPFUL FUNCTION TO USE THE DATE BASES: */
 
 /* Set the connected user var to the one who was log in or register */
-export function setConnectedUser(username) {
-    connectedUser = username
+export async function setConnectedUser(username) {
+    connectedUser = username;
+
+    await server.get("/setup/" + username).then((response) => {
+        console.log(response);
+    });
 }
 
 /* Add user to data base */
-export function addUser(user) {
+export async function addUser(user) {
+    
     if (user.img === undefined) {
         dbUsers[user.userName] = { password: user.password, phone: user.phoneNumber, displayName: user.displayName, gender: user.gender, img: "default_picture.jpg" };
     } else {
         dbUsers[user.userName] = { password: user.password, phone: user.phoneNumber, displayName: user.displayName, gender: user.gender, img: user.img };
     }
+    
+    if (user.img === undefined) {
+        user.img = "default_picture.jpg";
+    }
+    
+    var addedUser = {
+                    "id": user.userName,
+                    "name": user.displayName,
+                    "password": user.password,
+                    "image": user.img,
+                    "last": null,
+                    "lastdate": null,
+                    "server": "localhost:5067"}
+    var response = await server.post("/setup/register", addedUser);
+    
+    console.log(response.data);
+            
 }
 
-/* Add profile image to data base by user */
-export function addImg(username, imgSrc) {
-    dbUsers[username] = { img: imgSrc };
+async function getUserByUsername(username) {
+    try
+    {
+        var respons = await server.get("/contacts/" + username);
+        var data = await respons.data;
+        return data;
+    } catch(e){
+        //user not found- thus return null
+        return null;
+        
+    }
+}
+/* Get user password by username */
+export async function getUserPassword(username) {
+    //return dbUsers[user].password
+    var data = await getUserByUsername(username);
+    if(data !== null){
+        return data.Password;
+    }
+    return null;
+}
+
+/* Get profile image of connected user */
+export async function getProfileImg() {
+    return await getImgByUsername(connectedUser);
 }
 
 /* Get profile image by user */
-export function getImgByUsername(username) {
-    return dbUsers[username].img;
+export async function getImgByUsername(username) {
+    //return dbUsers[username].img;
+    var data = await getUserByUsername(username);
+    if(data !== null){
+        return data.Image;
+    }
+    return null;
 }
 
 /* Get display name by username */
-export function getDisNameByUsername(username) {
-    return dbUsers[username].displayName;
+export async function getDisNameByUsername(username) {
+    //return dbUsers[username].displayName;
+    var data = await getUserByUsername(username);
+    if(data !== null){
+        return data.Name;
+    }
+    return null;
 }
 
 /* Check if user is exists on system (users data base) */
-export function userIsExists(name) {
-    if (dbUsers[name] != null) {
+export async function userIsExists(name) {
+    if(name == ''){
+        return false;
+    }
+    //getUserByUsername(name).then(data => )
+    var data = await getUserByUsername(name);
+    
+    console.log(data);
+    if(data !== null && data.Id !== ""){
         return true;
     }
-    return false
+    
+    return false;
+    /*if (dbUsers[name] != null) {
+        return true;
+    }
+    return false*/
 }
 
 /* Add chat to chats data base */
-export function addConectionToList(user1, user2) {
+export async function addConectionToList(user1, user2) {
     var chatExists = getConversationBy2Users(user1, user2);
     if (chatExists === false) {
+        const response = await fetch('http://localhost:5067/api/contacts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "id": user2,
+                "name": getDisNameByUsername(user2),
+                "server": "localhost:5067"
+            })
+    });
+    
+    console.log(response);
         chatId += 1;
         dbChats["chat" + chatId] = [user1, user2];
         return "chat" + chatId;
@@ -112,43 +197,56 @@ export function addConectionToList(user1, user2) {
     // return "chat" + chatId;
 }
 
+
+export async function addMsg(msg, to){
+    await server.post('/contacts/'+to+"/Messages", {
+        "content": msg.text
+    });
+   
+}
+
+//---------------------------------TO DELETE(replacement - function above)----------------------------------
+
 /* Create last message id for current message */
-function generateMsgId() {
+/*function generateMsgId() {
     msgId += 1;
     return "msg" + msgId;
 }
-
+*/
 /* Add a message to data base */
-export function addMsg(msg) {
+/*
+export function addMsgOld(msg) {
     var id = generateMsgId();
     dbMsg[id] = msg;
     return id;
-}
+}*/
 
 /* Add message to data base by chat id */
+/*
 export function addMsgInChat(idM, idC, from, to) {
     if (dbMsgInChat[idC] === undefined) {
         dbMsgInChat[idC] = [];
     }
     dbMsgInChat[idC].push({ idMsg: idM, from: from, to: to });
-}
+}*/
 
-/* Get the other user of a specific chat */
-export function getOtherUserByChatId(idC, user1) {
-    var users = dbChats[idC];
-    if (users[0] === user1)
-        return users[1];
-    return users[0];
-}
+///-------------------------------END--------------------------------
 
-/* Get message info by id */
+
+
+/* Get message info by id 
 export function getMsgById(id) {
     return dbMsg[id];
-}
+}*/
 
 /* Get messages list by chat id */
-export function getMsgsByChatId(idC) {
-    var result = [];
+export async function getMsgsByChatId(idC) {
+
+    var respons = await server.get('/chats/'+idC);
+    var data = await respons.data;
+    return data;
+
+    /*var result = [];
     var lstMsg = dbMsgInChat[idC];
     if (lstMsg !== undefined) {
         lstMsg.forEach(element => {
@@ -157,7 +255,21 @@ export function getMsgsByChatId(idC) {
             result.push(elm);
         });
     }
-    return result;
+    return result;*/
+}
+
+/* Get the other user of a specific chat */
+export async function getOtherUserByChatId(idC, user1) {
+
+    var respons = await server.get('/chats/'+user1+'/'+idC);
+    var data = await respons.data;
+    return data;
+
+/*
+    var users = dbChats[idC];
+    if (users[0] === user1)
+        return users[1];
+    return users[0];*/
 }
 
 /* Get the chat that contain the convection between 2 users: */
@@ -180,7 +292,13 @@ export function getConversationBy2Users(user1, user2) {
 }
 
 /* Get a list of other user for all chats */
-export function getOtherUser(user) {
+export async function getOtherUser(user) {
+
+    var respons = await server.get('/chats/user/'+user);
+    var data = await respons.data;
+    console.log(data);
+    return data;
+    /*
     var users = [] // {chatNum: user}
     for (const [key, value] of Object.entries(dbChats)) {
         if (value[0] === user) {
@@ -189,18 +307,9 @@ export function getOtherUser(user) {
             users.push([key, value[0]]);
         }
     }
-    return users
+    return users*/
 }
 
-/* Get user password by username */
-export function getUserPassword(user) {
-    return dbUsers[user].password
-}
-
-/* Get profile image of connected user */
-export function getProfileImg() {
-    return getImgByUsername(connectedUser);
-}
 
 /* Get last message info of a specific chat */
 export function getLastMsg(chatId) {

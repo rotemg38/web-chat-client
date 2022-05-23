@@ -1,17 +1,24 @@
+import {useEffect, useState} from 'react';
 import { getDisNameByUsername, getProfileImg } from "../dbHandle/dbHardcoded";
 import { connectedUser, userIsExists, getConversationBy2Users } from "../dbHandle/dbHardcoded";
 import './addChat.css'
 
 /* This function responsiable about the title of the left size chats and the add chat button */
 function AddChat(msgState) {
-    /* Validation of the add chat button- check if the the user we want to add is legal */
-    const checkUserID = (event) => {
-        const value = event.target.value;
-        let user = document.getElementById("contactname")
-        
-        // if the user is not exists, the user is the current user that loged in or the user chat is allready
-        // shown- then the user is not valid
-        if (!userIsExists(value) || value === connectedUser || getConversationBy2Users(value, connectedUser) !== false) {
+
+    const [logedInUser, setLogedInUser] = useState({img : "", displayName: ""});
+    //get the logedInUser data- one time at page loading
+    useEffect(()=>{
+        async function fetchData() {
+        var name = await getDisNameByUsername(connectedUser);
+        var img = await getProfileImg();
+        setLogedInUser({img: img, displayName: name});
+    }
+    fetchData();
+    },[]);
+
+    const checkValid = (exists, value, user) => {
+        if (exists == false || value === connectedUser || getConversationBy2Users(value, connectedUser) !== false) {
             user.classList.remove("is-valid")
             user.classList.add("is-invalid")
             user.setCustomValidity('Wrong username')
@@ -25,6 +32,20 @@ function AddChat(msgState) {
             document.getElementById("btnAddChatModal").removeAttribute("hidden");
             
         }
+    }
+        
+    /* Validation of the add chat button- check if the the user we want to add is legal */
+    const checkUserID = (event) => {
+        const value = event.target.value;
+        let user = document.getElementById("contactname")
+        userIsExists(value).then(exists => checkValid(exists, value, user))
+        //var exists = userIsExists(value).then(checkValid(exists, value))
+        
+        
+        
+        // if the user is not exists, the user is the current user that loged in or the user chat is allready
+        // shown- then the user is not valid
+        
     }
 
     const cancleBtn = (e)=>{
@@ -41,11 +62,11 @@ function AddChat(msgState) {
             <ul className="list-group">
                 <ul className="chats-title">
                     <div className="col-1">
-                        <img src={getProfileImg()} className="col profile" alt="profile" width="100%" height="100%"/>
+                        <img src={logedInUser.img} className="col profile" alt="profile" width="100%" height="100%"/>
                     </div>
 
                     <div className="col-5">
-                       <h3> {getDisNameByUsername(connectedUser)}</h3>
+                       <h3> {logedInUser.displayName}</h3>
                     </div>
 
                     <button type="button" className="col btn btn-sm " data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" title="Add Chat"> 

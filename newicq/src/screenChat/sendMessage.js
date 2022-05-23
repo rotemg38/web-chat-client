@@ -1,5 +1,5 @@
 import './sendMessage.css'
-import { addMsg, addMsgInChat, getOtherUserByChatId} from '../dbHandle/dbHardcoded';
+import { addMsgOld, addMsg, addMsgInChat, getOtherUserByChatId} from '../dbHandle/dbHardcoded';
 import MediaButton from './mediaMessages/mediaButton';
 import { SendFill } from 'react-bootstrap-icons';
 
@@ -7,14 +7,24 @@ import { SendFill } from 'react-bootstrap-icons';
 function SendMessage(props) {
 
     //internal usage of the funcion- general function to send any message
-    const sendMsg = (inputMsgBox, msg)=>{
-        let idMsg = addMsg(msg);
-        let otherUser = getOtherUserByChatId(props.chatId, props.connectedUser);
-        addMsgInChat(idMsg, props.chatId, props.connectedUser, otherUser);
+    const sendMsg = async (inputMsgBox, msg)=>{
+        let otherUser = await getOtherUserByChatId(props.chatId, props.connectedUser);
+        
+        //todo: to delete
+        //let idMsg = addMsgOld(msg);
+        //addMsgInChat(idMsg, props.chatId, props.connectedUser, otherUser);
+        //todo: end of delete
+        
+        await addMsg(msg, otherUser);
         //add to msg the relevant fields
         msg["connectedUser"] = props.connectedUser;
         msg["from"] = props.connectedUser;
         msg["to"] = otherUser;
+
+        //add more for the server ajutments:
+        msg["Sent"] = true;
+        msg["Content"] = msg.text;
+        msg["Created"] = msg.date;
         props.funcUpdate(msg);
         
        //clean input
@@ -27,7 +37,7 @@ function SendMessage(props) {
 
 
     /* Handler for each message that sent */
-    const handleSend = (event)=>{
+    const handleSend = async (event)=>{
         var today = new Date();
         var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         let time = today.toLocaleTimeString('en-GB', { hour12: false, hour: "numeric", minute: "numeric"});
@@ -57,7 +67,7 @@ function SendMessage(props) {
             return;//end the function- dont send anything
         }
         
-        sendMsg(inputMsgBox, msg);
+        await sendMsg(inputMsgBox, msg);
         
     };
 
@@ -65,7 +75,7 @@ function SendMessage(props) {
         <div className='row'>
             <form onSubmit={handleSend}>
                 <div className="input-group">
-                    <MediaButton handleSend={handleSend}/>
+                    {/*<MediaButton handleSend={handleSend}/>*/}
                     <input type="text" accept="text" autoComplete="off" id="messageBox" name="messageBox" className="form-control"/>
                     <button className="btn btn-primary" type="submit" id="send" title="Send Message">
                         <SendFill/>
