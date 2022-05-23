@@ -1,20 +1,24 @@
 import './userChat.css'
-import { getImgByUsername, getDisNameByUsername } from '../dbHandle/dbHardcoded';
-import {React, useEffect, useState} from 'react';
+import { getImgByUsername, getDisNameByUsername, getLastMsg } from '../dbHandle/dbHardcoded';
+import { React, useEffect, useState } from 'react';
 
 /* This function is responsiable about the componenet of every chat from chat list the connected user has */
 function UserChat(msgState) {
 
-    const [userData, setUserData] = useState({img : "", displayName: ""});
-   
-    useEffect(()=>{
+    const [userData, setUserData] = useState({ img: "", displayName: "", lastMsg: "" });
+
+    useEffect(() => {
         async function fetchData() {
-        var name = await getDisNameByUsername(msgState.user);
-        var img = await getImgByUsername(msgState.user);
-        setUserData({img: img, displayName: name});
+            var name = await getDisNameByUsername(msgState.user);
+            var img = await getImgByUsername(msgState.user);
+            var msg = await getLastMsg(msgState.chatId); 
+            if (msg === null) {
+                msg = "";
+            }
+            setUserData({ img: img, displayName: name, lastMsg: msg });
         }
         fetchData();
-    },[]);
+    }, [msgState]);
 
     /* Handle on click the chats that choisen- notify the main screen the current chat ID  */
     const handleUserChatClick = (event) => {
@@ -32,11 +36,11 @@ function UserChat(msgState) {
                     <div className='maintext col-10'>
                         <h5 className="mb-1">{userData.displayName}</h5>
                         {/*last message text: */}
-                        <div className="mb-1 text"> {msgState.lastMsg.text}
+                        <div className="mb-1 text"> {userData.lastMsg.Content}
                         </div>
                     </div>
                     {/*time of last message: */}
-                    <div className="text-muted col"><div> {msgState.lastMsg.fullDate} </div></div>
+                    <div className="text-muted col"><div> {userData.lastMsg.Created} </div></div> {/*lastMsg.fullDate*/}
                 </div>
             </button>
         </div>

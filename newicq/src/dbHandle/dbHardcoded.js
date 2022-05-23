@@ -1,5 +1,6 @@
 
 import axios from 'axios'
+
 /* ALL DATABASES THAT ARE REALEVANT FOR THE APP: */
 
 const dbUsers = {
@@ -89,8 +90,7 @@ export async function addUser(user) {
     if (user.img === undefined) {
         user.img = "default_picture.jpg";
     }
-    // const response = await fetch("https://localhost:5000/api/register/" + user.userName +"/"+ user.displayName +"/"+ user.img +"/"+ user.password);
-    // console.log(response.json());
+
     
     var addedUser = {
                     "id": user.userName,
@@ -166,36 +166,17 @@ export async function userIsExists(name) {
     }
     
     return false;
-    /*if (dbUsers[name] != null) {
-        return true;
-    }
-    return false*/
 }
 
 /* Add chat to chats data base */
 export async function addConectionToList(user1, user2) {
-    var chatExists = getConversationBy2Users(user1, user2);
-    if (chatExists === false) {
-        const response = await fetch('http://localhost:5067/api/contacts', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                "id": user2,
-                "name": getDisNameByUsername(user2),
-                "server": "localhost:5067"
-            })
+    var respons = await server.post('/invitations', {
+        "from": user1,
+        "to": user2,
+        "server": "localhost:5067"
     });
-    
-    console.log(response);
-        chatId += 1;
-        dbChats["chat" + chatId] = [user1, user2];
-        return "chat" + chatId;
-    } else {
-        return chatExists;
-    }
-    // chatId += 1;
-    // dbChats["chat" + chatId] = [user1, user2];
-    // return "chat" + chatId;
+    var data = await respons.data;
+    return data.ChatId;
 }
 
 
@@ -206,68 +187,12 @@ export async function addMsg(msg, to){
    
 }
 
-//---------------------------------TO DELETE(replacement - function above)----------------------------------
-
-/* Create last message id for current message */
-/*function generateMsgId() {
-    msgId += 1;
-    return "msg" + msgId;
-}
-*/
-/* Add a message to data base */
-/*
-export function addMsgOld(msg) {
-    var id = generateMsgId();
-    dbMsg[id] = msg;
-    return id;
-}*/
-
-/* Add message to data base by chat id */
-/*
-export function addMsgInChat(idM, idC, from, to) {
-    if (dbMsgInChat[idC] === undefined) {
-        dbMsgInChat[idC] = [];
-    }
-    dbMsgInChat[idC].push({ idMsg: idM, from: from, to: to });
-}*/
-
-///-------------------------------END--------------------------------
-
-
-/// maybe do need it
-/* Get message info by id */
-/*export async function getMsgById(id) {
-    var respons = await fetch("https://localhost:5000/api/contacts/" + connectedUser + "/messages/" + id);
-    var data = await respons.json();
-    return data;
-
-    //return dbMsg[id];
-}*/
-
-
-/* Get message info by id 
-export function getMsgById(id) {
-    return dbMsg[id];
-}*/
-
-
 /* Get messages list by chat id */
 export async function getMsgsByChatId(idC) {
 
     var respons = await server.get('/chats/'+idC);
     var data = await respons.data;
     return data;
-
-    /*var result = [];
-    var lstMsg = dbMsgInChat[idC];
-    if (lstMsg !== undefined) {
-        lstMsg.forEach(element => {
-            let msg = getMsgById(element.idMsg);
-            let elm = Object.assign({}, element, msg);
-            result.push(elm);
-        });
-    }
-    return result;*/
 }
 
 /* Get the other user of a specific chat */
@@ -276,12 +201,6 @@ export async function getOtherUserByChatId(idC, user1) {
     var respons = await server.get('/chats/'+user1+'/'+idC);
     var data = await respons.data;
     return data;
-
-/*
-    var users = dbChats[idC];
-    if (users[0] === user1)
-        return users[1];
-    return users[0];*/
 }
 
 /* Get the chat that contain the convection between 2 users: */
@@ -325,31 +244,9 @@ export async function getOtherUser(user) {
 
 
 /* Get last message info of a specific chat */
-export function getLastMsg(chatId) {
-    var clock = ""
-    var indexLastMsg = -1
-    var msgsList = getMsgsByChatId(chatId) // list of msgs by chat id
-
-    var respons = await fetch("https://localhost:5000/api/contacts/" + connectedUser + "/messages/chat" + chatId);
-    var data = await respons.json();
-    if (data !== undefined) {
-        for (var i = 0; i < msgsList.length; i++) {
-            if (clock <= )
-        }
-    }
-
-    // all msgs in some chat: dbMsgInChat[chatId]
-    if (dbMsgInChat[chatId] !== undefined) { // check if there is no msgs between them yet
-        for (var i = 0; i < msgsList.length; i++) {
-            // check which msg was the last that arrived from user1:
-            if (clock <= dbMsg[msgsList[i].idMsg].date) {
-                clock = dbMsg[dbMsgInChat[chatId][i].idMsg].date;
-                indexLastMsg = i;
-            }
-        }
-    }
-    if (indexLastMsg !== -1) {
-        return msgsList[indexLastMsg]
-    }
-    return {}
+export async function getLastMsg(chatId) {
+    var respons = await server.get('/chats/msgs/' + chatId);
+    var data = await respons.data;
+    console.log(data);
+    return data;
 }
