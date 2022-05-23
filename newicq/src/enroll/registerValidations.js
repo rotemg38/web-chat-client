@@ -19,7 +19,7 @@ const passwordValidation = (pass, confirmPass) => {
 /* This function checks the validation for each element in the register */ 
 ///receive key- the field name we are checking
 ///and value- the value of the field
-export const formValidationByElement = async (key, value)=>{
+export const formValidationByElement = (key, value)=>{
     var result = true;
     var pass = document.getElementById("password");
     var confirmPass = document.getElementById("confirmPass");
@@ -55,8 +55,7 @@ export const formValidationByElement = async (key, value)=>{
     } 
     if(key === "userName"){
         var userName = document.getElementById("userName");
-        var isExists = await userIsExists(userName.value);
-        if(userName.value === "" || isExists){
+        if(userName.value === "" || userIsExists(userName.value)){
             userName.classList.remove("is-valid");
             userName.classList.add("is-invalid");
             userName.setCustomValidity('error')
