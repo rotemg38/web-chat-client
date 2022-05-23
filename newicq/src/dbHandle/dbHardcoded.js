@@ -63,20 +63,7 @@ export var connectedUser = "";
 /* Set the connected user var to the one who was log in or register */
 export async function setConnectedUser(username) {
     connectedUser = username;
-    const response = await fetch("https://localhost:5000/api/setup/" + username)
-    // const response = await fetch("https://localhost:5000/api/setup/" + username, {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify({
-    //             "id": username,
-    //             "name": "",
-    //             "password": "",
-    //             "image": "",
-    //             "last": null,
-    //             "lastdate": null
-    //         })
-    // });
-    
+    const response = await fetch("https://localhost:5000/api/setup/" + username)    
     console.log(response.json());
 }
 
@@ -93,20 +80,6 @@ export async function addUser(user) {
         user.img = "default_picture.jpg";
     }
     const response = await fetch("https://localhost:5000/api/register/" + user.userName +"/"+ user.displayName +"/"+ user.img +"/"+ user.password);
-    // const response = await fetch("https://localhost:5000/api/register", {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify({
-    //             "id": user.userName,
-    //             "name": user.displayName,
-    //             "password": user.password,
-    //             "image": "default_picture.jpg",
-    //             "last": null,
-    //             "lastdate": null
-    //         })
-    // });
-
-    
     console.log(response.json());
             
 }
@@ -246,8 +219,12 @@ export function getOtherUserByChatId(idC, user1) {
 }
 
 /* Get message info by id */
-export function getMsgById(id) {
-    return dbMsg[id];
+export async function getMsgById(id) {
+    var respons = await fetch("https://localhost:5000/api/contacts/" + connectedUser + "/messages/" + id);
+    var data = await respons.json();
+    return data;
+
+    //return dbMsg[id];
 }
 
 /* Get messages list by chat id */
@@ -275,6 +252,7 @@ export function getConversation(user) {
 
 /* Get chat between 2 users by these users */
 export function getConversationBy2Users(user1, user2) {
+
     for (const [key, value] of Object.entries(dbChats)) {
         if ((value[0] === user1 && value[1] === user2) || (value[0] === user2 && value[1] === user1)) {
             return key
@@ -301,7 +279,17 @@ export function getOtherUser(user) {
 export function getLastMsg(chatId) {
     var clock = ""
     var indexLastMsg = -1
-    var msgsList = getMsgsByChatId(chatId)
+    var msgsList = getMsgsByChatId(chatId) // list of msgs by chat id
+
+    var respons = await fetch("https://localhost:5000/api/contacts/" + connectedUser + "/messages/chat" + chatId);
+    var data = await respons.json();
+    if (data !== undefined) {
+        for (var i = 0; i < msgsList.length; i++) {
+            if (clock <= )
+        }
+    }
+
+    // all msgs in some chat: dbMsgInChat[chatId]
     if (dbMsgInChat[chatId] !== undefined) { // check if there is no msgs between them yet
         for (var i = 0; i < msgsList.length; i++) {
             // check which msg was the last that arrived from user1:
