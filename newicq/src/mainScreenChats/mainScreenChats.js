@@ -3,7 +3,7 @@ import ScreenChat from "../screenChat/screenChat";
 import './mainScreenChats.css'
 import '../App.css'
 import { connectedUser, getOtherUserByChatId, userIsExists, getConversationBy2Users } from "../dbHandle/dbHardcoded";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getMsgsByChatId, getOtherUser, getLastMsg } from '../dbHandle/dbHardcoded';
 import Message from "../screenChat/message";
 import UserChat from "../chats/userChat";
@@ -19,8 +19,8 @@ function MainScreenChats() {
     const chatInfo = { connectedUser: connectedUser, chatId: chatsState.chatId, otherUserName: chatsState.otherUserName, msgsComponents: chatsState.msgsComponents }
 
     //when the user click the chat he wants to see this function will be activate and update the current chatId he is watching
-    const updateChatId = (chatId) => {
-        var chatMessages = getMsgsByChatId(chatId);
+    const updateChatId = async (chatId) => {
+        var chatMessages = await getMsgsByChatId(chatId);
         var connectedUser = chatInfo.connectedUser;
 
         // list of the messages
@@ -29,7 +29,7 @@ function MainScreenChats() {
             return <Message {...msg} key={key} />
         });
 
-        var other = getOtherUserByChatId(chatId, connectedUser);
+        var other = await getOtherUserByChatId(chatId, connectedUser);
         setChatsState({ chatId: chatId, otherUserName: other, msgsComponents: messageList, lastMsg: {} });
 
         //change the display to be 100% - handle design
@@ -37,14 +37,27 @@ function MainScreenChats() {
 
     }
 
-    const currUserFriend = getOtherUser(connectedUser)
 
-    // list of the chats connected
-    const chatsOnScreenList = currUserFriend.map((value, key) => {
-        return <UserChat lastMsg={getLastMsg(value[0])} user={value[1]} updateChatId={updateChatId} chatId={value[0]} key={key} />
-    });
+    const [usersOnScreen, setUserOnScreen] = useState();
 
-    const [usersOnScreen, setUserOnScreen] = useState(chatsOnScreenList);
+
+    useEffect(()=>{
+        async function fetchData() {
+            var currUserFriend = await getOtherUser(connectedUser)
+            // list of the chats connected
+            const chatsOnScreenList = currUserFriend.map((value, key) => {
+                return <UserChat lastMsg={getLastMsg(value.Item1)} user={value.Item2} updateChatId={updateChatId} chatId={value.Item1} key={key} />
+            });
+            
+            setUserOnScreen(chatsOnScreenList);
+
+        }
+        fetchData();
+    },[]);
+
+    
+
+    
 
     /* When message is sent this function will be activate and update the display of the messages.
     This function add the given message to the list of messages that we are displaying now.
