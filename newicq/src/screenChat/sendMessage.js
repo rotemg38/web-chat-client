@@ -8,11 +8,11 @@ function SendMessage(props) {
 
     //internal usage of the funcion- general function to send any message
     const sendMsg = async (inputMsgBox, msg)=>{
-        let otherUser = getOtherUserByChatId(props.chatId, props.connectedUser);
+        let otherUser = await getOtherUserByChatId(props.chatId, props.connectedUser);
         
         //todo: to delete
-        let idMsg = addMsgOld(msg);
-        addMsgInChat(idMsg, props.chatId, props.connectedUser, otherUser);
+        //let idMsg = addMsgOld(msg);
+        //addMsgInChat(idMsg, props.chatId, props.connectedUser, otherUser);
         //todo: end of delete
         
         await addMsg(msg, otherUser);
@@ -20,6 +20,11 @@ function SendMessage(props) {
         msg["connectedUser"] = props.connectedUser;
         msg["from"] = props.connectedUser;
         msg["to"] = otherUser;
+
+        //add more for the server ajutments:
+        msg["Sent"] = true;
+        msg["Content"] = msg.text;
+        msg["Created"] = msg.date;
         props.funcUpdate(msg);
         
        //clean input
