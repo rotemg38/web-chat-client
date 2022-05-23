@@ -46,6 +46,7 @@ function MainScreenChats() {
             var currUserFriend = await getOtherUser(connectedUser)
             // list of the chats connected
             const chatsOnScreenList = currUserFriend.map((value, key) => {
+                //var last = await ;
                 return <UserChat lastMsg={getLastMsg(value.Item1)} user={value.Item2} updateChatId={updateChatId} chatId={value.Item1} key={key} />
             });
             
@@ -82,7 +83,7 @@ function MainScreenChats() {
     }
 
     /* Add the chat to the chat list in the left side of screen */
-    const addConection = () => {
+    const addConection = async() => {
         var user = document.getElementById("contactname")
         var username = user.value
         // check if the user wants to add himself
@@ -98,7 +99,7 @@ function MainScreenChats() {
         document.getElementById("btnAddChatModal").setAttribute("hidden", true);
 
 
-        var chatId = addConectionToList(connectedUser, username);
+        var chatId = await addConectionToList(connectedUser, username);
         var newList = usersOnScreen;
         // add the new chat
         newList.push(<UserChat lastMsg={{}} key={usersOnScreen.length} user={username} updateChatId={updateChatId} chatId={chatId} />);

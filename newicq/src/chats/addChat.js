@@ -35,10 +35,12 @@ function AddChat(msgState) {
     }
         
     /* Validation of the add chat button- check if the the user we want to add is legal */
-    const checkUserID = (event) => {
+    const checkUserID = async (event) => {
         const value = event.target.value;
         let user = document.getElementById("contactname")
-        userIsExists(value).then(exists => checkValid(exists, value, user))
+        var exists = await userIsExists(value);
+        checkValid(exists, value, user);
+        //userIsExists(value).then(exists => checkValid(exists, value, user))
         //var exists = userIsExists(value).then(checkValid(exists, value))
         
         
