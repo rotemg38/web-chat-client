@@ -12,7 +12,7 @@ import UserConnectionError from "../errorPages/userNotSignIn";
 
 /* This function is responsiable about the the main screen of the chats page- 
 merge between the chats list and the chat screen */
-function MainScreenChats() {
+function MainScreenChats({connection}) {
 
     const [chatsState, setChatsState] = useState({ chatId: "-1", otherUserName: "", msgsComponents: [], lastMsg: {} });
 
@@ -40,30 +40,7 @@ function MainScreenChats() {
 
     const [usersOnScreen, setUserOnScreen] = useState();
 
-
-    useEffect(()=>{
-        async function fetchData() {
-            var currUserFriend = await getOtherUser(connectedUser)
-            // list of the chats connected
-            const chatsOnScreenList = currUserFriend.map((value, key) => {
-                //var last = await ;
-                return <UserChat lastMsg={getLastMsg(value.Item1)} user={value.Item2} updateChatId={updateChatId} chatId={value.Item1} key={key} />
-            });
-            
-            setUserOnScreen(chatsOnScreenList);
-
-        }
-        fetchData();
-    },[]);
-
-    
-
-    
-
-    /* When message is sent this function will be activate and update the display of the messages.
-    This function add the given message to the list of messages that we are displaying now.
-    Also this function update the last message for te specific chat */
-    const updateMessages = (msg) => {
+    const updateMsg = (msg)=>{
         setChatsState((curentState) => {
             return {
                 chatId: curentState.chatId, otherUserName: curentState.otherUserName,
@@ -80,6 +57,57 @@ function MainScreenChats() {
             });
 
         });
+    }
+
+    useEffect(()=>{
+        //add the connected user
+        connection.invoke("AddUserConnection", connectedUser);
+        //when message is recieved need to update the messages
+        connection.on("ReciveMessage", function (msg){
+            updateMsg(JSON.parse(msg));
+          });
+
+        async function fetchData() {
+            var currUserFriend = await getOtherUser(connectedUser)
+            // list of the chats connected
+            const chatsOnScreenList = currUserFriend.map((value, key) => {
+                //var last = await ;
+                return <UserChat lastMsg={getLastMsg(value.Item1)} user={value.Item2} updateChatId={updateChatId} chatId={value.Item1} key={key} />
+            });
+            
+            setUserOnScreen(chatsOnScreenList);
+
+        }
+        fetchData();
+    },[]);
+
+
+    /* When message is sent this function will be activate and update the display of the messages.
+    This function add the given message to the list of messages that we are displaying now.
+    Also this function update the last message for te specific chat */
+    const updateMessages = (msg) => {
+        
+        var invokeMsg = {Id:-1, Content: msg.Content, Created: msg.Created, Sent: false};
+     
+        connection.invoke("SentMessage", JSON.stringify(invokeMsg), chatsState.otherUserName);
+
+        updateMsg(msg);
+        /*setChatsState((curentState) => {
+            return {
+                chatId: curentState.chatId, otherUserName: curentState.otherUserName,
+                msgsComponents: [...curentState.msgsComponents, <Message {...msg} key={curentState.msgsComponents.length} />],
+                lastMsg: msg
+            };
+        });
+
+        setUserOnScreen((current) => {
+            return current.map((value, key) => {
+                if (value.props.chatId === chatsState.chatId)
+                    return <UserChat lastMsg={msg} user={chatsState.otherUserName} updateChatId={updateChatId} chatId={chatsState.chatId} key={key} />
+                return value;
+            });
+
+        });*/
     }
 
     /* Add the chat to the chat list in the left side of screen */

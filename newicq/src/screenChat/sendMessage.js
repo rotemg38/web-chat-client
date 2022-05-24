@@ -24,7 +24,7 @@ function SendMessage(props) {
         //add more for the server ajutments:
         msg["Sent"] = true;
         msg["Content"] = msg.text;
-        msg["Created"] = msg.date;
+        msg["Created"] = msg.fullDate;
         props.funcUpdate(msg);
         
        //clean input
