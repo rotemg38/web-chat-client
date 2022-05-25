@@ -229,14 +229,13 @@ export function getConversation(user) {
 }
 
 /* Get chat between 2 users by these users */
-export function getConversationBy2Users(user1, user2) {
-
-    for (const [key, value] of Object.entries(dbChats)) {
-        if ((value[0] === user1 && value[1] === user2) || (value[0] === user2 && value[1] === user1)) {
-            return key
-        }
-    }
-    return false
+export async function getConversationBy2Users(user1, user2) {
+    var respons = await server.get('/chats/getchat/'+user1+'/'+user2);
+    var data = await respons.data;
+    return data;
+    // if (data === "") {
+    //     return false;
+    // } return true;
 }
 
 /* Get a list of other user for all chats */

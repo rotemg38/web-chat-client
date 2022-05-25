@@ -17,8 +17,12 @@ function AddChat(msgState) {
     fetchData();
     },[]);
 
-    const checkValid = (exists, value, user) => {
-        if (exists == false || value === connectedUser || getConversationBy2Users(value, connectedUser) !== false) {
+    
+
+    const checkValid = async (exists, value, user) => {
+        //var chat = await getConversationBy2Users(value, connectedUser);
+        var chatOnScreen = await msgState.checkIfOnScreen(value);
+        if (exists == false || value === connectedUser || chatOnScreen === true) {
             user.classList.remove("is-valid")
             user.classList.add("is-invalid")
             user.setCustomValidity('Wrong username')
@@ -33,6 +37,23 @@ function AddChat(msgState) {
             
         }
     }
+    // const checkValid = async (exists, value, user) => {
+    //     var chatInSys = await getConversationBy2Users(value, connectedUser);
+    //     if (exists == false || value === connectedUser || chatInSys !== false) {
+    //         user.classList.remove("is-valid")
+    //         user.classList.add("is-invalid")
+    //         user.setCustomValidity('Wrong username')
+    //         //block the option to add
+    //         document.getElementById("btnAddChatModal").setAttribute("hidden", true);
+    //     } else {
+    //         user.classList.remove("is-invalid")
+    //         user.classList.add("is-valid")
+    //         user.setCustomValidity('')
+    //         //allow the option to add
+    //         document.getElementById("btnAddChatModal").removeAttribute("hidden");
+            
+    //     }
+    // }
         
     /* Validation of the add chat button- check if the the user we want to add is legal */
     const checkUserID = async (event) => {
