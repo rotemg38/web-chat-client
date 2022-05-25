@@ -25,7 +25,6 @@ export const formValidationByElement = async (key, value)=>{
     var confirmPass = document.getElementById("confirmPass");
     if(key === "password") {
         if(!pass.checkValidity()){
-            // document.getElementById("passwordInvalid").innerHTML = pass.validationMessage;
             pass.classList.remove("is-valid");
             pass.classList.add("is-invalid");
             result = false;

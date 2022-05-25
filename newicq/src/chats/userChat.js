@@ -40,7 +40,7 @@ function UserChat(msgState) {
                         </div>
                     </div>
                     {/*time of last message: */}
-                    <div className="text-muted col"><div> {userData.lastMsg.Created} </div></div> {/*lastMsg.fullDate*/}
+                    <div className="text-muted col"><div> {userData.lastMsg.Created} </div></div> 
                 </div>
             </button>
         </div>
