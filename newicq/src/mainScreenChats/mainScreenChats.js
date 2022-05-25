@@ -109,6 +109,22 @@ function MainScreenChats({connection}) {
 
         });*/
     }
+    const checkIfOnScreen = async (username) => {
+        var chat = await getConversationBy2Users(username, connectedUser);
+        if (chat === "") { //chat doesn't exists
+            return false;
+        }
+        var onScreenValue = 0;
+        var onScreen =  usersOnScreen.map((value, key) => { // check if it's on screen
+            if (value.props.chatId === chat.ChatId) { 
+                onScreenValue = 1;
+            }
+        });
+        if (onScreenValue === 1) {
+            return true;
+        }
+        return false;
+    }
 
     /* Add the chat to the chat list in the left side of screen */
     const addConection = async() => {
@@ -119,7 +135,8 @@ function MainScreenChats({connection}) {
         // check if user is exist to create a chat with him:
         if (userIsExists(username) === false) { return }
         // check if userChat is allready in lists of userChats:
-        if (await getConversationBy2Users(username, connectedUser) !== false) { return }
+        if (await checkIfOnScreen(username) === true) { return }
+        //if (await getConversationBy2Users(username, connectedUser) !== "") { return }
         
         //clear the field and the validation checks for the next time and hide the add button
         user.classList.remove("is-valid")
@@ -149,7 +166,7 @@ function MainScreenChats({connection}) {
             <div id="mainScreenChat" className="container">
                 <div className="row">
                     <div className="col-md-3">
-                        <Chats addConection={addConection} setUserOnScreen={setUserOnScreen} usersOnScreen={usersOnScreen} lastMsg={chatsState.lastMsg} updateChatId={updateChatId} />
+                        <Chats checkIfOnScreen={checkIfOnScreen} addConection={addConection} setUserOnScreen={setUserOnScreen} usersOnScreen={usersOnScreen} lastMsg={chatsState.lastMsg} updateChatId={updateChatId} />
                     </div>
                     <div className="col-md-9">
                         <ScreenChat {...chatInfo} updateMessages={updateMessages} />
