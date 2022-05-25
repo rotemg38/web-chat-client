@@ -87,7 +87,7 @@ function MainScreenChats({connection}) {
     Also this function update the last message for te specific chat */
     const updateMessages = (msg) => {
         
-        var invokeMsg = {Id:-1, Content: msg.Content, Created: msg.Created, Sent: false};
+        var invokeMsg = {Id: -1, Content: msg.Content, Created: msg.Created, Sent: false};
      
         connection.invoke("SentMessage", JSON.stringify(invokeMsg), chatsState.otherUserName);
 
@@ -119,7 +119,7 @@ function MainScreenChats({connection}) {
         // check if user is exist to create a chat with him:
         if (userIsExists(username) === false) { return }
         // check if userChat is allready in lists of userChats:
-        if (getConversationBy2Users(username, connectedUser) !== false) { return }
+        if (await getConversationBy2Users(username, connectedUser) !== false) { return }
         
         //clear the field and the validation checks for the next time and hide the add button
         user.classList.remove("is-valid")

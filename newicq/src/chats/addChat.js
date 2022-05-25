@@ -17,8 +17,9 @@ function AddChat(msgState) {
     fetchData();
     },[]);
 
-    const checkValid = (exists, value, user) => {
-        if (exists == false || value === connectedUser || getConversationBy2Users(value, connectedUser) !== false) {
+    const checkValid = async (exists, value, user) => {
+        var chatInSys = await getConversationBy2Users(value, connectedUser);
+        if (exists == false || value === connectedUser || chatInSys !== false) {
             user.classList.remove("is-valid")
             user.classList.add("is-invalid")
             user.setCustomValidity('Wrong username')
