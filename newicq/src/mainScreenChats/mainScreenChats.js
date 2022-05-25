@@ -43,18 +43,25 @@ function MainScreenChats() {
     const [usersOnScreen, setUserOnScreen] = useState();
 
     const updateMsg = (msg)=>{
+        var chatid = chatsState.chatId;
+        var otherUser = chatsState.otherUserName;
+        //if this function activated from the signalr
+        if(msg.chatId != undefined){
+            chatid = msg.chatId;
+            otherUser = msg.otherUser;
+        }
         setChatsState((curentState) => {
             return {
                 chatId: curentState.chatId, otherUserName: curentState.otherUserName,
                 msgsComponents: [...curentState.msgsComponents, <Message {...msg} key={curentState.msgsComponents.length} />],
                 lastMsg: msg
             };
-        });
+        })
 
         setUserOnScreen((current) => {
             return current.map((value, key) => {
-                if (value.props.chatId === chatsState.chatId)
-                    return <UserChat lastMsg={msg} user={chatsState.otherUserName} updateChatId={updateChatId} chatId={chatsState.chatId} key={key} />
+                if (value.props.chatId === chatid)
+                    return <UserChat lastMsg={msg} user={otherUser} updateChatId={updateChatId} chatId={value.props.chatId} key={key} />
                 return value;
             });
 
@@ -95,7 +102,7 @@ function MainScreenChats() {
     Also this function update the last message for te specific chat */
     const updateMessages = (msg) => {
         
-        var invokeMsg = {Id: -1, Content: msg.Content, Created: msg.Created, Sent: false};
+        var invokeMsg = {Id: -1, Content: msg.Content, Created: msg.Created, Sent: false, chatId: chatsState.chatId, otherUser: connectedUser};
      
         connection.invoke("SentMessage", JSON.stringify(invokeMsg), chatsState.otherUserName);
 
