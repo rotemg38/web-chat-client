@@ -1,6 +1,6 @@
 import './login.css';
 import { useNavigate } from 'react-router-dom';
-import { setConnectedUser } from '../dbHandle/dbHardcoded'
+import { connectedUser, setConnectedUser } from '../dbHandle/dbHardcoded'
 import { useState } from 'react';
 import { checkValidation } from './loginValidation'
 
@@ -23,9 +23,14 @@ function Login() {
       event.preventDefault();
       event.stopPropagation();
     } else {
-      setConnectedUser(inputs.userName);
-      //successfuly login:
-      navigate("/chats");
+      //if somone is connected and its not the user try to signin
+      if(connectedUser !== "" && connectedUser !== inputs.userName){
+        alert("The user: " + connectedUser + " is allready connected! \n signout if you want to connect to other user.");
+      }else{
+        setConnectedUser(inputs.userName);
+        //successfuly login:
+        navigate("/chats");
+      }
     }
   }
   /* Handler for any change in one of the elements */

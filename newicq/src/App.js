@@ -3,23 +3,24 @@ import Login from './login/login';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Register from "./enroll/register";
 import MainScreenChats from './mainScreenChats/mainScreenChats';
-import { useState, useEffect } from 'react';
-import {HubConnectionBuilder} from '@microsoft/signalr';
+import { useEffect } from 'react';
+import {disConnectUser, getConnectedUser} from './dbHandle/dbHardcoded'
 
 
 function App() {
 
-  var [connection, setConnection] = useState(null);
-
   useEffect(()=>{
     async function fetchData(){ 
-      var hubConnection = new HubConnectionBuilder().withUrl("http://localhost:5067/hubs/msgs").build();
-      setConnection(hubConnection);
-      await hubConnection.start();
+      await getConnectedUser();
     }
     fetchData();
+    
   }, []);
 
+  const logOut = async (e)=>{
+    await disConnectUser();
+    window.location.assign("http://localhost:3000/");
+  }
   return (
     <> 
     <header>
@@ -36,7 +37,13 @@ function App() {
                             <a className="nav-link text-dark" href="http://localhost:5000/">Rate Our App</a>
                         </li>
                         <li className="nav-item">
+                            <a className="nav-link text-dark" href="http://localhost:3000/chats">Chats</a>
+                        </li>
+                        <li className="nav-item">
                             <a className="nav-link text-dark" href="http://localhost:3000/">LogIn</a>
+                        </li>
+                        <li className="nav-item">
+                          <button className="btn btn-link nav-link text-dark" onClick={logOut}>LogOut</button>
                         </li>
                     </ul>
                 </div>
@@ -49,7 +56,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Login />}></Route>
           <Route path='/enroll' element={<Register />}></Route>
-          <Route path='/chats' element={<MainScreenChats connection={connection}/>}></Route>
+          <Route path='/chats' element={<MainScreenChats />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

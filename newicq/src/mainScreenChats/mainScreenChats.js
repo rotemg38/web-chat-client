@@ -2,17 +2,19 @@ import Chats from "../chats/chats";
 import ScreenChat from "../screenChat/screenChat";
 import './mainScreenChats.css'
 import '../App.css'
-import { connectedUser, getOtherUserByChatId, userIsExists, getConversationBy2Users } from "../dbHandle/dbHardcoded";
+import { getConnectedUser, connectedUser, getOtherUserByChatId, userIsExists, getConversationBy2Users } from "../dbHandle/dbHardcoded";
 import { useEffect, useState } from "react";
 import { getMsgsByChatId, getOtherUser, getLastMsg } from '../dbHandle/dbHardcoded';
 import Message from "../screenChat/message";
 import UserChat from "../chats/userChat";
 import { addConectionToList } from "../dbHandle/dbHardcoded";
 import UserConnectionError from "../errorPages/userNotSignIn";
+import {HubConnectionBuilder} from '@microsoft/signalr';
 
 /* This function is responsiable about the the main screen of the chats page- 
 merge between the chats list and the chat screen */
-function MainScreenChats({connection}) {
+function MainScreenChats() {
+    var [connection, setConnection] = useState(null);
 
     const [chatsState, setChatsState] = useState({ chatId: "-1", otherUserName: "", msgsComponents: [], lastMsg: {} });
 
@@ -21,7 +23,7 @@ function MainScreenChats({connection}) {
     //when the user click the chat he wants to see this function will be activate and update the current chatId he is watching
     const updateChatId = async (chatId) => {
         var chatMessages = await getMsgsByChatId(chatId);
-        var connectedUser = chatInfo.connectedUser;
+        //var connectedUser = chatInfo.connectedUser;
 
         // list of the messages
         var messageList = chatMessages.map((msg, key) => {
@@ -58,25 +60,31 @@ function MainScreenChats({connection}) {
 
         });
     }
-
+    
     useEffect(()=>{
-        //add the connected user
-        connection.invoke("AddUserConnection", connectedUser);
-        //when message is recieved need to update the messages
-        connection.on("ReciveMessage", function (msg){
-            updateMsg(JSON.parse(msg));
-          });
-
         async function fetchData() {
-            var currUserFriend = await getOtherUser(connectedUser)
-            // list of the chats connected
-            const chatsOnScreenList = currUserFriend.map((value, key) => {
-                //var last = await ;
-                return <UserChat lastMsg={getLastMsg(value.Item1)} user={value.Item2} updateChatId={updateChatId} chatId={value.Item1} key={key} />
-            });
-            
-            setUserOnScreen(chatsOnScreenList);
+            await getConnectedUser();
+            if(connectedUser !== ""){
 
+                var hubConnection = new HubConnectionBuilder().withUrl("http://localhost:5067/hubs/msgs").build();
+                setConnection(hubConnection);
+                await hubConnection.start();
+
+                //add the connected user
+                hubConnection.invoke("AddUserConnection", connectedUser);
+                //when message is recieved need to update the messages
+                hubConnection.on("ReciveMessage", function (msg){
+                    updateMsg(JSON.parse(msg));
+                });
+                var currUserFriend = await getOtherUser(connectedUser)
+                // list of the chats connected
+                const chatsOnScreenList = currUserFriend.map((value, key) => {
+                    //var last = await ;
+                    return <UserChat lastMsg={getLastMsg(value.Item1)} user={value.Item2} updateChatId={updateChatId} chatId={value.Item1} key={key} />
+                });
+                
+                setUserOnScreen(chatsOnScreenList);
+            }
         }
         fetchData();
     },[]);
