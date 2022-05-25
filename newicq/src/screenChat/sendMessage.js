@@ -53,16 +53,16 @@ function SendMessage(props) {
         }
         //if the input is on image mode- means we want to send an image 
         else if(msgType === "image"){
-            msg = {type: msgType, text: "image", date: time, imgSrc: inputMsgBox.src, fullDate: date+' '+time};    
+            msg = {type: msgType, text: "image", date: time, imgSrc: inputMsgBox.src, fullDate: date +' '+time};    
         }
          //if the input is on file mode- means we want to send an video 
          else if(msgType === "file"){
             msgType = "video";
-            msg = {type: msgType,text: "video", date: time, videoSrc: inputMsgBox.src, fullDate: date+' '+time};
+            msg = {type: msgType,text: "video", date: time, videoSrc: inputMsgBox.src, fullDate: date +' '+time};
         }
         //if the input is on audio mode- means we want to send an audio 
         else if(msgType === "audio"){
-            msg = {type: msgType,text: "audio", date: time, audioSrc: inputMsgBox.src, fullDate: date+' '+time};
+            msg = {type: msgType,text: "audio", date: time, audioSrc: inputMsgBox.src, fullDate: date +' '+time};
         } else {
             return;//end the function- dont send anything
         }
