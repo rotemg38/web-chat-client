@@ -154,8 +154,10 @@ function MainScreenChats() {
 
         var chatId = await addConectionToList(connectedUser, username);
         var newList = usersOnScreen;
+        var last = await getLastMsg(chatId);
         // add the new chat
-        newList.push(<UserChat lastMsg={{}} key={usersOnScreen.length} user={username} updateChatId={updateChatId} chatId={chatId} />);
+        newList.push(<UserChat lastMsg={chatId} key={usersOnScreen.length} user={username} updateChatId={updateChatId} chatId={chatId} />);
+        //newList.push(<UserChat lastMsg={{}} key={usersOnScreen.length} user={username} updateChatId={updateChatId} chatId={chatId} />);
         // list the chats on screen
         setUserOnScreen(
             (current) => {
