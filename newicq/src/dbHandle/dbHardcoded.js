@@ -78,6 +78,22 @@ export async function setConnectedUser(username) {
     });
 }
 
+/* get the connected user */
+export async function getConnectedUser() {
+    var response = await server.get("/setup/connectedUser");
+    var data = response.data;
+    console.log(data);
+    if(data !== null){
+        connectedUser = data;
+    }else{
+        connectedUser = "";
+    }
+}
+
+export async function disConnectUser(){
+    await server.get("/setup/disConnectUser");
+}
+
 /* Add user to data base */
 export async function addUser(user) {
     
@@ -154,7 +170,7 @@ export async function getDisNameByUsername(username) {
 
 /* Check if user is exists on system (users data base) */
 export async function userIsExists(name) {
-    if(name == ''){
+    if(name === ''){
         return false;
     }
     //getUserByUsername(name).then(data => )
