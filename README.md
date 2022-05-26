@@ -48,13 +48,14 @@ With the following **features**:
 ### Installing & Executing program
 At first, make sure that npm is installed on your computer. (you can download via Node.js installer)
 
-Download the project and via your prefered IDE run the application.
+Download the project and via your prefered IDE run the application- if you want to work without a server side, download the project from "Main" branch.
+Else, download the project from "MainWithServer" branch
 
 We recommend on VSCode as an excellent IDE therefore we will explain how to run our project on this IDE.
 
 In order to run the project with a server, you'll need to get the server program from "https://github.com/rotemg38/AdvancedProgrammingWebServerSide" and follow the instruction there. 
 
-After tou run the server side, come back to VSCode and open VSCode Terminal. 
+After you run the server side, come back to VSCode and open VSCode Terminal (the code of the relavnt branch). 
 
 Make sure you are in the "newicq" folder, if not run the command:
 ```
