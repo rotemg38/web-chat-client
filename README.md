@@ -5,19 +5,19 @@ This is a Web Client side of our chat application which is part of a bigger proj
 The web client includes the following **pages**:
 - **LogIn screen**
 
-    <img alt="LogIn Screen" src="assets/images/logIn_screen.png" height="300" />
-
-- **SignUp screen**
-
-     <img alt="SignUp Screen" src="assets/images/signUp_screen.png" height="300" />
+    <img alt="LogIn Screen" src="assets/images/logIn_page.png" height="300" />
 
 - **The Chats screen**
 
-    <img alt="Chats Screen" src="assets/images/chats_screen.png" height="300" />
+    <img alt="Chats Screen" src="assets/images/chats_page.png" height="300" />
+- **Rating screen**
+- 
+ <img alt="Error Access Screen" src="assets/images/rating_page.png" height="300" />
 
 - **Error Access screen**
 
     <img alt="Error Access Screen" src="assets/images/error_access_screen.png" height="300" />
+
 
 
 With the following **features**:
