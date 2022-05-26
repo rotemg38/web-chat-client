@@ -21,11 +21,14 @@ The web client includes the following **pages**:
 
 
 With the following **features**:
+- Login to your user
+- Rate the application
 - Add new user to the app
 - Connect to your app account
 - Add new chat
 - Sending a message from 4 different types: text, image, video and audio
 - Enforce access restrictions
+- Logout your user
 
 ## Technologies
 - ReactJs
@@ -33,6 +36,7 @@ With the following **features**:
 - HTML
 - CSS
 - JS
+- SignalR
 
 ## Getting Started
 
@@ -48,7 +52,9 @@ Download the project and via your prefered IDE run the application.
 
 We recommend on VSCode as an excellent IDE therefore we will explain how to run our project on this IDE.
 
-After opening the project in VSCode, open VSCode Terminal. 
+In order to run the project with a server, you'll need to get the server program from "https://github.com/rotemg38/AdvancedProgrammingWebServerSide" and follow the instruction there. 
+
+After tou run the server side, come back to VSCode and open VSCode Terminal. 
 
 Make sure you are in the "newicq" folder, if not run the command:
 ```
