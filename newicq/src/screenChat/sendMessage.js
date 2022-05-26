@@ -1,6 +1,6 @@
 import './sendMessage.css'
 import { addMsgOld, addMsg, addMsgInChat, getOtherUserByChatId} from '../dbHandle/dbHardcoded';
-import MediaButton from './mediaMessages/mediaButton';
+//import MediaButton from './mediaMessages/mediaButton';
 import { SendFill } from 'react-bootstrap-icons';
 
 /* This function is responsiable about the act of sending a message- notify any component involved and act accordingly */
@@ -9,11 +9,6 @@ function SendMessage(props) {
     //internal usage of the funcion- general function to send any message
     const sendMsg = async (inputMsgBox, msg)=>{
         let otherUser = await getOtherUserByChatId(props.chatId, props.connectedUser);
-        
-        //todo: to delete
-        //let idMsg = addMsgOld(msg);
-        //addMsgInChat(idMsg, props.chatId, props.connectedUser, otherUser);
-        //todo: end of delete
         
         await addMsg(msg, otherUser);
         //add to msg the relevant fields

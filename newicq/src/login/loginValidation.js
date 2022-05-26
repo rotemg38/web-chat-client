@@ -26,8 +26,6 @@
     var pass = await getUserPassword(user);
     var isExists = await userIsExists(user);
     return isExistsNonSyncPassword(isExists, pass, password, result);
-    //userIsExists(user).then(isExists => isExistsNonSyncPassword(isExists, pass, password, result));
-
  }
 
  /* This function checks the validation for each element in the login */ 
@@ -38,8 +36,6 @@
         var name = value;
         var isExists = await userIsExists(name);
         await isExistsNonSyncName(isExists, name, user, result);
-        //userIsExists(value).then(isExists => isExistsNonSyncName(isExists, name, user, result));
-         //var isExists = await userIsExists(value);
         
         //if username changed check the password also
         key = "password"

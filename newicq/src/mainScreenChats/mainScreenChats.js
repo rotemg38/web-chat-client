@@ -23,7 +23,6 @@ function MainScreenChats() {
     //when the user click the chat he wants to see this function will be activate and update the current chatId he is watching
     const updateChatId = async (chatId) => {
         var chatMessages = await getMsgsByChatId(chatId);
-        //var connectedUser = chatInfo.connectedUser;
 
         // list of the messages
         var messageList = chatMessages.map((msg, key) => {
@@ -107,22 +106,6 @@ function MainScreenChats() {
         connection.invoke("SentMessage", JSON.stringify(invokeMsg), chatsState.otherUserName);
 
         updateMsg(msg);
-        /*setChatsState((curentState) => {
-            return {
-                chatId: curentState.chatId, otherUserName: curentState.otherUserName,
-                msgsComponents: [...curentState.msgsComponents, <Message {...msg} key={curentState.msgsComponents.length} />],
-                lastMsg: msg
-            };
-        });
-
-        setUserOnScreen((current) => {
-            return current.map((value, key) => {
-                if (value.props.chatId === chatsState.chatId)
-                    return <UserChat lastMsg={msg} user={chatsState.otherUserName} updateChatId={updateChatId} chatId={chatsState.chatId} key={key} />
-                return value;
-            });
-
-        });*/
     }
     const checkIfOnScreen = async (username) => {
         var chat = await getConversationBy2Users(username, connectedUser);
@@ -151,7 +134,6 @@ function MainScreenChats() {
         if (userIsExists(username) === false) { return }
         // check if userChat is allready in lists of userChats:
         if (await checkIfOnScreen(username) === true) { return }
-        //if (await getConversationBy2Users(username, connectedUser) !== "") { return }
         
         //clear the field and the validation checks for the next time and hide the add button
         user.classList.remove("is-valid")
@@ -164,7 +146,6 @@ function MainScreenChats() {
         var last = await getLastMsg(chatId);
         // add the new chat
         newList.push(<UserChat lastMsg={chatId} key={usersOnScreen.length} user={username} updateChatId={updateChatId} chatId={chatId} />);
-        //newList.push(<UserChat lastMsg={{}} key={usersOnScreen.length} user={username} updateChatId={updateChatId} chatId={chatId} />);
         // list the chats on screen
         setUserOnScreen(
             (current) => {
