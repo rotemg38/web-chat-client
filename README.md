@@ -1,31 +1,39 @@
 # AdvancedProgrammingWeb
 This is a Web Client side of our chat application which is part of a bigger project for the course Advanced Programming 2.
 
+This project client side works with the server in:
+"https://github.com/rotemg38/AdvancedProgrammingWebServerSide"
+
 ## Description
 The web client includes the following **pages**:
 - **LogIn screen**
 
-    <img alt="LogIn Screen" src="assets/images/logIn_screen.png" height="300" />
+    <img alt="LogIn Screen" src="assets/images/logIn_page.png" height="300" />
 
 - **SignUp screen**
 
-     <img alt="SignUp Screen" src="assets/images/signUp_screen.png" height="300" />
+     <img alt="SignUp Screen" src="assets/images/signUp_page.png" height="300" />
 
 - **The Chats screen**
 
-    <img alt="Chats Screen" src="assets/images/chats_screen.png" height="300" />
+    <img alt="Chats Screen" src="assets/images/chats_page.png" height="300" />
+
+- **The Rating screen**
+
+    <img alt="Rates Screen" src="assets/images/rating_page.png" height="300" />
 
 - **Error Access screen**
 
-    <img alt="Error Access Screen" src="assets/images/error_access_screen.png" height="300" />
+    <img alt="Error Access Screen" src="assets/images/error_access_page.png" height="300" />
 
 
 With the following **features**:
 - Add new user to the app
 - Connect to your app account
 - Add new chat
-- Sending a message from 4 different types: text, image, video and audio
+- Sending a text message
 - Enforce access restrictions
+- Rate our app
 
 ## Technologies
 - ReactJs
