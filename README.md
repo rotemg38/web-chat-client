@@ -5,30 +5,27 @@ This is a Web Client side of our chat application which is part of a bigger proj
 The web client includes the following **pages**:
 - **LogIn screen**
 
-    <img alt="LogIn Screen" src="assets/images/logIn_page.png" height="300" />
+    <img alt="LogIn Screen" src="assets/images/logIn_screen.png" height="300" />
+
+- **SignUp screen**
+
+     <img alt="SignUp Screen" src="assets/images/signUp_screen.png" height="300" />
 
 - **The Chats screen**
 
-    <img alt="Chats Screen" src="assets/images/chats_page.png" height="300" />
-- **Rating screen**
-- 
- <img alt="Error Access Screen" src="assets/images/rating_page.png" height="300" />
+    <img alt="Chats Screen" src="assets/images/chats_screen.png" height="300" />
 
 - **Error Access screen**
 
     <img alt="Error Access Screen" src="assets/images/error_access_screen.png" height="300" />
 
 
-
 With the following **features**:
-- Login to your user
-- Rate the application
 - Add new user to the app
 - Connect to your app account
 - Add new chat
 - Sending a message from 4 different types: text, image, video and audio
 - Enforce access restrictions
-- Logout your user
 
 ## Technologies
 - ReactJs
@@ -36,7 +33,6 @@ With the following **features**:
 - HTML
 - CSS
 - JS
-- SignalR
 
 ## Getting Started
 
@@ -48,14 +44,11 @@ With the following **features**:
 ### Installing & Executing program
 At first, make sure that npm is installed on your computer. (you can download via Node.js installer)
 
-Download the project and via your prefered IDE run the application- if you want to work without a server side, download the project from "Main" branch.
-Else, download the project from "MainWithServer" branch
+Download the project and via your prefered IDE run the application.
 
 We recommend on VSCode as an excellent IDE therefore we will explain how to run our project on this IDE.
 
-In order to run the project with a server, you'll need to get the server program from "https://github.com/rotemg38/AdvancedProgrammingWebServerSide" and follow the instruction there. 
-
-After you run the server side, come back to VSCode and open VSCode Terminal (the code of the relavnt branch). 
+After opening the project in VSCode, open VSCode Terminal. 
 
 Make sure you are in the "newicq" folder, if not run the command:
 ```
